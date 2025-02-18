@@ -1,0 +1,20 @@
+Repo: https://github.com/pau-minoves/jseats/
+Response:
+Error: The model `gpt-3` does not exist or you do not have access to it.
+
+Repo: https://github.com/lowtalkers/escape-reality/
+Response:
+Error: The model `gpt-3` does not exist or you do not have access to it.
+
+Repo: https://github.com/kryptokrauts/ae-prediction-cards/
+Response:
+Error: The model `gpt-3` does not exist or you do not have access to it.
+
+Repo: https://github.com/bcgov/embc-ess/
+Response:
+Error: The model `gpt-3` does not exist or you do not have access to it.
+
+Repo: https://github.com/hyeonsangjeon/youtube-dl-nas/
+Response:
+Error: The model `gpt-3` does not exist or you do not have access to it.
+
