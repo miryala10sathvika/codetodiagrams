@@ -8,18 +8,17 @@ def extract_repo_url(link):
     match = re.match(r"(https://github\.com/[^/]+/[^/]+)", link)
     return match.group(1) + "/" if match else link
 
-
+# Read OpenAI API key from file
 with open("openai_key.txt", "r") as file:
     openai.api_key = file.read().strip()
 
-
-
+# Function to send link to ChatGPT and get a response
 def get_chatgpt_response(link):
     try:
         response = openai.ChatCompletion.create(
-            model="gpt-3",
+            model="gpt-4",
             messages=[
-                {"role": "system", "content": "Analyze the following link and summarize it."},
+                {"role": "system", "content": "Analyze the following GitHub repository link and summarize it."},
                 {"role": "user", "content": link}
             ],
             temperature=0.7
@@ -28,27 +27,30 @@ def get_chatgpt_response(link):
     except Exception as e:
         return f"Error: {e}"
 
+# File paths
+input_csv = "data_extraction_framework.csv"  # Input CSV file
+output_csv = "output.csv"  # Output CSV file
+column_name = "Image URL"  # Column containing GitHub links
 
-input_csv = "data_extraction_framework.csv"  
-output_txt = "output.txt"
-column_name = "Image URL" 
-
-
+# Load CSV file
 df = pd.read_csv(input_csv, delimiter=";", encoding="utf-8", on_bad_lines="skip").head(5)
 
-
+# Ensure column exists
 if column_name not in df.columns:
     print(f"Error: Column '{column_name}' not found in CSV file.")
     exit()
 
+# Open CSV file for writing results
+with open(output_csv, "w", encoding="utf-8", newline="") as file:
+    writer = csv.writer(file)
+    writer.writerow(["Repo URL", "Summary"])  # Write header row
 
-with open(output_txt, "w", encoding="utf-8") as file:
     for index, row in df.iterrows():
         link = row[column_name]
-        if pd.notna(link):  
+        if pd.notna(link):  # Check if the link is not empty
             repo_url = extract_repo_url(link)
-            response = get_chatgpt_response(repo_url)
-            file.write(f"Repo: {repo_url}\nResponse:\n{response}\n\n")
+            summary = get_chatgpt_response(repo_url)
+            writer.writerow([repo_url, summary])  # Write repo URL and summary to CSV
             print(f"Processed repo {repo_url}")
 
-print(f"Results saved in {output_txt}")
+print(f"Results saved in {output_csv}")
