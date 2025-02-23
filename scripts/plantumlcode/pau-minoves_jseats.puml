@@ -1,0 +1,23 @@
+@startuml
+```
+@startuml
+package "jseats" {
+  [README]
+  [Source Code]
+  [Test Cases]
+}
+
+actor PauMinoves
+
+PauMinoves --> "jseats" : Owns
+
+note right of [Source Code]
+  Implement various methods of 
+  seat allocations or distributions 
+  such as D'Hondt, Sainte-Lague, 
+  Largest Remainder and more.
+end note
+
+@enduml
+```
+@enduml

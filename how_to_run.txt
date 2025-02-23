@@ -1,0 +1,5 @@
+first run the downloadingimages.py file which downloads the images.
+next run the initialfetching.py files to generate the summaries.
+then run the generatingimages.py files to generate the images.
+atlast run the analysingimages.py file to generate the analysis.
+for the outputs please check the output.csv file 

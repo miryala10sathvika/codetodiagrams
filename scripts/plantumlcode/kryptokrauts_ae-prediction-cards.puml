@@ -1,0 +1,27 @@
+@startuml
+```plantuml
+@startuml
+package "ae-prediction-cards" {
+  [ae-prediction-cards]
+  
+  package "JavaScript Libraries" {
+    [JavaScript]
+  }
+
+  cloud "aeternity Blockchain" {
+    [AE tokens]
+  }
+
+  [ae-prediction-cards] --> [JavaScript]
+  [ae-prediction-cards] --> [AE tokens]
+
+  note bottom of [ae-prediction-cards]
+    This project is no longer maintained
+  end note
+
+  [kryptokrauts] ..> [ae-prediction-cards] : Develops
+}
+
+@enduml
+```
+@enduml
