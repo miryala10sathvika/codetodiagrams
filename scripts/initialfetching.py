@@ -33,7 +33,7 @@ def get_plantuml_from_summary(summary, repo_name):
         response = openai.ChatCompletion.create(
             model="gpt-4",
             messages=[
-                {"role": "system", "content": "You are an expert at creating PlantUML component diagrams. Generate a PlantUML component diagram based on the following repository summary. Include only the PlantUML code without any explanation."},
+                {"role": "system", "content": "You are an expert at creating PlantUML diagrams. Generate a PlantUML diagram based on the following repository summary. Include only the PlantUML code without any explanation."},
                 {"role": "user", "content": summary}
             ],
             temperature=0.7
@@ -63,7 +63,7 @@ output_csv = "output.csv"  # Output CSV file
 column_name = "Image URL"  # Column containing GitHub links
 
 # Load CSV file
-df = pd.read_csv(input_csv, delimiter=";", encoding="utf-8", on_bad_lines="skip").head(3)
+df = pd.read_csv(input_csv, delimiter=";", encoding="utf-8", on_bad_lines="skip").head(10)
 
 # Ensure column exists
 if column_name not in df.columns:

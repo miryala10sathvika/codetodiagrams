@@ -1,0 +1,20 @@
+Error in bcgov_embc-ess.puml:
+Error line 15 in file: /home/sathvika/codetodiagrams/scripts/plantumlcode/bcgov_embc-ess.puml
+Some diagram description contains errors
+
+Error in pau-minoves_jseats.puml:
+Error line 5 in file: /home/sathvika/codetodiagrams/scripts/plantumlcode/pau-minoves_jseats.puml
+Some diagram description contains errors
+
+Error in domingo1021_Bunny-code.puml:
+Error line 1 in file: /home/sathvika/codetodiagrams/scripts/plantumlcode/domingo1021_Bunny-code.puml
+Some diagram description contains errors
+
+Error in lowtalkers_escape-reality.puml:
+Error line 1 in file: /home/sathvika/codetodiagrams/scripts/plantumlcode/lowtalkers_escape-reality.puml
+Some diagram description contains errors
+
+Error in aikkala_user-in-the-box.puml:
+Error line 1 in file: /home/sathvika/codetodiagrams/scripts/plantumlcode/aikkala_user-in-the-box.puml
+Some diagram description contains errors
+

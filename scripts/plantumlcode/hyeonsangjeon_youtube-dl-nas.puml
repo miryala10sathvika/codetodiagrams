@@ -1,0 +1,21 @@
+@startuml
+```plantuml
+@startuml
+title youtube-dl-nas Repository
+
+actor Hyeonsangjeon
+package "youtube-dl-nas" {
+  [youtube-dl]
+  [NAS environment]
+  [Scripts]
+}
+
+Hyeonsangjeon --> [youtube-dl-nas] : Maintains
+[youtube-dl-nas] --> [youtube-dl] : Uses
+[youtube-dl-nas] --> [NAS environment] : Setup for
+[youtube-dl-nas] --> [Scripts] : Contains
+
+@enduml
+```
+
+@enduml

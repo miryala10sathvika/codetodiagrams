@@ -1,23 +1,26 @@
 @startuml
-```
 @startuml
+title Jseats Repository Structure
+
 package "jseats" {
-  [README]
-  [Source Code]
-  [Test Cases]
+    [jseats]
+    [documentation]
 }
 
-actor PauMinoves
+actor PauMinoves as "Pau Minoves"
+actor User
 
-PauMinoves --> "jseats" : Owns
+PauMinoves --> [jseats] : manages
+User --> [jseats] : uses
+User --> [documentation] : reads
 
-note right of [Source Code]
-  Implement various methods of 
-  seat allocations or distributions 
-  such as D'Hondt, Sainte-Lague, 
-  Largest Remainder and more.
-end note
-
+class jseats {
+    +D'Hondt()
+    +Sainte-Laguë()
+    +Modified Sainte-Laguë()
+    +Huntington-Hill()
+    ..
+    +Other methods()
+  }
 @enduml
-```
 @enduml

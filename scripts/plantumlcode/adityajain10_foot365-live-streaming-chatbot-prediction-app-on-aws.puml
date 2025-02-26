@@ -1,0 +1,18 @@
+@startuml
+Given the limited information available, the PlantUML code for the architecture might look something like this:
+
+```plantuml
+@startuml
+title Foot365 Live Streaming Chatbot Prediction App on AWS
+
+actor User
+
+User --> "Chatbot App" : Interacts
+"Chatbot App" --> "AWS Hosting" : Hosted
+"Chatbot App" --> "Live Streaming Service" : Accesses 
+"Chatbot App" --> "Prediction Service" : Accesses 
+
+@enduml
+```
+Please note, this is a very basic diagram. If more detailed information about the project is provided, a more accurate UML diagram can be created.
+@enduml

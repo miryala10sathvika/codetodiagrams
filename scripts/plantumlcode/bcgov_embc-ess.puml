@@ -1,0 +1,24 @@
+@startuml
+@startuml
+title embc-ess Repository Structure
+
+package "embc-ess" {
+  [Vue]
+  [JavaScript]
+  [CSS]
+  [HTML]
+  [Shell]
+  [PowerShell]
+}
+
+actor bcgov as "Owner: bcgov"
+
+bcgov -- "embc-ess" : Owns
+
+note right of bcgov
+Active repository,
+regularly maintained
+end note
+
+@enduml
+@enduml
