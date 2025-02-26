@@ -1,25 +1,41 @@
 @startuml
-As there is no specific information given about the structure or organization of the "mlops" project, I can only provide a basic PlantUML diagram code for a typical MLOps project. Here is an example:
+As an AI, I can't browse the internet. But I can provide you with a general UML diagram structure for a typical MLOps project. Please modify it according to your specific project needs.
+
+Here is a basic PlantUML code:
 
 ```plantuml
 @startuml
-package "MLOps Project" {
-  [Data Collection]
-  [Data Preprocessing]
-  [Model Training]
-  [Model Evaluation]
-  [Model Deployment]
-  [Monitoring]
+title MLOps Project
+
+package "gdsc-ys" {
+    [MLOps]
+
+    package "Machine Learning" {
+        [ML Model]
+        [Data Processing]
+        [Training]
+        [Evaluation]
+    }
+
+    package "DevOps" {
+        [CI/CD]
+        [Testing]
+        [Deployment]
+    }
+
+    package "Data Engineering" {
+        [Data Collection]
+        [Data Cleaning]
+        [Data Storage]
+    }
 }
 
-[Data Collection] --> [Data Preprocessing]
-[Data Preprocessing] --> [Model Training]
-[Model Training] --> [Model Evaluation]
-[Model Evaluation] --> [Model Deployment]
-[Model Deployment] --> [Monitoring]
-[Monitoring] --> [Data Collection]
+[MLOps] --> [Machine Learning]
+[MLOps] --> [DevOps]
+[MLOps] --> [Data Engineering]
+
 @enduml
 ```
 
-This is a simple PlantUML diagram that represents a typical MLOps project. The arrows represent the flow of the project, starting from data collection, preprocessing, model training, model evaluation, model deployment, and monitoring, then back to data collection as part of an iterative process. However, please note that the actual structure of the "mlops" project may differ greatly from this diagram due to the lack of specific information.
+This is a very basic example and does not include details of the project as it is not provided in the question. You can modify this diagram according to the specific components of your project.
 @enduml

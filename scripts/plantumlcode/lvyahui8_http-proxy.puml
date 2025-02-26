@@ -1,15 +1,13 @@
 @startuml
-As per your request, here is a simple PlantUML class diagram based on the limited information you provided. 
-
-```plantuml
 @startuml
-class http-proxy {
-  -lvyahui8 : Owner
-  -README : String
-  -SourceCode : JavaScript
+skinparam packageStyle rect
+actor User
+rectangle "http-proxy project" {
+(User) ..> (http-proxy project) : uses
+  
+package "http-proxy" {
+  [Java Code]
+  }
 }
 @enduml
-```
-
-This class diagram represents the "http-proxy" as a class where "lvyahui8" is the owner, "README" is a string type variable (representing the README file), and "SourceCode" is a JavaScript type variable (representing the source code written in JavaScript).
 @enduml

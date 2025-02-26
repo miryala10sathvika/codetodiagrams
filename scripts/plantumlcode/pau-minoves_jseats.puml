@@ -1,26 +1,26 @@
 @startuml
 @startuml
-title Jseats Repository Structure
+title jseats Repository Structure
 
-package "jseats" {
-    [jseats]
-    [documentation]
+package "pau-minoves/jseats" {
+  [jseats]
+  package "Java Files" {
+  }
+  package "XML Files" {
+  }
+  package "Documentation" {
+  }
+}
+note bottom: Last updated on Oct 15, 2021
+
+actor "pau-minoves" as A
+A -- [jseats] : Maintains
+
+cloud {
+  [Forked Once]
 }
 
-actor PauMinoves as "Pau Minoves"
-actor User
+note right: No releases, suggesting\nthe project is likely in a development stage
 
-PauMinoves --> [jseats] : manages
-User --> [jseats] : uses
-User --> [documentation] : reads
-
-class jseats {
-    +D'Hondt()
-    +Sainte-Laguë()
-    +Modified Sainte-Laguë()
-    +Huntington-Hill()
-    ..
-    +Other methods()
-  }
 @enduml
 @enduml

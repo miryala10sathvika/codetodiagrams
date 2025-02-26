@@ -1,15 +1,20 @@
 @startuml
 @startuml
-title ae-prediction-cards Repository Structure
+title ae-prediction-cards Repository
 
-package "ae-prediction-cards" {
-  [README]
-  [LICENSE]
-  package "Source Code" {
-    [Sophia Language Files]
-  }
-  package "Additional Resources" {
-  }
-}
+actor User
+participant "Frontend Interface (JavaScript, CSS, HTML)" as Frontend
+database "ae-prediction-cards Repository" as Repo
+participant "Smart-Contract Backend (Sophia)" as Backend
+actor kryptokrauts
+
+User -> Frontend : Make Predictions
+Frontend -> Backend : Call Smart Contract
+Backend -> Repo : Update State
+Backend --> Frontend : Return Result
+Frontend --> User : Show Result
+
+kryptokrauts -> Repo : Manage Repository
+
 @enduml
 @enduml

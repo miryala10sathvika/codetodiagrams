@@ -1,21 +1,17 @@
 @startuml
-```plantuml
 @startuml
-title youtube-dl-nas Repository
+title youtube-dl-nas Repository Diagram
 
-actor Hyeonsangjeon
-package "youtube-dl-nas" {
-  [youtube-dl]
-  [NAS environment]
-  [Scripts]
-}
+actor "hyeonsangjeon" as user
+entity "youtube-dl-nas Repository" as repo
+database "Docker" as docker
+entity "Shell Language" as shell
 
-Hyeonsangjeon --> [youtube-dl-nas] : Maintains
-[youtube-dl-nas] --> [youtube-dl] : Uses
-[youtube-dl-nas] --> [NAS environment] : Setup for
-[youtube-dl-nas] --> [Scripts] : Contains
+user --> repo : Owns
+repo --> docker : Uses
+repo --> shell : Written In
+
+note right of repo : This repository seems to\nbe a project for YouTube\n downloads on Network-Attached\n Storage (NAS). No detailed\n README file or additional\n context is provided.
 
 @enduml
-```
-
 @enduml

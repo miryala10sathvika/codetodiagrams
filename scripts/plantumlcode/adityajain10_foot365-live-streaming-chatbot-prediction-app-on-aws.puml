@@ -1,18 +1,29 @@
 @startuml
-Given the limited information available, the PlantUML code for the architecture might look something like this:
+Here is the PlantUML code for a class diagram based on the given information:
 
 ```plantuml
 @startuml
-title Foot365 Live Streaming Chatbot Prediction App on AWS
 
-actor User
-
-User --> "Chatbot App" : Interacts
-"Chatbot App" --> "AWS Hosting" : Hosted
-"Chatbot App" --> "Live Streaming Service" : Accesses 
-"Chatbot App" --> "Prediction Service" : Accesses 
+package "foot365-live-streaming-chatbot-prediction-app-on-aws" {
+    class "Chatbot" {
+        +send_message(message: String): void
+        +receive_message(): String
+    }
+    
+    class "PredictionApp" {
+        +predict(): void
+    }
+    
+    class "AWS" {
+    }
+    
+    Chatbot -- AWS: runs on
+    PredictionApp -- AWS: runs on
+    Chatbot -- PredictionApp: interacts with
+}
 
 @enduml
 ```
-Please note, this is a very basic diagram. If more detailed information about the project is provided, a more accurate UML diagram can be created.
+
+This PlantUML code will generate a diagram that represents the classes "Chatbot", "PredictionApp" and "AWS" within the package "foot365-live-streaming-chatbot-prediction-app-on-aws", as well as the relationships between them. Please note that due to the lack of detailed information in the repository, the methods and attributes of the classes are just assumptions and they might not reflect the actual content of the repository.
 @enduml
