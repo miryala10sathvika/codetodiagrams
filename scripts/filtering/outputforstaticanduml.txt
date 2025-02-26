@@ -1,0 +1,40 @@
+Repository: TinkerWorks/HomeSensorHub
+Image URL: https://github.com/TinkerWorks/HomeSensorHub/blob/master/docs/top_level_architecture.png
+Architecture Scope: entire
+Behavior: static
+--------------------------------------------------------------------------------
+Repository: ndsev/zswag
+Image URL: https://github.com/ndsev/zswag/blob/master/doc/zswag-architecture.png
+Architecture Scope: entire
+Behavior: static
+--------------------------------------------------------------------------------
+Repository: OpenPSD/modelbank
+Image URL: https://github.com/OpenPSD/modelbank/blob/master/modelbank_solution_architecture.png
+Architecture Scope: entire
+Behavior: static
+--------------------------------------------------------------------------------
+Repository: ballerina-platform/asyncapi-tools
+Image URL: https://github.com/ballerina-platform/asyncapi-tools/blob/main/asyncapi-cli/src/main/resources/architecture.jpg
+Architecture Scope: entire
+Behavior: static
+--------------------------------------------------------------------------------
+Repository: EOS-Nation/dfuse-docs
+Image URL: https://github.com/EOS-Nation/dfuse-docs/blob/master/static/drawings/general_architecture.png
+Architecture Scope: part
+Behavior: static
+--------------------------------------------------------------------------------
+Repository: matryx/MatryxPlatform
+Image URL: https://github.com/matryx/MatryxPlatform/blob/master/assets/ArchitectureDiagram.svg
+Architecture Scope: entire
+Behavior: static
+--------------------------------------------------------------------------------
+Repository: batatero/arquiteturaPHP00
+Image URL: https://github.com/batatero/arquiteturaPHP00/blob/master/Class%20Architecture.jpg
+Architecture Scope: entire
+Behavior: static
+--------------------------------------------------------------------------------
+Repository: Taymindis/fcgi-function
+Image URL: https://github.com/Taymindis/fcgi-function/blob/master/images/fcgi_func_architecture.png
+Architecture Scope: part
+Behavior: static
+--------------------------------------------------------------------------------
