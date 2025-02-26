@@ -1,34 +1,57 @@
 @startuml
-As an AI model, I'm unable to browse the internet or access external links. However, based on your description, I can generate a basic PlantUML class diagram that might represent a generic full-stack project. Please replace the placeholders with the actual classes/objects upon reviewing your repository.
+As there is no explicit structure provided in your statement, I will create a basic PlantUML class diagram based on the information you've provided. 
 
-```plantuml
+```
 @startuml
+title Full Stack Interview Prep 2021
 
-package "full_stack_interview_prep_2021" {
-    class "FrontEnd" {
-        +handleUI()
-    }
-    
-    class "BackEnd" {
-        +handleServerRequest()
-    }
-    
-    class "Database" {
-        +storeData()
-        +retrieveData()
-    }
-    
-    class "User" {
-        +makeRequest()
-    }
-    
-    User -- FrontEnd : makes requests >
-    FrontEnd -- BackEnd : forwards requests >
-    BackEnd -- Database : stores/retrieves data >
+class Repository {
+  +String name
+  +User owner
+  +String description
+  +Date created_at
+  +Date updated_at
+  -- methods --
+  +getDetails(): String
 }
+
+class User {
+  +String username
+  +String email
+  -- methods --
+  +getDetails(): String
+}
+
+class Resource {
+  +String name
+  +String type
+  +String content
+  -- methods --
+  +getDetails(): String
+}
+
+class Code {
+  +String name
+  +String language
+  +String content
+  -- methods --
+  +getDetails(): String
+}
+
+class Information {
+  +String name
+  +String content
+  -- methods --
+  +getDetails(): String
+}
+
+User "1" -- "1" Repository : Owns
+Repository "1" -- "*" Resource : Contains
+Repository "1" -- "*" Code : Contains
+Repository "1" -- "*" Information : Contains
 
 @enduml
 ```
+Please note that this is a generic representation. The real life application might be different based on the exact structure and details of the project.
 
-This is a very high level representation and actual implementation could have many more classes and relationships. You would need to update this diagram according to your project's structure and functionalities.
 @enduml

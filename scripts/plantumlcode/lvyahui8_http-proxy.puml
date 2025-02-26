@@ -1,13 +1,27 @@
 @startuml
 @startuml
-skinparam packageStyle rect
-actor User
-rectangle "http-proxy project" {
-(User) ..> (http-proxy project) : uses
-  
-package "http-proxy" {
-  [Java Code]
-  }
+title http-proxy GitHub Repository
+
+actor lvyahui8 as "Owner (lvyahui8)"
+
+package "http-proxy Repository" {
+    [http-proxy]
+    [start server script]
+    [setup rules script]
+    [modify requests/responses script]
+    [install instructions]
+    [usage instructions]
 }
+
+lvyahui8 --> [http-proxy] : manages
+lvyahui8 --> [start server script] : manages
+lvyahui8 --> [setup rules script] : manages
+lvyahui8 --> [modify requests/responses script] : manages
+lvyahui8 --> [install instructions] : wrote
+lvyahui8 --> [usage instructions] : wrote
+
+note right of [http-proxy]
+This project is a simple HTTP/HTTPS proxy server created using node.js.
+end note
 @enduml
 @enduml

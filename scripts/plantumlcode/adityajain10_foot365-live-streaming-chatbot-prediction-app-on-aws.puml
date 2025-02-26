@@ -1,29 +1,18 @@
 @startuml
-Here is the PlantUML code for a class diagram based on the given information:
+As you've asked for a PlantUML diagram, I'll create a basic component diagram based on the information provided. However, as there are no details about the specific programming language used and the specific functionalities of the project, the diagram will be rather generic.
 
 ```plantuml
 @startuml
-
-package "foot365-live-streaming-chatbot-prediction-app-on-aws" {
-    class "Chatbot" {
-        +send_message(message: String): void
-        +receive_message(): String
-    }
-    
-    class "PredictionApp" {
-        +predict(): void
-    }
-    
-    class "AWS" {
-    }
-    
-    Chatbot -- AWS: runs on
-    PredictionApp -- AWS: runs on
-    Chatbot -- PredictionApp: interacts with
+package "GitHub" {
+  [foot365-live-streaming-chatbot-prediction-app-on-aws]
 }
 
+actor Aditya_Jain
+cloud AWS
+
+Aditya_Jain --> [foot365-live-streaming-chatbot-prediction-app-on-aws]: Creates
+[foot365-live-streaming-chatbot-prediction-app-on-aws] --> AWS: Deploys
 @enduml
 ```
-
-This PlantUML code will generate a diagram that represents the classes "Chatbot", "PredictionApp" and "AWS" within the package "foot365-live-streaming-chatbot-prediction-app-on-aws", as well as the relationships between them. Please note that due to the lack of detailed information in the repository, the methods and attributes of the classes are just assumptions and they might not reflect the actual content of the repository.
+This PlantUML code creates a diagram with 4 components: Aditya Jain (the creator of the repository), the GitHub repository itself, and AWS where the repository's app is deployed. The relationships are represented with arrows.
 @enduml

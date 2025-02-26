@@ -1,26 +1,30 @@
 @startuml
 @startuml
-title jseats Repository Structure
 
-package "pau-minoves/jseats" {
-  [jseats]
-  package "Java Files" {
-  }
-  package "XML Files" {
-  }
-  package "Documentation" {
-  }
-}
-note bottom: Last updated on Oct 15, 2021
+package "jseats" {
+  [D'Hondt]
+  [Sainte-Laguë]
+  [Largest Remainder]
+  [Others]
+  [Readme]
+  [License]
 
-actor "pau-minoves" as A
-A -- [jseats] : Maintains
-
-cloud {
-  [Forked Once]
+  [D'Hondt] --> [jseats]
+  [Sainte-Laguë] --> [jseats]
+  [Largest Remainder] --> [jseats]
+  [Others] --> [jseats]
+  [Readme] ..> [jseats]
+  [License] ..> [jseats]
 }
 
-note right: No releases, suggesting\nthe project is likely in a development stage
+note top of [jseats]
+  Java Library
+  Developed by Pau Minoves
+end note
+
+note right of [License]
+  MIT license
+end note
 
 @enduml
 @enduml

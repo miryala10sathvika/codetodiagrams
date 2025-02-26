@@ -1,40 +1,29 @@
 @startuml
 @startuml
-title EMBC ESS - Repository Structure
-
-package "bcgov/embc-ess" {
-  [ESS System]
-  [Development Environment Instructions]
-  [Contributing Guide]
+package "EMBC ESS" {
+  [Contribution Guidelines]
   [Code of Conduct]
+  [Readme]
+  [License]
+  
+  package "Backend" {
+    [ASP.NET Core]
+  }
+  
+  package "Frontend" {
+    [Angular]
+  }
+  
+  [Docker]
+  [Jenkins]
 }
 
-cloud {
-  [TypeScript]
-  [.NET Core]
-}
-
-[ESS System] --> [TypeScript]
-[ESS System] --> [.NET Core]
-
-note right of [ESS System] 
-  This contains source code for the
-  Emergency Support Services (ESS) system 
-  which includes services for registering evacuees, 
-  managing referrals, supporting users and more.
+note bottom of [License]
+:Apache License 2.0:
 end note
 
-note bottom of [Development Environment Instructions]
-  Instructions for setting up a development environment
-end note
-
-note bottom of [Contributing Guide]
-  Guide for contributing to the project
-end note
-
-note bottom of [Code of Conduct]
-  Repository's code of conduct
-end note
-
+[ASP.NET Core] ..> [Docker] : Deployed Using
+[Angular] ..> [Docker] : Deployed Using
+[Docker] ..> [Jenkins] : CI/CD
 @enduml
 @enduml

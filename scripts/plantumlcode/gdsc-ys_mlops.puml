@@ -1,41 +1,23 @@
 @startuml
-As an AI, I can't browse the internet. But I can provide you with a general UML diagram structure for a typical MLOps project. Please modify it according to your specific project needs.
-
-Here is a basic PlantUML code:
-
-```plantuml
 @startuml
-title MLOps Project
+title GDSC-YS MLOPS Repository
 
-package "gdsc-ys" {
-    [MLOps]
+actor User
+participant "MLOps Repo" as A
 
-    package "Machine Learning" {
-        [ML Model]
-        [Data Processing]
-        [Training]
-        [Evaluation]
-    }
-
-    package "DevOps" {
-        [CI/CD]
-        [Testing]
-        [Deployment]
-    }
-
-    package "Data Engineering" {
-        [Data Collection]
-        [Data Cleaning]
-        [Data Storage]
-    }
-}
-
-[MLOps] --> [Machine Learning]
-[MLOps] --> [DevOps]
-[MLOps] --> [Data Engineering]
-
+User -> A: Access repository
+A --> User: Provide repository details
+note right
+The repository does not provide a detailed 
+description or a README file to explain the 
+project, its purpose, or its functionalities.
+end note
+User -> A: Check for branches or contributors
+A --> User: No branches or contributors found
+note right 
+There are no branches or contributors listed, 
+implying that the repository may be newly created 
+or not actively maintained.
+end note
 @enduml
-```
-
-This is a very basic example and does not include details of the project as it is not provided in the question. You can modify this diagram according to the specific components of your project.
 @enduml

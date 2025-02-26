@@ -4,6 +4,7 @@ import openai
 import pandas as pd
 import csv
 import re
+import json
 
 # Function to extract repository URL from a GitHub file URL
 def extract_repo_url(link):
@@ -66,43 +67,49 @@ def compile_plantuml(input_path, output_dir="../output_images"):
     
     return result.returncode == 0, result.stderr
 
-def process_repository(link, writer):
+def process_repository(link):
     if pd.notna(link):
         repo_url = extract_repo_url(link)
         summary = get_chatgpt_response(repo_url)
-        writer.writerow([repo_url, summary])
+        
+        # Return dictionary instead of writing to CSV
+        result = {
+            "repo_url": repo_url,
+            "summary": summary
+        }
         
         repo_name = repo_url.split('github.com/')[-1].rstrip('/')
         
         # Generate and compile PlantUML code with retry mechanism
         max_retries = 3
         attempt = 0
-        while attempt < max_retries:
-            # Generate PlantUML code
-            puml_code = get_plantuml_from_summary(summary, repo_name, 
-                                                error_message=None if attempt == 0 else error_message)
-            
-            # Save the code
-            file_path = save_plantuml_code(puml_code, repo_name)
-            
-            # Try to compile
-            success, error_message = compile_plantuml(file_path)
-            
-            if success:
-                print(f"Successfully processed repo {repo_url}")
-                print(f"PlantUML diagram generated at {file_path}")
-                break
-            else:
-                print(f"Attempt {attempt + 1}: Error in generating PlantUML for {repo_url}")
-                print(f"Error message: {error_message}")
-                attempt += 1
+        
+        # Open log file in append mode
+        with open("process.log", "a", encoding="utf-8") as log_file:
+            while attempt < max_retries:
+                puml_code = get_plantuml_from_summary(summary, repo_name, 
+                                                    error_message=None if attempt == 0 else error_message)
                 
-        if attempt == max_retries:
-            print(f"Failed to generate valid PlantUML for {repo_url} after {max_retries} attempts")
+                file_path = save_plantuml_code(puml_code, repo_name)
+                success, error_message = compile_plantuml(file_path)
+                
+                if success:
+                    log_file.write(f"Successfully processed repo {repo_url}\n")
+                    log_file.write(f"PlantUML diagram generated at {file_path}\n")
+                    break
+                else:
+                    log_file.write(f"Attempt {attempt + 1}: Error in generating PlantUML for {repo_url}\n")
+                    log_file.write(f"Error message: {error_message}\n")
+                    attempt += 1
+                    
+            if attempt == max_retries:
+                log_file.write(f"Failed to generate valid PlantUML for {repo_url} after {max_retries} attempts\n")
+        
+        return result
 
 def main():
     input_csv = "data_extraction_framework.csv"
-    output_csv = "output.csv"
+    output_jsonl = "output.jsonl"
     column_name = "Image URL"
 
     df = pd.read_csv(input_csv, delimiter=";", encoding="utf-8", on_bad_lines="skip").head(10)
@@ -111,14 +118,13 @@ def main():
         print(f"Error: Column '{column_name}' not found in CSV file.")
         return
 
-    with open(output_csv, "w", encoding="utf-8", newline="") as file:
-        writer = csv.writer(file)
-        writer.writerow(["Repo URL", "Summary"])
-
+    with open(output_jsonl, "w", encoding="utf-8") as file:
         for index, row in df.iterrows():
-            process_repository(row[column_name], writer)
+            result = process_repository(row[column_name])
+            if result:
+                file.write(f"{result}\n")
 
-    print(f"Results saved in {output_csv}")
+    print(f"Results saved in {output_jsonl}")
 
 if __name__ == "__main__":
     main() 

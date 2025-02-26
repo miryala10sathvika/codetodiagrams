@@ -1,20 +1,33 @@
 @startuml
 @startuml
+
 title ae-prediction-cards Repository
 
-actor User
-participant "Frontend Interface (JavaScript, CSS, HTML)" as Frontend
-database "ae-prediction-cards Repository" as Repo
-participant "Smart-Contract Backend (Sophia)" as Backend
-actor kryptokrauts
+package "Kryptokrauts" {
+  [ae-prediction-cards]
+}
 
-User -> Frontend : Make Predictions
-Frontend -> Backend : Call Smart Contract
-Backend -> Repo : Update State
-Backend --> Frontend : Return Result
-Frontend --> User : Show Result
+cloud {
+  [aeternity blockchain]
+}
 
-kryptokrauts -> Repo : Manage Repository
+database "aepp-sdk" as sdk {
+}
+
+[ae-prediction-cards] --> [aeternity blockchain] : uses
+[ae-prediction-cards] --> sdk : uses
+
+note "ISC License" as N1
+[ae-prediction-cards] .. N1 : is licensed under
+
+note "JavaScript" as N2
+[ae-prediction-cards] .. N2 : is written in
+
+note "Regularly updated" as N3
+[ae-prediction-cards] .. N3
+
+note "Includes documentation" as N4
+[ae-prediction-cards] .. N4
 
 @enduml
 @enduml

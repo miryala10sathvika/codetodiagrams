@@ -78,7 +78,7 @@ def main():
     
     try:
         # Read CSV file with semicolon delimiter
-        df = pd.read_csv(input_csv, delimiter=";", encoding="utf-8", on_bad_lines="skip").head(3)
+        df = pd.read_csv(input_csv, delimiter=";", encoding="utf-8", on_bad_lines="skip").head(10)
         
         # Check if required column exists
         if image_column not in df.columns:

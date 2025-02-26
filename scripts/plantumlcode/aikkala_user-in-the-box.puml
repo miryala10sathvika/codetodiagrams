@@ -1,3 +1,35 @@
 @startuml
-As an AI model, I'm sorry but I can't provide the PlantUML diagram without any specific information about the classes, relationships, functionalities or any other structural details of the project. The information you provided does not contain any specific details about the project structure, hence it's not possible to generate a PlantUML diagram. Please provide more details about the project.
+As an AI model, I can't browse the internet to check the repository, so I'll generate a basic PlantUML example that can be modified as per your requirements. 
+
+```PlantUML
+@startuml
+class User {
+  +String name
+  +String email
+  --
+  +User()
+  +User(name : String, email : String)
+  +getName() : String
+  +getEmail() : String
+  +setName(name : String) : void
+  +setEmail(email : String) : void
+}
+
+class Box {
+  +String color
+  +int size
+  --
+  +Box()
+  +Box(color : String, size : int)
+  +getColor() : String
+  +getSize() : int
+  +setColor(color : String) : void
+  +setSize(size : int) : void
+}
+
+User -- Box: has >
+@enduml
+```
+
+In this example, there are two classes, 'User' and 'Box'. The 'User' has attributes 'name' and 'email' and the 'Box' has attributes 'color' and 'size'. The '--' line separates the attributes from the methods in each class. Each class also has getter and setter methods for their attributes. The 'User' has a relation with the 'Box' which is represented by the line with 'has >' at the end. This means that a 'User' has a 'Box'.
 @enduml
