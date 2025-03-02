@@ -108,7 +108,7 @@ def process_repository(link):
         return result
 
 def main():
-    input_csv = "data_extraction_framework.csv"
+    input_csv = "./dataset/dataonlywithstaticanduml.csv"
     output_jsonl = "output.jsonl"
     column_name = "Image URL"
 

@@ -1,0 +1,25 @@
+@startuml
+@startuml
+package "modelbank" {
+  [modelbank application] 
+  [Berlin Group PSD2 XS2A API standards]
+  [Java]
+  [Spring Boot]
+  [Documentation]
+  [Docker Compose]
+}
+
+[OpenPSD] --> [modelbank application]
+[modelbank application] ..> [Berlin Group PSD2 XS2A API standards] : complies with
+[modelbank application] ..> [Java] : uses
+[modelbank application] ..> [Spring Boot] : uses
+[modelbank application] ..> [Documentation] : includes
+[modelbank application] ..> [Docker Compose] : includes
+
+note bottom of [modelbank application]
+Last commit: 14th October 2021
+Contributors: 16
+License: Apache License 2.0
+end note
+@enduml
+@enduml

@@ -1,0 +1,23 @@
+@startuml
+@startuml
+package "EOS-Nation" {
+  [dfuse-docs Repository]
+}
+
+cloud "GitHub" {
+  [EOS-Nation/dfuse-docs]
+}
+
+[Developer] --> [GitHub]
+[GitHub] --> [dfuse-docs Repository]
+
+package "dfuse" {
+  [Installation]
+  [Usage]
+  [Features]
+}
+
+[EOS-Nation/dfuse-docs] --> [dfuse]
+
+@enduml
+@enduml

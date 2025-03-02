@@ -1,0 +1,20 @@
+@startuml
+@startuml fcgi-function
+package "fcgi-function" {
+  [Dockerfile]
+  [README]
+  [Build Instructions]
+  [Source Code]
+  [Example Code]
+}
+
+component [Fast CGI protocol] as FastCGI
+component [C language] as C
+
+[Source Code] -up- [FastCGI]
+[Example Code] -up- [FastCGI]
+[Build Instructions] ..> [Dockerfile]
+[Source Code] ..> C
+[Example Code] ..> C
+@enduml
+@enduml

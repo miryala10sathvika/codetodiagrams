@@ -4,6 +4,7 @@ import os
 import re
 from urllib.parse import urlparse
 from pathlib import Path
+from PIL import Image  # Pillow library for image processing
 
 def convert_github_url_to_raw(url):
     """Convert GitHub repository URL to raw content URL"""
@@ -30,6 +31,21 @@ def extract_repo_info(url):
         repo_name = repo_name.rstrip('/').replace('.git', '')
         return f"{username}_{repo_name}"
     return None
+
+def convert_image_to_png(file_path):
+    """Convert an image file to PNG format and return the new file path."""
+    try:
+        # Open the image file using Pillow
+        with Image.open(file_path) as img:
+            # Define new file path with .png extension
+            new_file_path = os.path.splitext(file_path)[0] + ".png"
+            # Convert and save as PNG
+            img.convert("RGBA").save(new_file_path, "PNG")
+        # Optionally remove the original file
+        os.remove(file_path)
+        return True, new_file_path
+    except Exception as e:
+        return False, str(e)
 
 def download_image(url, folder_path):
     try:
@@ -63,6 +79,14 @@ def download_image(url, folder_path):
                 if chunk:
                     file.write(chunk)
         
+        # If the file is not in PNG format, convert it to PNG
+        if ext.lower() != ".png":
+            success, new_path_or_error = convert_image_to_png(file_path)
+            if success:
+                return True, new_path_or_error
+            else:
+                return False, new_path_or_error
+        
         return True, file_path
     except Exception as e:
         return False, str(e)
@@ -73,7 +97,7 @@ def main():
     os.makedirs(output_folder, exist_ok=True)
     
     # Read the CSV file
-    input_csv = "data_extraction_framework.csv"
+    input_csv = "./dataset/dataonlywithstaticanduml.csv"
     image_column = "Image URL"
     
     try:
@@ -94,7 +118,7 @@ def main():
                 success, result = download_image(image_url, output_folder)
                 
                 if success:
-                    print(f"Successfully downloaded: {result}")
+                    print(f"Successfully downloaded and converted image: {result}")
                 else:
                     print(f"Failed to download image: {result}")
             
