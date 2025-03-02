@@ -1,33 +1,22 @@
 @startuml
 @startuml
 
-title ae-prediction-cards Repository
-
-package "Kryptokrauts" {
-  [ae-prediction-cards]
+package "ae-prediction-cards" {
+  [Scripts for deploying contracts]
+  [Frontend code]
+  [Features for managing bets]
+  [Features for determining outcomes]
+  [Features for distributing winnings]
+  [Documentation]
 }
 
-cloud {
-  [aeternity blockchain]
-}
-
-database "aepp-sdk" as sdk {
-}
-
-[ae-prediction-cards] --> [aeternity blockchain] : uses
-[ae-prediction-cards] --> sdk : uses
-
-note "ISC License" as N1
-[ae-prediction-cards] .. N1 : is licensed under
-
-note "JavaScript" as N2
-[ae-prediction-cards] .. N2 : is written in
-
-note "Regularly updated" as N3
-[ae-prediction-cards] .. N3
-
-note "Includes documentation" as N4
-[ae-prediction-cards] .. N4
+[JavaScript] --> [Scripts for deploying contracts]
+[Sophia] --> [Scripts for deploying contracts]
+[JavaScript] --> [Frontend code]
+[JavaScript] --> [Features for managing bets]
+[JavaScript] --> [Features for determining outcomes]
+[JavaScript] --> [Features for distributing winnings]
+[JavaScript] --> [Documentation]
 
 @enduml
 @enduml

@@ -1,29 +1,34 @@
 @startuml
 @startuml
-package "EMBC ESS" {
-  [Contribution Guidelines]
-  [Code of Conduct]
-  [Readme]
-  [License]
-  
-  package "Backend" {
-    [ASP.NET Core]
-  }
-  
-  package "Frontend" {
-    [Angular]
-  }
-  
-  [Docker]
-  [Jenkins]
+package "https://github.com/bcgov/embc-ess/" {
+  [embc-ess]
 }
 
-note bottom of [License]
-:Apache License 2.0:
-end note
+cloud "Emergency Support Services (ESS)" {
+  [ESS Program]
+}
 
-[ASP.NET Core] ..> [Docker] : Deployed Using
-[Angular] ..> [Docker] : Deployed Using
-[Docker] ..> [Jenkins] : CI/CD
+database "PostgreSQL" {
+  [Database]
+}
+
+[embc-ess] --> [ESS Program]
+[embc-ess] --> [Database]
+
+node "Backend (.NET Core)" {
+  [C#]
+}
+[embc-ess] --> [C#]
+
+node "Frontend (Vue.js)" {
+  [JavaScript]
+  [TypeScript]
+}
+[embc-ess] --> [JavaScript]
+[embc-ess] --> [TypeScript]
+
+[embc-ess] ..> [README] : includes
+[embc-ess] ..> [Developer Guide] : includes
+[embc-ess] ..> [Contribution Guidelines] : includes
 @enduml
 @enduml

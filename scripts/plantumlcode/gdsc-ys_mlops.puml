@@ -1,23 +1,13 @@
 @startuml
 @startuml
-title GDSC-YS MLOPS Repository
-
-actor User
-participant "MLOps Repo" as A
-
-User -> A: Access repository
-A --> User: Provide repository details
-note right
-The repository does not provide a detailed 
-description or a README file to explain the 
-project, its purpose, or its functionalities.
-end note
-User -> A: Check for branches or contributors
-A --> User: No branches or contributors found
-note right 
-There are no branches or contributors listed, 
-implying that the repository may be newly created 
-or not actively maintained.
-end note
+package "https://github.com/gdsc-ys/mlops/" {
+  [gdsc-ys] ..> [mlops]
+  package "mlops" {
+    [Machine Learning Operations (MLOps)]
+    [Jupyter notebook]
+  }
+  [gdsc-ys] --> [Machine Learning Operations (MLOps)]
+  [Jupyter notebook] ..> [Machine Learning Operations (MLOps)]
+}
 @enduml
 @enduml

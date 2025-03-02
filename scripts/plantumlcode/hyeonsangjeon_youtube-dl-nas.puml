@@ -1,3 +1,19 @@
 @startuml
-I'm sorry, but without more specific information about the components and relationships within the "youtube-dl-nas" project, it's not possible to generate a meaningful PlantUML diagram. The provided details are not sufficient to determine the structure or behavior of the system, which are crucial for creating a UML diagram. Please provide more specifics about the project, such as its classes, relationships, functions, or other elements.
+@startuml
+package "youtube-dl-nas" {
+  [Docker]
+  [Shell Script]
+  [Setup Instructions]
+  [Usage Examples]
+}
+
+actor "hyeonsangjeon" as A
+
+A -- [youtube-dl-nas]
+[youtube-dl-nas] ..> [Docker] 
+[youtube-dl-nas] ..> [Shell Script]
+[youtube-dl-nas] ..> [Setup Instructions]
+[youtube-dl-nas] ..> [Usage Examples]
+
+@enduml
 @enduml

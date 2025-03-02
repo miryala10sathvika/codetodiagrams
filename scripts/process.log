@@ -1,0 +1,47 @@
+Attempt 1: Error in generating PlantUML for https://github.com/pau-minoves/jseats/
+Error message: Error line 3 in file: /home/sathvika/codetodiagrams/scripts/plantumlcode/pau-minoves_jseats.puml
+Some diagram description contains errors
+
+Attempt 2: Error in generating PlantUML for https://github.com/pau-minoves/jseats/
+Error message: Error line 12 in file: /home/sathvika/codetodiagrams/scripts/plantumlcode/pau-minoves_jseats.puml
+Some diagram description contains errors
+
+Attempt 3: Error in generating PlantUML for https://github.com/pau-minoves/jseats/
+Error message: Error line 5 in file: /home/sathvika/codetodiagrams/scripts/plantumlcode/pau-minoves_jseats.puml
+Some diagram description contains errors
+
+Failed to generate valid PlantUML for https://github.com/pau-minoves/jseats/ after 3 attempts
+Attempt 1: Error in generating PlantUML for https://github.com/kryptokrauts/ae-prediction-cards/
+Error message: Error line 25 in file: /home/sathvika/codetodiagrams/scripts/plantumlcode/kryptokrauts_ae-prediction-cards.puml
+Some diagram description contains errors
+
+Successfully processed repo https://github.com/kryptokrauts/ae-prediction-cards/
+PlantUML diagram generated at plantumlcode/kryptokrauts_ae-prediction-cards.puml
+Successfully processed repo https://github.com/bcgov/embc-ess/
+PlantUML diagram generated at plantumlcode/bcgov_embc-ess.puml
+Successfully processed repo https://github.com/hyeonsangjeon/youtube-dl-nas/
+PlantUML diagram generated at plantumlcode/hyeonsangjeon_youtube-dl-nas.puml
+Attempt 1: Error in generating PlantUML for https://github.com/aikkala/user-in-the-box/
+Error message: Error line 11 in file: /home/sathvika/codetodiagrams/scripts/plantumlcode/aikkala_user-in-the-box.puml
+Some diagram description contains errors
+
+Successfully processed repo https://github.com/aikkala/user-in-the-box/
+PlantUML diagram generated at plantumlcode/aikkala_user-in-the-box.puml
+Successfully processed repo https://github.com/lvyahui8/http-proxy/
+PlantUML diagram generated at plantumlcode/lvyahui8_http-proxy.puml
+Successfully processed repo https://github.com/domingo1021/Bunny-code/
+PlantUML diagram generated at plantumlcode/domingo1021_Bunny-code.puml
+Successfully processed repo https://github.com/adityajain10/foot365-live-streaming-chatbot-prediction-app-on-aws/
+PlantUML diagram generated at plantumlcode/adityajain10_foot365-live-streaming-chatbot-prediction-app-on-aws.puml
+Attempt 1: Error in generating PlantUML for https://github.com/sm2774us/full_stack_interview_prep_2021/
+Error message: Error line 1 in file: /home/sathvika/codetodiagrams/scripts/plantumlcode/sm2774us_full_stack_interview_prep_2021.puml
+Some diagram description contains errors
+
+Attempt 2: Error in generating PlantUML for https://github.com/sm2774us/full_stack_interview_prep_2021/
+Error message: Error line 1 in file: /home/sathvika/codetodiagrams/scripts/plantumlcode/sm2774us_full_stack_interview_prep_2021.puml
+Some diagram description contains errors
+
+Successfully processed repo https://github.com/sm2774us/full_stack_interview_prep_2021/
+PlantUML diagram generated at plantumlcode/sm2774us_full_stack_interview_prep_2021.puml
+Successfully processed repo https://github.com/gdsc-ys/mlops/
+PlantUML diagram generated at plantumlcode/gdsc-ys_mlops.puml

@@ -1,35 +1,11 @@
 @startuml
-As an AI model, I can't browse the internet to check the repository, so I'll generate a basic PlantUML example that can be modified as per your requirements. 
-
-```PlantUML
 @startuml
-class User {
-  +String name
-  +String email
-  --
-  +User()
-  +User(name : String, email : String)
-  +getName() : String
-  +getEmail() : String
-  +setName(name : String) : void
-  +setEmail(email : String) : void
+package "GitHub" {
+    [user-in-the-box]
 }
 
-class Box {
-  +String color
-  +int size
-  --
-  +Box()
-  +Box(color : String, size : int)
-  +getColor() : String
-  +getSize() : int
-  +setColor(color : String) : void
-  +setSize(size : int) : void
-}
+actor aikkala
 
-User -- Box: has >
+aikkala --> [user-in-the-box] : owns
 @enduml
-```
-
-In this example, there are two classes, 'User' and 'Box'. The 'User' has attributes 'name' and 'email' and the 'Box' has attributes 'color' and 'size'. The '--' line separates the attributes from the methods in each class. Each class also has getter and setter methods for their attributes. The 'User' has a relation with the 'Box' which is represented by the line with 'has >' at the end. This means that a 'User' has a 'Box'.
 @enduml

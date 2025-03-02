@@ -30,7 +30,7 @@ def get_chatgpt_response(link):
         return f"Error: {e}"
 
 def get_plantuml_from_summary(summary, repo_name, error_message=None):
-    system_content = "You are an expert at creating PlantUML  diagrams. Generate a PlantUML diagram based on the following repository summary. Include only the PlantUML code without any explanation. Ensure the code is syntax error free."
+    system_content = "You are an expert at creating PlantUML diagrams. Generate a PlantUML component diagram based on the following repository summary. Include only the PlantUML code without any explanation. Ensure the code is syntax error free."
     
     if error_message:
         system_content += "\nThe previous code generated had errors. Here's the error message: " + error_message
