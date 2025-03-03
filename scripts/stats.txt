@@ -1,0 +1,780 @@
+Column: Architecture Scope
+  Unique values count: 3
+  Value occurrences:
+    entire: 194
+    part: 92
+    entire+: 87
+-
+Column: Architectural Notation
+  Unique values count: 9
+  Value occurrences:
+    boxes_and_arrows: 202
+    icons_and_arrows: 77
+    boxes: 43
+    UML: 15
+    icons_and_arrows, boxes: 15
+    boxes_and_arrows, icons_and_arrows: 11
+    boxes, icons_and_arrows: 8
+    boxes_and_arrows, boxes: 1
+    boxes, boxes_and_arrows: 1
+-
+Column: Architectural Styles
+  Unique values count: 52
+  Value occurrences:
+    client-server: 68
+    layered: 43
+    event-driven: 35
+    SOA: 21
+    microservices: 12
+    publish-subscribe: 9
+    MVC: 7
+    pipes-and-filters: 6
+    clean: 5
+    rest: 5
+    client-server, layered: 5
+    smart-contracts: 4
+    layered, SOA: 4
+    client-server, publish-subscribe: 3
+    MVVM: 3
+    client-server, SOA: 2
+    client-server, event-driven: 2
+    client-server, microservices: 2
+    microservices, event-driven: 2
+    layered, microservices: 2
+    event-driven, SOA: 1
+    layered, map-reduce: 1
+    P2P: 1
+    client-server, rest: 1
+    SOA, smart-contracts: 1
+    onion: 1
+    layered, P2P: 1
+    event-driven, MVC: 1
+    rest, MVC: 1
+    microservices, layered: 1
+    MVI, layered: 1
+    hexagonal, layered: 1
+    pipes-and-filters, SOA: 1
+    event-driven, client-server: 1
+    MVC, clean: 1
+    SOA, event-driven: 1
+    clean, hexagonal: 1
+    client-server, publish-subscribe, SOA: 1
+    clean, client-server: 1
+    SOA, client-server: 1
+    microservices, client-server: 1
+    clean, SOA: 1
+    layered, MVC: 1
+    client-server, layered, pipes-and-filters, rest: 1
+    client-server, P2P: 1
+    layered, pipes-and-filters: 1
+    microservices, publish-subscribe: 1
+    client-server, MVC, rest: 1
+    client-server, MVC: 1
+    event-driven, SOA, layered: 1
+    publish-subscribe, client-server: 1
+-
+Column: Concern
+  Unique values count: 29
+  Value occurrences:
+    general: 111
+    control_flow: 88
+    deployment: 49
+    deployment, connectivity: 25
+    connectivity: 23
+    data_flow: 18
+    deployment, control_flow: 12
+    deployment, data_flow: 9
+    security: 6
+    deployment, performance: 3
+    deployment, security: 3
+    connectivity, control_flow: 3
+    scheduling: 3
+    security, deployment: 2
+    performance, deployment: 2
+    deployment, connectivity, performance: 2
+    security, deployment, connectivity: 2
+    security, control_flow: 1
+    connectivity, control_flow, security: 1
+    deployment, connectivity, performance, security: 1
+    data_flow, performance: 1
+    security, connectivity: 1
+    deployment, scheduling: 1
+    data_flow, control_flow: 1
+    scheduling, control_flow: 1
+    performance, security: 1
+    connectivity, data_flow: 1
+    control_flow, security: 1
+    security, control_flow, deployment: 1
+-
+Column: Behavior
+  Unique values count: 3
+  Value occurrences:
+    static: 182
+    dynamic: 154
+    static, dynamic: 37
+-
+Column: QAs
+  Unique values count: 45
+  Value occurrences:
+    maintainability: 161
+    functional_suitability: 48
+    functional_suitability, maintainability: 34
+    maintainability, functional_suitability: 10
+    flexibility: 9
+    security: 9
+    maintainability, security: 9
+    maintainability, interaction_capability: 8
+    performance_efficiency: 8
+    functional_suitability, interaction_capability: 7
+    maintainability, flexibility: 6
+    flexibility, performance_efficiency: 6
+    interaction_capability: 5
+    interaction_capability, functional_suitability: 5
+    maintainability, performance_efficiency: 4
+    functional_suitability, performance_efficiency: 4
+    compatibility: 3
+    security, functional_suitability: 3
+    functional_suitability, reliability: 2
+    maintainability, reliability: 2
+    performance_efficiency, functional_suitability: 2
+    functional_suitability, maintainability, compatibility: 2
+    maintainability, compatibility: 2
+    functional_suitability, security: 2
+    security, maintainability: 2
+    maintainability, flexibility, compatibility: 1
+    maintainability, performance_efficiency, reliability: 1
+    maintainability, flexibility, interaction_capability: 1
+    security, maintainability, flexibility, performance_efficiency, interaction_capability: 1
+    flexibility, security, maintainability: 1
+    flexibility, security: 1
+    maintainability, flexibility, performance_efficiency: 1
+    flexibility, performance_efficiency, reliability: 1
+    functional_suitability, maintainability, reliability: 1
+    performance_efficiency, security: 1
+    security, compatibility: 1
+    compatibility, performance_efficiency: 1
+    flexibility, maintainability: 1
+    functional_suitability, maintainability, security, performance_efficiency: 1
+    maintainability, security, performance_efficiency: 1
+    security, functional_suitability, maintainability: 1
+    security, performance_efficiency: 1
+    performance_efficiency, flexibility: 1
+    maintainability, security, flexibility: 1
+    flexibility, performance_efficiency, reliability, security: 1
+-
+Column: Granularity
+  Unique values count: 3
+  Value occurrences:
+    high: 199
+    medium: 140
+    low: 34
+-
+Column: Components Nature
+  Unique values count: 250
+  Value occurrences:
+    technologies: 18
+    sub-systems: 17
+    packages: 14
+    DBs, technologies: 6
+    technologies, clients: 6
+    layers: 6
+    steps: 5
+    classes: 5
+    DBs, sub-systems: 5
+    technologies, containers: 5
+    layers, sub-systems: 4
+    servers, DBs: 4
+    servers: 4
+    sub-systems, packages: 4
+    packages, classes: 4
+    clients, servers, DBs: 3
+    technologies, functions: 3
+    servers, containers: 3
+    packages, layers: 3
+    servers, clients: 3
+    technologies, services: 3
+    technologies, layers: 3
+    technologies, DBs: 2
+    quality-attributes: 2
+    clients, technologies: 2
+    technologies, DBs, APIs, steps: 2
+    DBs, network_components: 2
+    layers, packages: 2
+    classes, functions: 2
+    sub-systems, DBs: 2
+    technologies, APIs: 2
+    sub-systems, APIs: 2
+    clients, servers, containers: 2
+    clients, servers: 2
+    packages, DBs: 2
+    clients, servers, packages: 2
+    sub-systems, functions: 2
+    containers: 2
+    DBs, services, clients: 2
+    sub-systems, DBs, clients: 1
+    devices, hardware_components, clients: 1
+    clients, servers, data: 1
+    sub-systems, packages, functions, hardware_components: 1
+    services, clients, containers: 1
+    sub-systems, communication_channels: 1
+    functions: 1
+    containers, DBs, sub-systems, technologies: 1
+    steps, technologies, clients: 1
+    functions, hardware_components, layers, packages, data: 1
+    packages, hardware_components: 1
+    technologies, containers, clients, DBs: 1
+    hardware_components, clients, sub-systems: 1
+    layers, classes, DBs, servers: 1
+    containers, sub-systems: 1
+    services, steps, DBs, technologies: 1
+    sub-systems, clients, data: 1
+    hardware_components, devices, DBs, layers: 1
+    functions, data: 1
+    servers, services, sub-systems, packages: 1
+    services, devices, DBs, network_components, clients, technologies: 1
+    services, network_components: 1
+    DBs, clients, technologies, bus: 1
+    technologies, APIs, functions: 1
+    containers, clients, DBs, servers, technologies, functions: 1
+    packages, servers, layers, network_components: 1
+    services, packages, DBs, layers: 1
+    clients, packages: 1
+    functions, DBs, sub-systems, technologies: 1
+    classes, layers, DBs: 1
+    classes, steps: 1
+    clients, servers, network_components: 1
+    technologies, packages, classes: 1
+    technologies, services, DBs, clients: 1
+    steps, clients, sub-systems: 1
+    packages, functions: 1
+    hardware_components, servers, technologies, clients: 1
+    clients, layers, DBs: 1
+    containers, sub-systems, technologies, hardware_components, clients, DBs: 1
+    DBs, APIs, sub-systems: 1
+    packages, DBs, clients: 1
+    firewalls, DBs, servers, clients: 1
+    features, functions, DBs, layers: 1
+    containers, technologies, clients: 1
+    containers, technologies: 1
+    packages, layers, DBs: 1
+    layers, clients: 1
+    clients, servers, sub-systems: 1
+    DBs, packages, data: 1
+    servers, DBs, technologies: 1
+    layers, classes: 1
+    layers, sub-systems, functions, DBs: 1
+    steps, sub-systems: 1
+    DBs, packages: 1
+    layers, packages, technologies: 1
+    DBs, clients, servers, steps: 1
+    technologies, sub-systems: 1
+    containers, technologies, DBs: 1
+    servers, clients, network_components, packages: 1
+    packages, DBs, data: 1
+    sub-systems, clients, servers: 1
+    technologies, DBs, clients: 1
+    DBs, packages, technologies: 1
+    clients, technologies, servers, classes: 1
+    DBs, clients, servers, sub-systems: 1
+    DBs, layers, functions, technologies: 1
+    packages, containers, network_components: 1
+    DBs, technologies, APIs, clients: 1
+    DBs, classes: 1
+    clients, servers, containers, sub-systems: 1
+    functions, classes: 1
+    technologies, DBs, clients, hardware_components: 1
+    technologies, clients, DBs: 1
+    technologies, DBs, containers: 1
+    services, sub-systems, DBs, containers: 1
+    network_components, technologies, containers, hardware_components, clients, DBs: 1
+    technologies, DBs, steps: 1
+    network_components, firewalls: 1
+    technologies, steps: 1
+    devices, technologies: 1
+    layers, sub-systems, packages, classes: 1
+    technologies, devices: 1
+    devices, classes: 1
+    containers, clients: 1
+    packages, classes, functions: 1
+    servers, services, APIs, DBs, technologies: 1
+    clients, APIs, DBs, services, technologies: 1
+    technologies, containers, DBs: 1
+    technologies, servers, services: 1
+    DBs, network_components, devices, devices, servers: 1
+    clients, servers, DBs, packages, technologies: 1
+    layers, services, sub-systems: 1
+    APIs, technologies, DBs, sub-systems: 1
+    classes, DBs: 1
+    technologies, APIs, clients: 1
+    steps, DBs, hardware_components, sub-systems: 1
+    functions, APIs, sub-systems: 1
+    packages, technologies: 1
+    layers, technologies, functions, DBs: 1
+    technologies, DBs, services, functions: 1
+    servers, services, clients, sub-systems: 1
+    servers, technologies: 1
+    DBs, technologies, servers: 1
+    services, clients, technologies, DBs: 1
+    APIs, technologies, packages: 1
+    APIs, clients, sub-systems: 1
+    DBs, services, servers, APIs: 1
+    clients, services, DBs, technologies, packages: 1
+    APIs, servers, clients: 1
+    packages, sub-systems: 1
+    DBs, services: 1
+    clients, servers, APIs, network_components: 1
+    DBs, services, bus, clients, APIs: 1
+    clients, sub-systems, technologies: 1
+    hardware_components, technologies, layers: 1
+    bus, services, clients: 1
+    hardware_components, sub-systems, technologies: 1
+    devices, hardware_components, DBs, clients: 1
+    classes, interfaces, functions: 1
+    packages, clients: 1
+    DBs, clients, packages: 1
+    sub-systems, servers, technologies, DBs: 1
+    APIs, DBs, technologies: 1
+    packages, DBs, services: 1
+    servers, technologies, sub-systems: 1
+    services, DBs, APIs, features: 1
+    DBs, servers: 1
+    layers, services, sub-systems, technologies: 1
+    technologies, DBs, services: 1
+    contracts, technologies, clients: 1
+    packages, classes, APIs, sub-systems: 1
+    APIs, sub-systems, functions: 1
+    containers, sub-systems, servers, DBs: 1
+    hardware_components, layers, APIs, sub-systems: 1
+    layers, APIs, DBs, technologies, clients: 1
+    servers, packages, VMs: 1
+    technologies, hardware_components, sub-systems, functions: 1
+    layers, technologies, DBs: 1
+    services, functions, packages: 1
+    contracts: 1
+    layers, DBs: 1
+    servers, sub-systems, technologies: 1
+    technologies, functions, APIs: 1
+    DBs, clients, services, layers: 1
+    APIs, DBs, functions: 1
+    technologies, layers, services, DBs, packages: 1
+    services, APIs, DBs: 1
+    sub-systems, DBs, functions: 1
+    servers, clients, network_components: 1
+    DBs, clients, servers, APIs, technologies: 1
+    DBs, servers, technologies: 1
+    layers, APIs, hardware_components, technologies: 1
+    technologies, hardware_components, packages: 1
+    servers, functions: 1
+    services, servers, DBs, clients: 1
+    servers, APIs, sub-systems, data: 1
+    packages, containers, functions, devices: 1
+    DBs, servers, technologies, clients: 1
+    DBs, servers, packages: 1
+    servers, APIs, technologies: 1
+    processes: 1
+    technologies, DBs, sub-systems: 1
+    APIs, containers, technologies, DBs: 1
+    DBs, functions: 1
+    sub-systems, layers: 1
+    layers, containers, functions: 1
+    packages, sub-systems, technologies: 1
+    classes, DBs, sub-systems: 1
+    DBs, technologies, devices: 1
+    technologies, hardware_components: 1
+    network_components, containers: 1
+    sub-systems, servers, clients: 1
+    functions, sub-systems: 1
+    technologies, servers, clients: 1
+    clients, technologies, functions: 1
+    clients, servers, technologies: 1
+    functions, clients, servers: 1
+    functions, technologies: 1
+    sub-systems, DBs, servers: 1
+    functions, clients, DBs: 1
+    technologies, network_components: 1
+    hardware_components, network_components, clients: 1
+    classes, sub-systems: 1
+    technologies, servers, sub-systems: 1
+    servers, services: 1
+    DBs, layers: 1
+    containers, APIs, services, technologies: 1
+    clients, services, sub-systems: 1
+    network_components, DBs, APIs, functions: 1
+    services, clients, functions: 1
+    ports: 1
+    DBs, sub-systems, classes: 1
+    classes, layers, APIs, DBs: 1
+    sub-systems, containers: 1
+    containers, DBs: 1
+    layers, coroutines: 1
+    classes, interfaces, functions, layers: 1
+    APIs, technologies, clients: 1
+    APIs, technologies, VMs: 1
+    APIs, DBs, clients: 1
+    functions, APIs, clients: 1
+    layers, functions: 1
+    data: 1
+    sub-systems, servers: 1
+    packages, classes, data: 1
+    APIs, containers: 1
+    network_components: 1
+    containers, sub-systems, technologies: 1
+    servers, containers, technologies: 1
+    sub-systems, technologies: 1
+    functions, layers: 1
+-
+Column: Connectors Nature
+  Unique values count: 35
+  Value occurrences:
+    control_flow: 92
+    communication: 80
+    data_flow: 72
+    dependencies: 28
+    function_calls: 9
+    inheritance: 6
+    communication, data_flow: 5
+    control_flow, data_flow: 5
+    API_calls, data_flow: 4
+    dependencies, communication: 3
+    communication, function_calls: 3
+    inheritance, dependencies: 3
+    control_flow, communication: 3
+    data_flow, control_flow: 2
+    dependencies, data_flow: 2
+    communication, dependencies: 2
+    dependencies, composition: 2
+    function_calls, data_flow: 1
+    control_flow, function_calls: 1
+    data_flow, API_calls, communication: 1
+    inheritance, composition: 1
+    data_flow, communication: 1
+    data_flow, function_calls: 1
+    function_calls, communication: 1
+    communication, control_flow: 1
+    data_flow, dependencies: 1
+    communication, composition: 1
+    dependencies, API_calls: 1
+    dependencies, inheritance, composition: 1
+    API_calls, function_calls: 1
+    control_flow, API_calls: 1
+    control_flow, dependencies: 1
+    function_calls, dependencies: 1
+    dependencies, control_flow: 1
+-
+Column: Shapes
+  Unique values count: 37
+  Value occurrences:
+    rectangles: 137
+    rectangles, icons: 68
+    icons: 47
+    rectangles, cylinders: 16
+    rectangles, circles: 12
+    rectangles, squares, icons: 11
+    rectangles, squares: 11
+    rectangles, cylinders, icons: 9
+    circles, icons: 8
+    circles: 7
+    icons, rectangles: 7
+    icons, 3d: 4
+    squares, icons: 4
+    circles, icons, rectangles: 3
+    rectangles, diamonds: 2
+    rectangles, ellipses: 2
+    ellipses, squares: 2
+    rectangles, cylinders, circles, squares: 2
+    rectangles, icons, cylinders: 2
+    rectangles, icons, squares: 2
+    rectangles, 3d, icons: 1
+    circles, rectangles, cylinders: 1
+    rectangles, cylinders, ellipses: 1
+    rectangles, cylinders, ellipses, squares: 1
+    rectangles, squares, cylinders: 1
+    rectangles, squares, 3d, icons: 1
+    squares, icons, cylinders: 1
+    rectangles, diamonds, squares: 1
+    squares: 1
+    rectangles, hexagons: 1
+    ellipses, icons, rectangles: 1
+    rectangles, cylinders, hexagons, icons, squares: 1
+    icons, circles: 1
+    rectangles, circles, hexagons, diamonds: 1
+    triangles, pentagons: 1
+    ellipses: 1
+    rectangles, 3d: 1
+-
+Column: Colored?
+  Unique values count: 2
+  Value occurrences:
+    y: 302
+    n: 71
+-
+Column: Connectors Direction
+  Unique values count: 10
+  Value occurrences:
+    uni: 217
+    bi: 54
+    uni, bi: 51
+    no: 14
+    uni, no: 4
+    uni, bi, no: 1
+    uni, bi, bus: 1
+    bus, uni, bi: 1
+    bus, no: 1
+-
+Column: Legend?
+  Unique values count: 2
+  Value occurrences:
+    n: 345
+    y: 28
+-
+Column: Nested Components?
+  Unique values count: 2
+  Value occurrences:
+    y: 219
+    n: 154
+-
+Column: Explicit Ports/Interfaces?
+  Unique values count: 2
+  Value occurrences:
+    n: 342
+    y: 31
+-
+Column: Explicit Connectors?
+  Unique values count: 2
+  Value occurrences:
+    y: 342
+    n: 31
+-
+Column: Design Overlays
+  Unique values count: 10
+  Value occurrences:
+    n: 305
+    text: 29
+    snapshots: 11
+    miniview: 8
+    URLs: 7
+    parameters: 5
+    code_snippet: 5
+    text, code_snippet: 1
+    text, snapshots: 1
+-
+Column: Technologies
+  Unique values count: 192
+  Value occurrences:
+    aws: 22
+    azure: 6
+    ros: 5
+    google: 5
+    mongodb: 4
+    apache: 4
+    docker: 3
+    postgresql: 3
+    kubernetes: 3
+    apache, jupyter: 2
+    aws, slack: 2
+    xtypes: 2
+    ibm: 2
+    sql: 2
+    blockchain: 2
+    mqtt: 2
+    python, apache, jupyter, nodejs, cloud_foundry, angular: 1
+    swift: 1
+    python, rust, raspberry: 1
+    aws, streamlit: 1
+    python, openfec, xml, github: 1
+    nuclio: 1
+    vuejs, flask, socket.io: 1
+    github, aws, mysql, docker, rails, circleci, nginx: 1
+    postgresql, elasticsearch: 1
+    gitlab, mongodb, kubernetes, prometheus: 1
+    angular, twitter, kubernetes, java, spring, apache, elasticsearch, kibana: 1
+    github, matlab, mqtt: 1
+    prometheus, bosh: 1
+    google, kubernetes, kibana, elasticsearch, mongodb, fluentd, redis: 1
+    skype, microsoft, azure: 1
+    dgraph, influxdb, grafana: 1
+    aws, github: 1
+    docker, linux, ovs: 1
+    redux: 1
+    kubernetes, nvidia: 1
+    heroku, raspberry, python, django, postgresql, angular, typescript, javascript, html, css: 1
+    aws, google, azure: 1
+    kibana, elasticsearch, mongodb, redis: 1
+    django, postgresql: 1
+    github, javascript, flask, python: 1
+    docker, aws, twitter, mysql, tableau, sklearn: 1
+    ssh, elasticsearch, kibana: 1
+    netlify, nodejs, mysql, cassandra: 1
+    ibm, nodejs, logdna: 1
+    sqlite, openai: 1
+    mongodb, tensorflow: 1
+    shibboleth, sentry, google, grafana, aws, elasticsearch, kibana, contentful, python: 1
+    vscode: 1
+    react, nodejs, postgresql: 1
+    mongodb, elasticsearch: 1
+    nvidia: 1
+    nodejs, ibm, openshift: 1
+    docker, jenkins, android: 1
+    aws, google: 1
+    ibm, nodejs: 1
+    netlify, heroku: 1
+    graphql, kubernetes, docker, c#, elasticsearch: 1
+    azure, github: 1
+    qdrant, azuer, chainlit, fastapi, docker: 1
+    java: 1
+    python, aws, raspberry: 1
+    cayley, mongodb, nodejs, elasticsearch: 1
+    fastapi, docker, kibana, elasticsearch: 1
+    aws, nodejs: 1
+    prometheus, apache, slack: 1
+    kubernetes, docker, apache: 1
+    nodejs, socket.io, graphxr: 1
+    oracle: 1
+    vuejs, nodejs, aws, cloudfront, docker, redis, mysql, influxdb, nginx, github: 1
+    c, c++: 1
+    mqtt, docker, telegram, twitter, node-red: 1
+    aws, react: 1
+    python, jupyter, aws, docker, prometheus, grafana, postgresql, nginx, mongodb, flask: 1
+    azure, github, pulumi: 1
+    socket.io, redis: 1
+    aws, elasticsearch: 1
+    aws, kubernetes: 1
+    flask: 1
+    java, spring: 1
+    salesforce: 1
+    aws, microsoft: 1
+    jupyter, python, ros: 1
+    aws, jira, slack: 1
+    presto, aws, minio: 1
+    docker, postgresql, nginx, dotnet, angular, pgadmin: 1
+    postgresql, redis, es, apache, aws: 1
+    aws, socket.io, nodejs, mysql, express: 1
+    nginx, nats, livekit: 1
+    spring, elasticsearch, thymeleaf, mysql: 1
+    github, android, ios, docker, kubernetes: 1
+    mysql, google, gradle, spring, java, jsoup, vuejs, kakaomap: 1
+    aws, elasticsearch, postgresql, powerbi, superset, dbt, tableau: 1
+    java, android, linux, ios, windows: 1
+    aws, apache, kaggle, fred: 1
+    python, zmq, javascript, sigma_designs: 1
+    windows, linux: 1
+    typescript, c, pio: 1
+    ethereum, bsc, cosmos, iris, bsn: 1
+    aws, google, openstack, azure, ali_cloud: 1
+    aws, postgresql, nodejs, redis, react, netlify, heroku: 1
+    vertexai, cloud_run: 1
+    google, github, jenkins, nginx, mongodb: 1
+    elasticsearch, kibana: 1
+    rabbitmq, docker, kubernetes, nginx, redis, mongodb: 1
+    github, electron, react, redux, sentry, matomo: 1
+    lucene: 1
+    tensorflow, pytorch, caffe, mxnet: 1
+    apache, java: 1
+    pagerduty, tekton: 1
+    ethereum: 1
+    postgresql, cloudinary, react, redux: 1
+    kubernetes, react, raspberry, google, java, go, python: 1
+    apache, mysql, redis, minio: 1
+    mysql, firestore, firebase: 1
+    mongodb, react, nodejs, apache: 1
+    linux: 1
+    influxdb, nginx, grafana, geth, lighthouse, ethereum: 1
+    tensorflow, pytorch, mxnet, caffe, darknet, megengine, oneflow, cuda: 1
+    kubernetes, react, nginx, flask: 1
+    mongodb, rabbitmq, grafana, kubernetes, prometheus: 1
+    redis, nginx, eureka, zipkin: 1
+    mysql, redis, prometheus, rabbitmq, apache, ethereum, polygon, bsc: 1
+    aws, oracle: 1
+    aws, github, mlflow: 1
+    google, go, kubernetes: 1
+    twilio, nextjs, onfleet: 1
+    aws, a-frame, react, nodejs, digitalocean, redis, mariadb: 1
+    aeternity, ipfs: 1
+    angular, .net: 1
+    openresty, redis, mysql, apache, druid : 1
+    rabbitmq, python, javascript, php, github: 1
+    docker, kubernetes: 1
+    ethereum, nodejs, firestore, aws, elasticsearch: 1
+    icefiredb: 1
+    aws, twitter: 1
+    jenkins: 1
+    pytorch, mlir: 1
+    aws, apache: 1
+    google, websocketd, pulltop: 1
+    sqlite, android: 1
+    airbyte, hasura, dbt, postgresql, snowplow: 1
+    kubernetes, keycloak: 1
+    postgresql, apache, jupyter: 1
+    kubernetes, docker: 1
+    confluent, oracle: 1
+    github, composer: 1
+    unity: 1
+    postgresql, mongodb: 1
+    superset, tableau, red_hat, prometheus, aws: 1
+    docker, apache, cassandra, butles, nginx, cockroachdb, kubernetes, spring: 1
+    microsoft: 1
+    cypress.io: 1
+    apache, kinesis, aws, snowflake, bigquery, redshift, synapse, google: 1
+    apache, aws, github: 1
+    qt: 1
+    docker, rabbitmq, mongodb: 1
+    bastion, azure, nginx, postgresql, kubernetes, simphera: 1
+    azure, blazor, auth0, sql: 1
+    javascript: 1
+    go, java, python, elasticsearch, mysql: 1
+    flutter, nodejs, kubernetes, docker, postman: 1
+    prometheus, grafana, kubernetes: 1
+    .net, c#, c++, f#: 1
+    bigquery: 1
+    docker, orthanc, flask, socket.io, nodejs: 1
+    angular: 1
+    redis, aws, apache, prometheus, nats, jaeger, swir: 1
+    openvr, c++, c#: 1
+    docker, jupyter, intel, linux, windows: 1
+    jupyter, tensorflow: 1
+    react, typescript, nodejs, ibm: 1
+    google, html, github, fauna, deploy: 1
+    cognos: 1
+    mysql, rocketmq: 1
+    twitter, apache, cassandra: 1
+    aws, redis: 1
+    rocketmq, apache: 1
+    watson, jupyter, cognos: 1
+    java, eclipse: 1
+    ethereum, oraclize, twitter, web3js: 1
+    kubernetes, oracle: 1
+    nginx, aws, opensearch: 1
+    azure, kubernetes: 1
+    react, aws, mongodb, cloudflare: 1
+    rocksdb: 1
+    mysql: 1
+    watson, jupyter, tensorflow: 1
+    azure, microsoft, twilio, powerbi: 1
+    dart: 1
+    mysql, postgresql, mongodb, clickhouse, redis, kubernetes, etcd, consul, nacos, polarismesh: 1
+-
+Column: Notes
+  Unique values count: 24
+  Value occurrences:
+    blockchain: 11
+    manual sketch: 7
+    IOT: 5
+    iot: 5
+    clean duplicate: 4
+    ROS duplicate: 3
+    bidirectional as two unidirectional: 1
+    quality attributes: 1
+    good example of low level UML architecture: 1
+    Even when colors are used, the meaning of the colors is not explicit: 1
+    The lack of a legen makes connector nature much harder to understand (e.g., what does a dashed line stand for?): 1
+    Connections, even if bidirectional, are shown as two unidirectional: 1
+    boxes language might be used just to represent layered architectures: 1
+    good example of security view: 1
+    IoT: 1
+    even if colors are used (for connectors or different elements), what the colors does  never seem to be specified: 1
+    ros: 1
+    iot, ros: 1
+    IOT, ros: 1
+    IOT, ROS: 1
+    ros, iot: 1
+    review flexibility & interoperability: 1
