@@ -2,6 +2,7 @@ import pandas as pd
 import requests
 import os
 import re
+import cairosvg
 from urllib.parse import urlparse
 from pathlib import Path
 from PIL import Image  # Pillow library for image processing
@@ -35,12 +36,16 @@ def extract_repo_info(url):
 def convert_image_to_png(file_path):
     """Convert an image file to PNG format and return the new file path."""
     try:
-        # Open the image file using Pillow
-        with Image.open(file_path) as img:
-            # Define new file path with .png extension
+        # Check if the file is an SVG
+        if file_path.lower().endswith(".svg"):
             new_file_path = os.path.splitext(file_path)[0] + ".png"
-            # Convert and save as PNG
-            img.convert("RGBA").save(new_file_path, "PNG")
+            cairosvg.svg2png(url=file_path, write_to=new_file_path)
+        else:
+            # Open the image file using Pillow
+            with Image.open(file_path) as img:
+                new_file_path = os.path.splitext(file_path)[0] + ".png"
+                img.convert("RGBA").save(new_file_path, "PNG")
+
         # Optionally remove the original file
         os.remove(file_path)
         return True, new_file_path

@@ -1,3 +1,31 @@
 @startuml
-Apologies for the confusion, but without any specific components, relationships, or functionality described, it would be difficult to generate an accurate PlantUML component diagram. Could you please provide more detail?
+```plantuml
+@startuml
+!define AWSPuml https://raw.githubusercontent.com/awslabs/aws-toolkit-jetbrains/master/resources/icons/aws.puml!include
+
+package "Presentation Layer" {
+  [index.php]
+  [ProductController]
+}
+
+package "Application Layer" {
+  [ProductService]
+}
+
+package "Domain Layer" {
+  [Product]
+}
+
+package "Infrastructure Layer" {
+  [ProductRepository]
+}
+
+[index.php] --> [ProductController] : Uses
+[ProductController] --> [ProductService] : Uses
+[ProductService] --> [ProductRepository] : Uses
+[ProductRepository] --> [Product] : Returns
+
+center header Arquitetura PHP00 - Layered Architecture
+@enduml
+```
 @enduml

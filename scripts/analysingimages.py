@@ -5,50 +5,78 @@ import openai
 from pathlib import Path
 import json
 
-def encode_image_to_base64(image_path):
-    with open(image_path, "rb") as image_file:
-        return base64.b64encode(image_file.read()).decode('utf-8')
+# def encode_image_to_base64(image_path):
+#     with open(image_path, "rb") as image_file:
+#         return base64.b64encode(image_file.read()).decode('utf-8')
+
+# def analyze_image_pair(initial_image_path, output_image_path):
+#     # Encode both images
+#     initial_base64 = encode_image_to_base64(initial_image_path)
+#     output_base64 = encode_image_to_base64(output_image_path)
+    
+#     # Prepare the messages for the API
+#     messages = [
+#         {
+#             "role": "user",
+#             "content": [
+#                 {
+#                     "type": "text",
+#                     "text": "Compare these two images. Analyze the differences."
+#                 },
+#                 {
+#                     "type": "image_url",
+#                     "image_url": {
+#                         "url": f"data:image/jpeg;base64,{initial_base64}",
+#                     "detail": "low",
+#                     }
+#                 },
+#                 {
+#                     "type": "image_url",
+#                     "image_url": {
+#                         "url": f"data:image/jpeg;base64,{output_base64}",
+#                        "detail": "low", 
+#                     }
+#                 }
+#             ]
+#         }
+#     ]
+
+#     # Make the API call
+#     response = openai.ChatCompletion.create(
+#         model="gpt-4o-mini",
+#         # model="DeepSeek-V3",
+#         messages=messages,
+#         max_tokens=350
+#     )
+    
+#     return response.choices[0].message['content']
+
+
+import PIL.Image
+import google.generativeai as genai
+
+def load_image(image_path):
+    return PIL.Image.open(image_path)
 
 def analyze_image_pair(initial_image_path, output_image_path):
-    # Encode both images
-    initial_base64 = encode_image_to_base64(initial_image_path)
-    output_base64 = encode_image_to_base64(output_image_path)
+    # Load both images using PIL
+    initial_image = load_image(initial_image_path)
+    output_image = load_image(output_image_path)
     
-    # Prepare the messages for the API
-    messages = [
-        {
-            "role": "user",
-            "content": [
-                {
-                    "type": "text",
-                    "text": "Compare these two images. Analyze the differences."
-                },
-                {
-                    "type": "image_url",
-                    "image_url": {
-                        "url": f"data:image/jpeg;base64,{initial_base64}",
-                    "detail": "low",
-                    }
-                },
-                {
-                    "type": "image_url",
-                    "image_url": {
-                        "url": f"data:image/jpeg;base64,{output_base64}",
-                       "detail": "low", 
-                    }
-                }
-            ]
-        }
-    ]
+    # Initialize Gemini API client
+    genai.configure(api_key="api_key")
+    model = genai.GenerativeModel("gemini-2.0-flash-exp")
+    
+    # Generate content using the model
+    response = model.generate_content([
+        "Compare these two images. Analyze the differences.",
+        initial_image,
+        output_image
+    ])
+    
+    return response.text if hasattr(response, 'text') else "Error: No response text received."
 
-    # Make the API call
-    response = openai.ChatCompletion.create(
-        model="gpt-4o-mini",
-        messages=messages,
-        max_tokens=350
-    )
-    
-    return response.choices[0].message['content']
+
 
 def main():
     # Set OpenAI API key

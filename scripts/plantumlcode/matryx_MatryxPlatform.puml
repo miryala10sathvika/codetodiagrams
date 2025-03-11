@@ -1,14 +1,71 @@
 @startuml
+```plantuml
 @startuml
-title MatryxPlatform Component Diagram
+!pragma teoz true
+' uncomment the line below if you're targeting version 1.20 or later
+' !pragma layout smetana
+'Azure
+' uncomment the line below if you're targeting version 1.20 or later
+' !include <azure/AzureCommon>
+' uncomment the line below if you're targeting version 1.20 or later
+' !include <azure/Compute/AppService>
 
-package "MatryxPlatform" {
-  [MatryxPlatform] ..> [Ethereum blockchain] : operates on
-  [MatryxPlatform] ..> [MTX token] : uses
-  [MatryxPlatform] ..> [JavaScript] : written in
-  [MatryxPlatform] ..> [STEM] : incentivize
-  [MatryxPlatform] ..> [Documentation] : guides
+node "React Frontend" {
+  [App.js]
+  [index.js]
+  package.json
+  [Components]
+  [Redux]
+  [Utils]
 }
 
+package Components {
+    [BountyCard.js]
+    [BountyDetails.js]
+    [CreateBountyForm.js]
+    [UserProfile.js]
+    [WalletConnect.js]
+}
+
+package Redux {
+    [actions/]
+    [reducers/]
+    [store.js]
+}
+
+package actions {
+    [fetchBounties]
+    [submitSolution]
+    [updateUserProfile]
+}
+
+package reducers {
+
+}
+
+package Utils {
+
+}
+
+
+node "Backend API (Not Fully Shown)" {
+  [API Endpoints]
+  [Authentication]
+  [Data Storage]
+}
+
+node "Ethereum Blockchain" {
+  [Smart Contracts]
+  [MTX Tokens]
+}
+
+App.js -- Components
+index.js -- App.js
+index.js -- Redux
+Redux -- actions
+actions -- Backend API (Not Fully Shown) : Uses
+Backend API (Not Fully Shown) -- Ethereum Blockchain : Interacts With
+WalletConnect.js -- Ethereum Blockchain : Interacts With
 @enduml
+```
 @enduml

@@ -1,20 +1,26 @@
 @startuml
-@startuml fcgi-function
-package "fcgi-function" {
-  [Dockerfile]
-  [README]
-  [Build Instructions]
-  [Source Code]
-  [Example Code]
-}
+```plantuml
+@startuml
+!define DEVICONS https://raw.githubusercontent.com/tupadr3g/plantuml-plantuml-sprites/master/devicons
+!define AWS https://raw.githubusercontent.com/awslabs/aws-icons-for-plantuml/v17.0/dist
+!include <c4/C4_Container.puml>
 
-component [Fast CGI protocol] as FastCGI
-component [C language] as C
+System_Ext(web_server, "Web Server (Nginx/Apache)", "Handles HTTP requests and dispatches to FCGI.", "Nginx or Apache configured to use FCGI.")
 
-[Source Code] -up- [FastCGI]
-[Example Code] -up- [FastCGI]
-[Build Instructions] ..> [Dockerfile]
-[Source Code] ..> C
-[Example Code] ..> C
+Container(fcgi_handler, "FCGI Handler (PHP)", "fcgi-function.php", "PHP", "Handles FCGI requests, executes functions, and returns responses.")
+
+ContainerDb(function_code, "Function Code", "Language-specific function code", "Various Languages", "Example functions in PHP, Python, Go, Javascript")
+
+Container(docker_image, "Docker Image", "Dockerfile and docker-compose.yml", "Docker", "For development purpose")
+
+Rel(web_server, fcgi_handler, "Forwards HTTP requests")
+Rel(fcgi_handler, function_code, "Executes function")
+Rel(function_code, fcgi_handler, "Returns response")
+
+ContainerQueue(composer, "Composer", "composer.json", "PHP Dependency Manager", "Manages php dependency")
+
+Rel(fcgi_handler, composer, "Install dependency libraries")
+
 @enduml
+```
 @enduml

@@ -1,25 +1,46 @@
 @startuml
+```plantuml
 @startuml
-package "modelbank" {
-  [modelbank application] 
-  [Berlin Group PSD2 XS2A API standards]
-  [Java]
-  [Spring Boot]
-  [Documentation]
-  [Docker Compose]
+!define AWESOMEFONTURL https://raw.githubusercontent.com/FortAwesome/Font-Awesome/6.x/otfs
+!if %version() >= "1.2021.0"
+  !definelong fa fa-database <$AWESOMEFONTURL/Font Awesome 6 Free-Solid-900.otf!FontAwesome6FreeSolid,database>
+  !definelong fa fa-cogs <$AWESOMEFONTURL/Font Awesome 6 Free-Solid-900.otf!FontAwesome6FreeSolid,cogs>
+  !definelong fa fa-file-code <$AWESOMEFONTURL/Font Awesome 6 Free-Regular-400.otf!FontAwesome6Free,file-code>
+  !definelong fa fa-terminal <$AWESOMEFONTURL/Font Awesome 6 Free-Solid-900.otf!FontAwesome6FreeSolid,terminal>
+  !definelong fa fa-book <$AWESOMEFONTURL/Font Awesome 6 Free-Solid-900.otf!FontAwesome6FreeSolid,book>
+  !definelong fa fa-check-circle <$AWESOMEFONTURL/Font Awesome 6 Free-Solid-900.otf!FontAwesome6FreeSolid,check-circle>
+!endif
+
+node "Modelbank System" {
+  [Models] as models [[https://github.com/OpenPSD/modelbank/tree/main/models]]
+  package "Modelbank Package" {
+    [cli.py] as cli <<fa fa-terminal>>
+    [converter.py] as converter <<fa fa-cogs>>
+    [models.py] as models_py <<fa fa-file-code>>
+    [reader.py] as reader <<fa fa-file-code>>
+    [schema.py] as schema <<fa fa-file-code>>
+    [validator.py] as validator <<fa fa-check-circle>>
+    [writer.py] as writer <<fa fa-file-code>>
+    [utils.py] as utils <<fa fa-file-code>>
+    [metadata.py] as metadata <<fa fa-file-code>>
+
+  }
+  [Documentation] as docs <<fa fa-book>> [[https://github.com/OpenPSD/modelbank/tree/main/docs]]
 }
 
-[OpenPSD] --> [modelbank application]
-[modelbank application] ..> [Berlin Group PSD2 XS2A API standards] : complies with
-[modelbank application] ..> [Java] : uses
-[modelbank application] ..> [Spring Boot] : uses
-[modelbank application] ..> [Documentation] : includes
-[modelbank application] ..> [Docker Compose] : includes
+models --> models_py : Defines data models
+models --> schema : Validates against
+cli -- models : Accesses/Manages
+cli -- converter : Uses
+cli -- reader : Uses
+cli -- writer : Uses
+validator -- schema : Uses
+models_py -- schema : Uses
+reader -- models_py : Reads data
+writer -- models_py : Writes data
+converter -- reader : Uses
+converter -- writer : Uses
 
-note bottom of [modelbank application]
-Last commit: 14th October 2021
-Contributors: 16
-License: Apache License 2.0
-end note
 @enduml
+```
 @enduml

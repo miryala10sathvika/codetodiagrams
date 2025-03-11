@@ -1,26 +1,120 @@
 @startuml
 ```plantuml
 @startuml
-package "zswag" {
-  [zswag.py]
-  [OpenAPI]
-  [SOAP]
+!define AWESOME_FONT <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+!define RECTANGLE class
+!define HEXAGON hexagon
+!define FONT_SIZE 14
+!define ICON_SIZE 20
+
+' Styling
+skinparam component {
+  BackgroundColor #f0f0f0
+  BorderColor #444
+  FontName Arial
+  FontSize FONT_SIZE
+  Shadowing true
 }
 
-actor ndsev
-ndsev --> [zswag.py]
-ndsev --> [OpenAPI]
-ndsev --> [SOAP]
-
-cloud "GitHub Repository" {
-  [Source Code]
-  [Project Documentation]
-  [Test Files]
+skinparam package {
+  BackgroundColor #fff
+  BorderColor #888
+  FontName Arial
+  FontSize FONT_SIZE
+  Shadowing true
 }
 
-[zswag.py] --> [Source Code]
-[OpenAPI] --> [Project Documentation]
-[SOAP] --> [Test Files]
+skinparam node {
+  BackgroundColor #eee
+  BorderColor #666
+  FontName Arial
+  FontSize FONT_SIZE
+  Shadowing true
+}
+
+skinparam cloud {
+  BackgroundColor #ddd
+  BorderColor #777
+  FontName Arial
+  FontSize FONT_SIZE
+  Shadowing true
+}
+
+skinparam database {
+  BackgroundColor #ffe
+  BorderColor #999
+  FontName Arial
+  FontSize FONT_SIZE
+  Shadowing true
+}
+
+skinparam rectangle {
+  BackgroundColor #eef
+  BorderColor #555
+  FontName Arial
+  FontSize FONT_SIZE
+  Shadowing true
+}
+
+skinparam hexagon {
+  BackgroundColor #fdd
+  BorderColor #a55
+  FontName Arial
+  FontSize FONT_SIZE
+  Shadowing true
+}
+
+skinparam note {
+  BackgroundColor #ffffee
+  BorderColor #bbb
+  FontName Arial
+  FontSize FONT_SIZE
+  Shadowing true
+}
+
+skinparam defaultFontName Arial
+skinparam defaultFontSize FONT_SIZE
+
+' Components
+
+package "ZSwag" {
+
+  [README.md] as Readme
+  [zswag.sln] as SolutionFile
+
+  package "Projects" {
+    component "ZSwag.Core" {
+      [SwaggerGenerator.cs] as SwaggerGenerator
+      [SwaggerOptions.cs] as SwaggerOptions
+      [SchemaGenerator.cs] as SchemaGenerator
+      [OperationGenerator.cs] as OperationGenerator
+    }
+
+    component "ZSwag.AspNetCore" {
+      [ZSwagMiddleware.cs] as Middleware
+      [ZSwagExtensions.cs] as Extensions
+    }
+
+    component "ZSwag.CommandLine" as CommandLine
+    component "Test Projects" as Tests
+  }
+}
+
+' Connections
+Readme -- SolutionFile : Describes
+SolutionFile -- SwaggerGenerator : Contains
+SolutionFile -- SwaggerOptions : Contains
+SolutionFile -- SchemaGenerator : Contains
+SolutionFile -- OperationGenerator : Contains
+SolutionFile -- Middleware : Contains
+SolutionFile -- Extensions : Contains
+SolutionFile -- CommandLine : Contains
+SolutionFile -- Tests : Contains
+
+Middleware -- SwaggerGenerator : Uses
+Extensions -- Middleware : Uses
+CommandLine -- SwaggerGenerator : Uses
+Tests -- SwaggerGenerator : Tests
 
 @enduml
 ```

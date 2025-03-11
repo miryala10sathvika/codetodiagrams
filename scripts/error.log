@@ -1,0 +1,95 @@
+Attempt 1: Error in generating PlantUML for https://github.com/TinkerWorks/HomeSensorHub/
+Error message: Error line 30 in file: /home/sathvika/codetodiagrams/scripts/plantumlcode/TinkerWorks_HomeSensorHub.puml
+Some diagram description contains errors
+
+Attempt 2: Error in generating PlantUML for https://github.com/TinkerWorks/HomeSensorHub/
+Error message: Error line 6 in file: /home/sathvika/codetodiagrams/scripts/plantumlcode/TinkerWorks_HomeSensorHub.puml
+Some diagram description contains errors
+
+Attempt 3: Error in generating PlantUML for https://github.com/TinkerWorks/HomeSensorHub/
+Error message: Error line 7 in file: /home/sathvika/codetodiagrams/scripts/plantumlcode/TinkerWorks_HomeSensorHub.puml
+Some diagram description contains errors
+
+Failed to generate valid PlantUML for https://github.com/TinkerWorks/HomeSensorHub/ after 3 attempts
+Successfully processed repo https://github.com/ndsev/zswag/
+PlantUML diagram generated at plantumlcode/ndsev_zswag.puml
+Attempt 1: Error in generating PlantUML for https://github.com/OpenPSD/modelbank/
+Error message: Error line 8 in file: /home/sathvika/codetodiagrams/scripts/plantumlcode/OpenPSD_modelbank.puml
+Some diagram description contains errors
+
+Attempt 2: Error in generating PlantUML for https://github.com/OpenPSD/modelbank/
+Error message: Error line 5 in file: /home/sathvika/codetodiagrams/scripts/plantumlcode/OpenPSD_modelbank.puml
+Some diagram description contains errors
+
+Successfully processed repo https://github.com/OpenPSD/modelbank/
+PlantUML diagram generated at plantumlcode/OpenPSD_modelbank.puml
+Attempt 1: Error in generating PlantUML for https://github.com/ballerina-platform/asyncapi-tools/
+Error message: Error line 12 in file: /home/sathvika/codetodiagrams/scripts/plantumlcode/ballerina-platform_asyncapi-tools.puml
+Some diagram description contains errors
+
+Attempt 2: Error in generating PlantUML for https://github.com/ballerina-platform/asyncapi-tools/
+Error message: Error line 6 in file: /home/sathvika/codetodiagrams/scripts/plantumlcode/ballerina-platform_asyncapi-tools.puml
+Some diagram description contains errors
+
+Attempt 3: Error in generating PlantUML for https://github.com/ballerina-platform/asyncapi-tools/
+Error message: Error line 18 in file: /home/sathvika/codetodiagrams/scripts/plantumlcode/ballerina-platform_asyncapi-tools.puml
+Some diagram description contains errors
+
+Failed to generate valid PlantUML for https://github.com/ballerina-platform/asyncapi-tools/ after 3 attempts
+Attempt 1: Error in generating PlantUML for https://github.com/EOS-Nation/dfuse-docs/
+Error message: Error line 12 in file: /home/sathvika/codetodiagrams/scripts/plantumlcode/EOS-Nation_dfuse-docs.puml
+Some diagram description contains errors
+
+Attempt 2: Error in generating PlantUML for https://github.com/EOS-Nation/dfuse-docs/
+Error message: Error line 7 in file: /home/sathvika/codetodiagrams/scripts/plantumlcode/EOS-Nation_dfuse-docs.puml
+Some diagram description contains errors
+
+Successfully processed repo https://github.com/EOS-Nation/dfuse-docs/
+PlantUML diagram generated at plantumlcode/EOS-Nation_dfuse-docs.puml
+Attempt 1: Error in generating PlantUML for https://github.com/matryx/MatryxPlatform/
+Error message: Error line 30 in file: /home/sathvika/codetodiagrams/scripts/plantumlcode/matryx_MatryxPlatform.puml
+Some diagram description contains errors
+
+Attempt 2: Error in generating PlantUML for https://github.com/matryx/MatryxPlatform/
+Error message: java.io.FileNotFoundException: https://raw.githubusercontent.com/RicardoNiepel/Azure-PlantUML/release/2-0/dist/Compute/AppService.puml
+	at sun.net.www.protocol.http.HttpURLConnection.getInputStream0(HttpURLConnection.java:1913)
+	at sun.net.www.protocol.http.HttpURLConnection.getInputStream(HttpURLConnection.java:1515)
+	at sun.net.www.protocol.https.HttpsURLConnectionImpl.getInputStream(HttpsURLConnectionImpl.java:268)
+	at java.net.URL.openStream(URL.java:1093)
+	at net.sourceforge.plantuml.preproc2.PreprocessorUtils.getReaderIncludeUrl2(PreprocessorUtils.java:122)
+	at net.sourceforge.plantuml.tim.TContext.executeInclude(TContext.java:502)
+	at net.sourceforge.plantuml.tim.TContext.executeOneLineNotSafe(TContext.java:260)
+	at net.sourceforge.plantuml.tim.TContext.executeOneLineSafe(TContext.java:241)
+	at net.sourceforge.plantuml.tim.TContext.executeLines(TContext.java:216)
+	at net.sourceforge.plantuml.tim.TimLoader.load(TimLoader.java:64)
+	at net.sourceforge.plantuml.BlockUml.<init>(BlockUml.java:114)
+	at net.sourceforge.plantuml.BlockUmlBuilder.init(BlockUmlBuilder.java:123)
+	at net.sourceforge.plantuml.BlockUmlBuilder.<init>(BlockUmlBuilder.java:74)
+	at net.sourceforge.plantuml.SourceFileReader.<init>(SourceFileReader.java:89)
+	at net.sourceforge.plantuml.Run.manageFileInternal(Run.java:477)
+	at net.sourceforge.plantuml.Run.processArgs(Run.java:391)
+	at net.sourceforge.plantuml.Run.manageAllFiles(Run.java:359)
+	at net.sourceforge.plantuml.Run.main(Run.java:182)
+Error line 5 in file: /home/sathvika/codetodiagrams/scripts/plantumlcode/matryx_MatryxPlatform.puml
+Some diagram description contains errors
+
+Attempt 3: Error in generating PlantUML for https://github.com/matryx/MatryxPlatform/
+Error message: Error line 65 in file: /home/sathvika/codetodiagrams/scripts/plantumlcode/matryx_MatryxPlatform.puml
+Some diagram description contains errors
+
+Failed to generate valid PlantUML for https://github.com/matryx/MatryxPlatform/ after 3 attempts
+Successfully processed repo https://github.com/batatero/arquiteturaPHP00/
+PlantUML diagram generated at plantumlcode/batatero_arquiteturaPHP00.puml
+Attempt 1: Error in generating PlantUML for https://github.com/Taymindis/fcgi-function/
+Error message: Error line 5 in file: /home/sathvika/codetodiagrams/scripts/plantumlcode/Taymindis_fcgi-function.puml
+Some diagram description contains errors
+
+Attempt 2: Error in generating PlantUML for https://github.com/Taymindis/fcgi-function/
+Error message: Error line 38 in file: /home/sathvika/codetodiagrams/scripts/plantumlcode/Taymindis_fcgi-function.puml
+Some diagram description contains errors
+
+Attempt 3: Error in generating PlantUML for https://github.com/Taymindis/fcgi-function/
+Error message: Error line 7 in file: /home/sathvika/codetodiagrams/scripts/plantumlcode/Taymindis_fcgi-function.puml
+Some diagram description contains errors
+
+Failed to generate valid PlantUML for https://github.com/Taymindis/fcgi-function/ after 3 attempts

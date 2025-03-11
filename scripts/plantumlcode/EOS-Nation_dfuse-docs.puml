@@ -1,23 +1,50 @@
 @startuml
+```plantuml
 @startuml
-package "EOS-Nation" {
-  [dfuse-docs Repository]
+!define DEEP_BLUE #0077CC
+!define LIGHT_BLUE #ADD8E6
+
+node "EOSIO Blockchain" {
+  component "EOSIO Node" as EOSNode
 }
 
-cloud "GitHub" {
-  [EOS-Nation/dfuse-docs]
+package "dfuse Infrastructure" {
+  component "Data Ingestion" as Ingestion {
+    note right: Connects to EOSIO Node\nIngests raw blockchain data
+  }
+  component "Data Processing &\nIndexing" as Processing {
+    note right: Transforms and indexes data\nfor efficient querying
+  }
+  component "GraphQL API" as GraphQL {
+    note right: Exposes a GraphQL endpoint\nfor querying blockchain data
+  }
+  component "Real-time Streaming" as Streaming {
+    note right: Provides real-time\nblock and state updates
+  }
+    component "State History" as State {
+    note right: Provides access to\nhistorical blockchain state data
+  }
 }
 
-[Developer] --> [GitHub]
-[GitHub] --> [dfuse-docs Repository]
-
-package "dfuse" {
-  [Installation]
-  [Usage]
-  [Features]
+package "Clients/Applications" {
+  component "dApps" as DApps
+  component "Data Analytics\nTools" as Analytics
+  component "Block Explorer" as Explorer
 }
 
-[EOS-Nation/dfuse-docs] --> [dfuse]
+EOSNode --> Ingestion : Raw Blockchain Data
+Ingestion --> Processing : Processed Data
+Processing --> GraphQL : Indexed Data
+Processing --> Streaming : Real-time Events
+Processing --> State: Historical State
+GraphQL --> DApps : Queries
+GraphQL --> Analytics : Queries
+GraphQL --> Explorer : Queries
+Streaming --> DApps : Updates
+State --> DApps : Historical Data
+
+center footer PlantUML diagram generated from EOS-Nation/dfuse-docs repository
 
 @enduml
+```
 @enduml

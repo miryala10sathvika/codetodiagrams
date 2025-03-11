@@ -1,29 +1,39 @@
 @startuml
+```plantuml
 @startuml
-package "asyncapi-tools Github Repository" {
-  [asyncapi-tools] ..> [Ballerina Platform] : Maintained by
-  
-  package "AsyncAPI" {
-    [AsyncAPI Specification] --> [open-source tools] : Includes
-  }
+!pragma teoz true
+skinparam componentStyle uml2
+' Component Diagram for AsyncAPI to Ballerina Tool
 
-  component "Ballerina Language" as Ballerina {
-     [Ballerina Services] --> [AsyncAPI Specification] : Generated for 
-  }
+[CLI]
+[AsyncAPI File]
+[AsyncAPI Parser]
+[AsyncAPI Validator]
+[AsyncAPI Model]
+[Service Generator]
+[Client Generator]
+[Type Generator]
+[Ballerina Compiler Plugin]
+[Ballerina Code]
 
-  [Ballerina Services] --> [Ballerina Language]
-  [asyncapi-tools] --> [AsyncAPI]
-  [asyncapi-tools] --> [Ballerina]
-
-  component "Compiler Plugin" {
-    [Service Validation] --> [AsyncAPI Specification] : Validates against
-  }
-
-  [Compiler Plugin] --> [Ballerina]
-
-  [Instructions] --> [asyncapi-tools]
-  [Examples] --> [Instructions]
-
-}
+CLI -- AsyncAPI File : Reads
+CLI -- AsyncAPI Parser : Invokes
+AsyncAPI Parser -- AsyncAPI Model : Creates
+AsyncAPI Parser -- AsyncAPI Validator : Validates
+AsyncAPI Model -- Service Generator : Uses
+AsyncAPI Model -- Client Generator : Uses
+AsyncAPI Model -- Type Generator : Uses
+Service Generator -- Ballerina Code : Generates
+Client Generator -- Ballerina Code : Generates
+Type Generator -- Ballerina Code : Generates
+AsyncAPI Validator -- AsyncAPI Parser : Reports issues
+Ballerina Compiler Plugin -- AsyncAPI Parser : Uses
+Ballerina Compiler Plugin -- AsyncAPI Validator : Uses
+Ballerina Compiler Plugin -- AsyncAPI Model : Uses
+Ballerina Compiler Plugin -- Service Generator : Uses
+Ballerina Compiler Plugin -- Client Generator : Uses
+Ballerina Compiler Plugin -- Type Generator : Uses
+CLI -- Ballerina Compiler Plugin : Uses
 @enduml
+```
 @enduml
