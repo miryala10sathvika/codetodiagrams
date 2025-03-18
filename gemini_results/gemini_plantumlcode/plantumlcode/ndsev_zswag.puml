@@ -1,0 +1,44 @@
+@startuml
+```plantuml
+@startuml
+!define SPRITEURL https://raw.githubusercontent.com/plantuml/plantuml-sprites/master/office/
+
+package ZSwag {
+    [ZSwag.csproj] as ZSwag_csproj
+    [Attributes]
+    [SwaggerGenOptions.cs] as SwaggerGenOptions
+    [ServiceCollectionExtensions.cs] as ServiceCollectionExtensions
+    [SwaggerUIOptions.cs] as SwaggerUIOptions
+    [SwaggerGenerator.cs] as SwaggerGenerator
+    [SwaggerMiddleware.cs] as SwaggerMiddleware
+
+    ZSwag_csproj -- Attributes : Uses
+    ZSwag_csproj -- SwaggerGenOptions : Uses
+    ZSwag_csproj -- ServiceCollectionExtensions : Uses
+    ZSwag_csproj -- SwaggerUIOptions : Uses
+    ZSwag_csproj -- SwaggerGenerator : Uses
+    ZSwag_csproj -- SwaggerMiddleware : Uses
+
+    SwaggerGenerator -- Attributes : Reads
+    SwaggerGenerator -- SwaggerGenOptions : Reads
+}
+
+package Example {
+    [Example.csproj] as Example_csproj
+    [Controllers]
+
+    Example_csproj -- ZSwag : Depends On
+    Example_csproj -- Controllers : Contains
+    ServiceCollectionExtensions -- Example_csproj : Used by
+}
+
+[README.md] as README
+[ZSwag.sln] as ZSwag_sln
+
+README -- ZSwag : Describes
+ZSwag_sln -- ZSwag : Contains
+ZSwag_sln -- Example : Contains
+
+@enduml
+```
+@enduml

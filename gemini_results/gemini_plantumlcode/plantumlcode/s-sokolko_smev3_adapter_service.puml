@@ -1,0 +1,45 @@
+@startuml
+```plantuml
+@startuml
+!define AWESOMEFONTURL https://raw.githubusercontent.com/FortAwesome/Font-Awesome/6.x/raw/main/svgs/solid
+!define icon(name) AWESOMEFONTURL/name.svg!stroke:none
+
+' Component Diagram for SMEV3 Adapter Service
+
+node "Client Application" as client {
+  [Requests/Responses] as client_req_resp
+}
+
+node "SMEV3 Adapter Service" as adapter {
+  component "Web Service Endpoint" as endpoint
+  component "Message Transformation Logic" as transformation
+  component "Security Handling" as security
+  component "SMEV3 Communication Layer" as communication
+  component "Configuration" as config
+  package "Model" {
+    [JAXB Classes] as jaxb_classes
+  }
+}
+
+node "SMEV3 System" as smev3 {
+  [SMEV3 Messages] as smev3_messages
+}
+
+client_req_resp -- endpoint : Uses
+endpoint -- transformation : Uses
+transformation -- security : Uses
+transformation -- jaxb_classes : Uses
+security -- communication : Uses
+communication -- config : Uses
+
+endpoint -- client_req_resp : Sends/Receives
+transformation -- transformation : Transforms
+security -- security : Signs/Verifies
+communication -- smev3_messages : Sends/Receives
+smev3_messages -- smev3 : Communicates
+
+adapter -- smev3 : Communicates
+client -- adapter : Communicates
+@enduml
+```
+@enduml

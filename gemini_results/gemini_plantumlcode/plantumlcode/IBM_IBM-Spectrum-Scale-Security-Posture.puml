@@ -1,0 +1,39 @@
+@startuml
+```plantuml
+@startuml
+!define AWESOME_FONT <font name="Awesome" size="20">
+!define ICON_FOLDER https://raw.githubusercontent.com/tupadr3g/plantuml-icon-font-sprites/master/sprites
+
+package "IBM Spectrum Scale Security Posture" {
+  [security-posture.sh] as MainScript
+  package "conf/" {
+    [checks.conf] as ChecksConfig
+    [thresholds.conf] as ThresholdsConfig
+    [cluster.conf] as ClusterConfig
+  }
+  package "lib/" {
+    [ssh_utils.sh] as SSHUtils
+    [report_generation.sh] as ReportGen
+    [check_functions.sh] as CheckFuncs
+  }
+  package "reports/" {
+    [Security Report] as Report
+  }
+  package "Target Spectrum Scale Cluster" {
+    [Spectrum Scale Cluster] as TargetCluster
+  }
+}
+
+MainScript -- ChecksConfig : Reads
+MainScript -- ThresholdsConfig : Reads
+MainScript -- ClusterConfig : Reads
+MainScript -- SSHUtils : Uses
+MainScript -- ReportGen : Uses
+MainScript -- CheckFuncs : Uses
+MainScript -- Report : Generates
+SSHUtils -- TargetCluster : Connects via SSH
+CheckFuncs -- TargetCluster : Executes Commands
+
+@enduml
+```
+@enduml

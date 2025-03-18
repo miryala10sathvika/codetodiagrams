@@ -5,27 +5,24 @@ import pandas as pd
 import csv
 import re
 import json
-
+import google.generativeai as genai
 # Function to extract repository URL from a GitHub file URL
 def extract_repo_url(link):
     match = re.match(r"(https://github\.com/[^/]+/[^/]+)", link)
     return match.group(1) + "/" if match else link
 
-# Read OpenAI API key from file
-with open("openai_key.txt", "r") as file:
-    openai.api_key = file.read().strip()
+genai.configure(api_key="your_api_key")
 
 def get_chatgpt_response(link):
     try:
-        response = openai.ChatCompletion.create(
-            model="gpt-4",
-            messages=[
-                {"role": "system", "content": "Analyze the following GitHub repository link and summarize it."},
-                {"role": "user", "content": link}
-            ],
-            temperature=0.7
+        model = genai.GenerativeModel("gemini-2.0-flash")
+        response = model.generate_content(
+            [
+                "Analyze the following GitHub repository link and summarize it. Analyze each and every file in the repository and include it in the summary. It should also concentrate on the overall high-level architecture of the system.",
+                link
+            ]
         )
-        return response["choices"][0]["message"]["content"]
+        return response.text if hasattr(response, 'text') else "Error: No response text received."
     except Exception as e:
         return f"Error: {e}"
 
@@ -33,23 +30,17 @@ def get_plantuml_from_summary(summary, repo_name, error_message=None):
     system_content = "You are an expert at creating PlantUML diagrams. Generate a PlantUML component diagram based on the following repository summary. Include only the PlantUML code without any explanation. Ensure the code is syntax error free."
     
     if error_message:
-        system_content += "\nThe previous code generated had errors. Here's the error message: " + error_message
+        system_content += f"\nThe previous code generated had errors. Here's the error message: {error_message}"
     
     try:
-        response = openai.ChatCompletion.create(
-            model="gpt-4",
-            messages=[
-                {"role": "system", "content": system_content},
-                {"role": "user", "content": summary}
-            ],
-            temperature=0.7
-        )
-        return response["choices"][0]["message"]["content"]
+        model = genai.GenerativeModel("gemini-2.0-flash")
+        response = model.generate_content([system_content, summary])
+        return response.text if hasattr(response, 'text') else "Error: No response text received."
     except Exception as e:
         return f"Error: {e}"
 
 def save_plantuml_code(puml_code, repo_name):
-    os.makedirs("plantumlcode", exist_ok=True)
+    os.makedirs("gemini_plantumlcode", exist_ok=True)
     clean_repo_name = repo_name.replace('/', '_').replace('\\', '_').rstrip('_')
     file_path = os.path.join("plantumlcode", f"{clean_repo_name}.puml")
     with open(file_path, "w", encoding="utf-8") as file:
@@ -58,7 +49,7 @@ def save_plantuml_code(puml_code, repo_name):
         file.write("\n@enduml")
     return file_path
 
-def compile_plantuml(input_path, output_dir="../output_images"):
+def compile_plantuml(input_path, output_dir="../gemini_output_images"):
     os.makedirs(output_dir, exist_ok=True)
     
     # Run PlantUML and capture output
@@ -85,7 +76,7 @@ def process_repository(link):
         attempt = 0
         
         # Open log file in append mode
-        with open("process.log", "a", encoding="utf-8") as log_file:
+        with open("error.log", "a", encoding="utf-8") as log_file:
             while attempt < max_retries:
                 puml_code = get_plantuml_from_summary(summary, repo_name, 
                                                     error_message=None if attempt == 0 else error_message)
@@ -109,7 +100,7 @@ def process_repository(link):
 
 def main():
     input_csv = "./dataset/filtered_output_uml.csv"
-    output_jsonl = "output.jsonl"
+    output_jsonl = "gemini_output.jsonl"
     column_name = "Image URL"
 
     df = pd.read_csv(input_csv, delimiter=";", encoding="utf-8", on_bad_lines="skip").head(16)

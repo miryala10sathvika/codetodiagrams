@@ -1,0 +1,46 @@
+@startuml
+```plantuml
+@startuml
+!define ELEMENT2(type, name, alias) component type name as alias
+!define ELEMENT(type, name) component type name
+!define REL(comp1, comp2, label) comp1 --> comp2 : label
+!define DEPENDS(comp1, comp2, label) comp1 .> comp2 : label
+
+ELEMENT("Main", main)
+package Graphics {
+  ELEMENT("Shader", shader)
+  ELEMENT("Mesh", mesh)
+  ELEMENT("Renderer", renderer)
+  ELEMENT("Camera", camera)
+  ELEMENT("Transform", transform)
+}
+
+package Resources {
+  ELEMENT("Vertex Shader", vertexShader)
+  ELEMENT("Fragment Shader", fragmentShader)
+}
+
+package External {
+  ELEMENT("GLFW", glfw)
+  ELEMENT("GLAD", glad)
+  ELEMENT("OpenGL", opengl)
+}
+
+REL(main, glfw, "Initializes")
+REL(main, glad, "Loads OpenGL functions")
+REL(main, renderer, "Uses")
+REL(renderer, opengl, "Uses")
+REL(shader, opengl, "Compiles and links")
+REL(renderer, shader, "Uses")
+REL(renderer, mesh, "Draws")
+REL(renderer, camera, "Uses for View/Projection")
+REL(mesh, opengl, "Creates VBOs/EBOs")
+REL(main, shader, "Loads and Uses")
+REL(main, mesh, "Loads and Uses")
+REL(shader, vertexShader, "Uses")
+REL(shader, fragmentShader, "Uses")
+REL(camera, transform, "Uses")
+
+@enduml
+```
+@enduml

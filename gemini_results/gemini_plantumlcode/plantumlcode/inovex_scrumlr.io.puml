@@ -1,0 +1,64 @@
+@startuml
+```plantuml
+@startuml
+!define SPRITEURL https://raw.githubusercontent.com/plantuml/plantuml-sprites/master/office/
+
+' Component: Frontend
+component "Frontend (Vue.js)" as Frontend {
+    [Vue.js Application] as VueApp
+    [Vue Router] as VueRouter
+    [Vuex Store] as Vuex
+    [Axios/Fetch API] as HttpApi
+    [UI Components] as UIComponents
+}
+
+' Component: Backend
+component "Backend (Spring Boot)" as Backend {
+    [Spring Boot Application] as SpringBootApp
+    [Kotlin Code] as KotlinCode
+    [Spring Data JPA] as SpringDataJpa
+    [REST API] as RestApi
+    [WebSockets (Likely)] as Websockets
+    [Flyway Migrations] as Flyway
+}
+
+' Component: Database
+database "Database (e.g., PostgreSQL)" as Database {
+    [Database Schema] as DBSchema
+}
+
+' Component: Authentication
+component "Authentication/Authorization" as Auth {
+}
+
+' Component: Docker
+component "Docker Containerization" as Docker {
+    [docker-compose.yml] as ComposeFile
+    [Dockerfile (Backend)] as DockerfileBackend
+    [Dockerfile (Frontend)] as DockerfileFrontend
+}
+
+' Relationships
+Frontend -right-> RestApi : Uses
+RestApi -down-> SpringBootApp : Implemented By
+SpringBootApp -down-> KotlinCode : Contains
+KotlinCode -down-> SpringDataJpa : Uses
+SpringDataJpa -down-> Database : Interacts With
+SpringBootApp -right-> Websockets : Implements
+SpringBootApp -left-> Auth : Uses
+Backend -down-> Flyway : Manages
+Frontend ..> Auth : Authenticates/Authorizes
+Frontend -down-> VueRouter : Uses for navigation
+Frontend -down-> Vuex : Manages State
+Frontend -down-> HttpApi : Makes Requests
+Frontend -down-> UIComponents : Utilizes
+Docker -down-> DockerfileBackend : Builds
+Docker -down-> DockerfileFrontend : Builds
+Docker -down-> ComposeFile : Orchestrates
+ComposeFile .up. Database : Manages
+
+center footer PlantUML Component Diagram
+
+@enduml
+```
+@enduml

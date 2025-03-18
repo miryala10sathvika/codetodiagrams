@@ -1,0 +1,56 @@
+@startuml
+```plantuml
+@startuml
+!pragma teoz true
+' uncomment the line below if you're using a theme
+' !include <aws/common>
+' Component Diagram for AWS AI Benchmark Framework
+
+component "Benchmark-AI Framework" {
+  [Scripts]
+  [Configuration Files]
+  [Documentation]
+
+  package benchmarks {
+    [Image Classification Benchmark]
+    [Object Detection Benchmark]
+    [NLP Benchmark]
+  }
+
+  package infrastructure {
+    [CloudFormation Templates]
+    [Terraform Configurations]
+  }
+}
+
+node AWS {
+  [S3]
+  [EC2]
+  [SageMaker]
+  [IAM]
+}
+
+Scripts -- AWS : Uses
+Configuration Files -- AWS : Configures
+infrastructure -- AWS : Provisions
+
+benchmarks -- Scripts : Executes
+benchmarks -- Configuration Files : Reads
+
+Image Classification Benchmark -- S3 : Stores/Retrieves Data
+Object Detection Benchmark -- S3 : Stores/Retrieves Data
+NLP Benchmark -- S3 : Stores/Retrieves Data
+
+Image Classification Benchmark -- EC2 : Training/Inference
+Object Detection Benchmark -- EC2 : Training/Inference
+NLP Benchmark -- EC2 : Training/Inference
+
+Image Classification Benchmark -- SageMaker : Training/Inference
+Object Detection Benchmark -- SageMaker : Training/Inference
+NLP Benchmark -- SageMaker : Training/Inference
+
+CloudFormation Templates -- IAM : Defines Roles
+Terraform Configurations -- IAM : Defines Roles
+@enduml
+```
+@enduml

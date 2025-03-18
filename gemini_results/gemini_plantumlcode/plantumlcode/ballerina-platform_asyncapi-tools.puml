@@ -1,0 +1,55 @@
+@startuml
+```plantuml
+@startuml
+!pragma teoz true
+skinparam componentStyle uml2
+skinparam rectangle {
+    roundCorner 20
+}
+
+package "asyncapi-to-ballerina" {
+    [main.bal] as main
+    [cli.bal] as cli
+    [parser.bal] as parser
+    [template.bal] as templateEngine
+    [utils.bal] as utils
+
+    package model {
+        [Data Model] as dataModel
+    }
+
+    package templates {
+        [Service Templates] as serviceTemplates
+        [Client Templates] as clientTemplates
+    }
+
+    package modules {
+        [Code Generation Modules] as modulesCode
+    }
+
+    main -- cli : Uses
+    main -- parser : Uses
+    main -- templateEngine : Uses
+    main -- dataModel : Uses
+    main -- serviceTemplates : Uses
+    main -- clientTemplates : Uses
+    main -- modulesCode : Uses
+    parser -- dataModel : Creates
+    templateEngine -- dataModel : Uses
+    templateEngine -- serviceTemplates : Uses
+    templateEngine -- clientTemplates : Uses
+    main -- utils : Uses
+
+}
+
+[AsyncAPI Document] as asyncAPI
+
+asyncAPI -- main : Input
+
+node "Generated Ballerina Code" as generatedCode
+
+templateEngine -- generatedCode : Output
+
+@enduml
+```
+@enduml

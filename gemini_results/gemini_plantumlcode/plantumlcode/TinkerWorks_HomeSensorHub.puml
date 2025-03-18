@@ -1,0 +1,27 @@
+@startuml
+```plantuml
+@startuml
+!pragma teoz true
+node "Raspberry Pi" {
+  [Sensor Hub\n(app.py)] as SensorHub
+}
+
+node "Other Devices" {
+  [Sensor Modules\n(e.g., Temp, Humidity)] as SensorModules
+}
+
+database "InfluxDB\n(Time Series Database)" as InfluxDB
+
+component "Grafana\n(Visualization)" as Grafana
+
+queue "Mosquitto\n(MQTT Broker)" as Mosquitto
+
+SensorModules -- Mosquitto : Publish Data
+SensorHub -- Mosquitto : Subscribe to Data
+SensorHub -- InfluxDB : Store Data
+InfluxDB -- Grafana : Data Source
+
+center footer HomeSensorHub Component Diagram
+@enduml
+```
+@enduml

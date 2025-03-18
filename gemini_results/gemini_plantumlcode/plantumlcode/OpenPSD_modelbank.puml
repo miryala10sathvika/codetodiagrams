@@ -1,0 +1,34 @@
+@startuml
+```plantuml
+@startuml
+!define AWESOME https://raw.githubusercontent.com/tupadr3/plantuml-icon-font-sprites/v2.2.0
+
+!define REPOSITORY AWESOME/fontawesome5/solid/folder
+!define FILE AWESOME/fontawesome5/solid/file
+!define COMPONENT AWESOME/fontawesome5/solid/box
+
+package "OpenPSD/modelbank" {
+
+    [README.md] <<FILE>>
+    [LICENSE] <<FILE>>
+
+    package "PV" {
+        [PV_generic_1.csv] <<FILE>>
+    }
+
+    package "Line" {
+        [Line_example.csv] <<FILE>>
+    }
+
+    package "Transformer" {
+        [Transformer_example.csv] <<FILE>>
+    }
+
+    [README.md] -- [PV_generic_1.csv] : Describes
+    [README.md] -- [Line_example.csv] : Describes
+    [README.md] -- [Transformer_example.csv] : Describes
+}
+
+@enduml
+```
+@enduml

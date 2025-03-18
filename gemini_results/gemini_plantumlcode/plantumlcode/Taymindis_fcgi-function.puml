@@ -1,0 +1,34 @@
+@startuml
+```plantuml
+@startuml
+!pragma teoz true
+component "Web Server\n(Nginx/Apache)" as WebServer {
+}
+
+component "FCGI Server\n(fcgi_function.py)" as FCGIServer {
+  [FCGI Protocol\nHandler] as FCGIHandler
+  [Function Loader\n(importlib)] as FunctionLoader
+  [Request Data\nParser] as RequestParser
+  [Response Formatter] as ResponseFormatter
+  [Error Handler] as ErrorHandler
+}
+
+component "Python Function\n(e.g., example_function.py)" as PythonFunction {
+}
+
+component "Client" as Client
+
+Client -- WebServer : HTTP Request
+WebServer -- FCGIServer : FCGI Request
+FCGIServer -- FunctionLoader : Loads
+FunctionLoader -- PythonFunction : Imports & Executes
+FCGIServer -- RequestParser : Parses
+FCGIServer -- ResponseFormatter : Formats
+FCGIServer -- ErrorHandler : Handles
+PythonFunction -- FCGIServer : Returns Result
+FCGIServer -- WebServer : FCGI Response
+WebServer -- Client : HTTP Response
+
+@enduml
+```
+@enduml

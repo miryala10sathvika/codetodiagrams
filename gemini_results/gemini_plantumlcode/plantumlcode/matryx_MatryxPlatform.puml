@@ -1,0 +1,52 @@
+@startuml
+```plantuml
+@startuml
+!define ICONURL https://raw.githubusercontent.com/plantuml/plantuml-icon-sprite/master/sprites
+!define Contract ICONURL/archimate/contract.png
+
+component "Frontend/Backend" {
+  [User Interface]
+  [User Actions]
+}
+
+node "Ethereum Blockchain" {
+  package Contracts {
+    component "MatryxPlatform.sol" <<Contract>> {
+        [Platform Management]
+    }
+    component "MatryxTournament.sol" <<Contract>> {
+        [Tournament Management]
+        [Submission Handling]
+        [Reputation Calculation]
+        [Bounty Allocation]
+    }
+    component "MatryxToken.sol" <<Contract>> {
+        [Token Management (MTX)]
+        [Token Minting]
+        [Token Burning]
+        [Token Transfer]
+    }
+    component "ERC20.sol" <<Contract>> {
+      [ERC20 Interface]
+    }
+    component "SafeMath.sol" <<Contract>> {
+      [Safe Arithmetic]
+    }
+  }
+}
+
+database "IPFS" {
+  [Decentralized Storage]
+}
+
+[User Interface] -- [User Actions]
+[User Actions] -- "MatryxPlatform.sol" : Interacts with
+"MatryxPlatform.sol" -- "MatryxTournament.sol" : Deploys
+"MatryxPlatform.sol" -- "MatryxToken.sol" : Manages
+"MatryxTournament.sol" -- "MatryxToken.sol" : Distributes
+"MatryxTournament.sol" -- [Decentralized Storage] : Stores Data
+[User Actions] -- [Decentralized Storage] : Uploads/Downloads
+
+@enduml
+```
+@enduml

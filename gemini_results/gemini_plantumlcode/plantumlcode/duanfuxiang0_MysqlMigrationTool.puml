@@ -1,0 +1,27 @@
+@startuml
+```plantuml
+@startuml
+!define RECT <<Rectangle>>
+package "MySQL Migration Tool" {
+  [MigrationTool] RECT
+  [Config] RECT
+  [SchemaComparator] RECT
+  [DataMigrator] RECT
+  [DataTransformer] RECT
+  [JdbcConnectionManager] RECT
+  [JdbcUtils] RECT
+}
+
+MigrationTool -- Config : Uses
+MigrationTool -- SchemaComparator : Uses
+MigrationTool -- DataMigrator : Uses
+
+SchemaComparator -- JdbcConnectionManager : Uses
+DataMigrator -- JdbcConnectionManager : Uses
+DataTransformer -- DataMigrator : Uses
+
+JdbcConnectionManager -- JdbcUtils : Uses
+
+@enduml
+```
+@enduml

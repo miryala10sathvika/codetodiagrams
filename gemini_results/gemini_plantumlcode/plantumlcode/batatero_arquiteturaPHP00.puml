@@ -1,0 +1,42 @@
+@startuml
+```plantuml
+@startuml
+!pragma teoz true
+component "filmes.php\n(Procedural)" as Filmes {
+  note right: Single file, procedural code.\nCRUD operations for movies.\nHigh coupling, low cohesion.
+}
+
+component "filmesOO.php\n(Object-Oriented)" as FilmesOO {
+  note right: Introduces classes (Movie, Repository).\nEncapsulation. Better organization.
+}
+
+component "MovieController.php\n(Controller)" as Controller {
+  note right: Handles user requests.\nInteracts with Model and View.
+}
+
+component "MovieView.php\n(View)" as View {
+  note right: Renders the user interface.\nDisplays data from Controller.
+}
+
+component "MovieModel.php\n(Model)" as Model {
+  note right: Data and business logic.\nInteracts with the database.
+}
+
+component "index.php\n(Entry Point)" as Index {
+  note right: Main entry point.\nRouting logic.
+}
+
+component "README.md\n(Documentation)" as Readme {
+  note right: Project overview and setup instructions.
+}
+
+component ".gitignore\n(Version Control)" as Gitignore {
+  note right: Specifies intentionally untracked files.
+}
+
+Index --> Controller : Delegates request
+Controller --> Model :  Interacts with
+Controller --> View :  Passes data to
+@enduml
+```
+@enduml

@@ -1,0 +1,51 @@
+@startuml
+```plantuml
+@startuml
+!pragma teoz true
+component "Data Acquisition" {
+  [Tamil Lyrics Data]
+}
+
+component "Data Preprocessing" {
+  [Cleaning & Tokenization]
+}
+
+component "Model Training" {
+  [Transformer Model (DistilBERT)]
+  [Fine-tuning]
+}
+
+component "Evaluation" {
+  [Performance Metrics]
+}
+
+component "Web Application (Optional)" {
+  [User Input]
+  [Sentiment Prediction]
+}
+
+database "Data Storage" {
+  [Tamil Lyrics Dataset]
+  [Preprocessed Data]
+}
+
+file "Model Storage" {
+  [config.json]
+  [pytorch_model.bin]
+  [tokenizer files]
+}
+
+[Tamil Lyrics Data] --> [Tamil Lyrics Dataset] : Stores
+[Cleaning & Tokenization] --> [Tamil Lyrics Dataset] : Reads
+[Cleaning & Tokenization] --> [Preprocessed Data] : Writes
+[Preprocessed Data] --> [Model Training] : Feeds
+[Model Training] --> [Model Storage] : Saves
+[Model Storage] --> [Web Application (Optional)] : Loads Model
+[Evaluation] --> [Model Training] : Evaluates
+[User Input] --> [Cleaning & Tokenization] : Processes Lyrics
+[Cleaning & Tokenization] --> [Sentiment Prediction] : Provides Cleaned Lyrics
+[Sentiment Prediction] --> [Evaluation] :  Logs Predictions
+
+@enduml
+```
+@enduml

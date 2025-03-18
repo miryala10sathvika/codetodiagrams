@@ -1,0 +1,55 @@
+@startuml
+```plantuml
+@startuml
+!define DEVICONS https://raw.githubusercontent.com/tupadr3g/plantuml-icon-font-sprites/master/devicons
+!define AWS https://raw.githubusercontent.com/plantuml/plantuml-aws/master/aws
+
+package "dfuse Architecture" {
+
+  [Blockchain Nodes] as BlockchainNodes
+  [dfuse Ingestion] as DfuseIngestion
+  [Data Indexing] as DataIndexing
+  [Data Streaming API] as StreamingAPI
+  [GraphQL API] as GraphQL
+  [Authentication & Authorization] as Auth
+
+  BlockchainNodes -right-> DfuseIngestion : Ingests Blocks
+  DfuseIngestion -right-> DataIndexing : Indexes Data
+  DataIndexing -down-> StreamingAPI : Provides Indexed Data
+  DataIndexing -down-> GraphQL : Provides Indexed Data
+  StreamingAPI -right-> Auth : Requires Authentication
+  GraphQL -right-> Auth : Requires Authentication
+}
+
+package "Deployment Environment" {
+  node "Kubernetes/Docker" as K8s
+}
+
+package "Data Storage" {
+  database "Time-Series/Key-Value DB (e.g., ClickHouse, RocksDB)" as Database
+}
+
+DataIndexing -- Database : Stores Indexed Data
+K8s -- DfuseIngestion : Deployed on
+K8s -- DataIndexing : Deployed on
+K8s -- StreamingAPI : Deployed on
+K8s -- GraphQL : Deployed on
+K8s -- Auth : Deployed on
+
+package "Technologies" {
+  [Go] as Go
+  [gRPC] as gRPC
+  [EOSIO] as EOSIO
+}
+
+DfuseIngestion .. Go
+DataIndexing .. Go
+StreamingAPI .. Go
+GraphQL .. Go
+
+DfuseIngestion -- EOSIO : Supports
+StreamingAPI -- gRPC : Uses
+
+@enduml
+```
+@enduml
