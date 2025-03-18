@@ -1,0 +1,60 @@
+.
+├── docs
+│   ├── top_level_architecture.dia
+│   └── top_level_architecture.png
+├── homesensorhub
+│   ├── homesensorhub.py
+│   ├── __init__.py
+│   ├── __main__.py
+│   ├── routing
+│   │   ├── data_sender.py
+│   │   ├── __init__.py
+│   │   ├── mqtt.py
+│   │   ├── mqtt_sender.py
+│   │   ├── mqtt_subscriber.py
+│   │   ├── payload.py
+│   │   └── sensor_sink.py
+│   ├── sensors
+│   │   ├── BoschBME
+│   │   │   ├── BoschBME280
+│   │   │   │   ├── __init__.py
+│   │   │   │   ├── probe.py
+│   │   │   │   └── type.py
+│   │   │   ├── BoschBME680
+│   │   │   │   ├── __init__.py
+│   │   │   │   ├── probe.py
+│   │   │   │   └── type.py
+│   │   │   └── probe.py
+│   │   ├── __init__.py
+│   │   ├── probe.py
+│   │   ├── RCWL0515
+│   │   │   ├── driver.py
+│   │   │   └── probe.py
+│   │   ├── sensor_types.py
+│   │   └── TSL258x
+│   │       ├── driver.py
+│   │       ├── __init__.py
+│   │       ├── probe.py
+│   │       └── type.py
+│   └── utils
+│       ├── __init__.py
+│       └── logging.py
+├── Jenkinsfile
+├── kubepods.yaml
+├── LICENSE
+├── pyproject.toml
+├── README.md
+├── requirements.txt
+├── run.sh
+├── setup.cfg
+├── tests
+│   ├── __init__.py
+│   ├── requirements.txt
+│   ├── sensors
+│   │   ├── __init__.py
+│   │   ├── test_light_sensors.py
+│   │   └── test_motion_sensor.py
+│   └── test_integration
+│       └── __init__.py
+└── unittest.cfg
+

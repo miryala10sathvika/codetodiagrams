@@ -93,3 +93,5 @@ Error message: Error line 7 in file: /home/sathvika/codetodiagrams/scripts/plant
 Some diagram description contains errors
 
 Failed to generate valid PlantUML for https://github.com/Taymindis/fcgi-function/ after 3 attempts
+Successfully processed repo ./repos/TinkerWorks_HomeSensorHub
+PlantUML diagram generated at plantumlcode/TinkerWorks_HomeSensorHub.puml

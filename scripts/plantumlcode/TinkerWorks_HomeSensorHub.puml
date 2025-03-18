@@ -1,64 +1,35 @@
 @startuml
+Based on your description, here's the PlantUML code for the component diagram:
+
 ```plantuml
 @startuml
-!define Component stereotype
-!define ENTITY stereotype
-
-node "ESP8266/ESP32\nMicrocontroller" {
-  [HomeSensorHub.ino] Component
-  [config.h] ENTITY
-  [OtaUpdater.h] Component
-  [OtaUpdater.cpp] Component
-  [Webserver.h] Component
-  [Webserver.cpp] Component
-  [Sensor.h] Component
-  [Sensor.cpp] Component
-  [DHTSensor.h] Component
-  [DHTSensor.cpp] Component
+package "TinkerWorks_HomeSensorHub" {
+  [requirements.txt]
+  [Jenkinsfile]
+  package "sensors" {
+    [BoschBME]
+    [RCWL0515]
+    [TSL258x]
+  }
+  package "routing" {
+  }
+  package "utils" {
+  }
+  package "tests" {
+  }
+  package "docs" {
+  }
+  package ".git" {
+    package "branches" {
+    }
+    package "hooks" {
+    }
+    package "refs" {
+    }
+  }
 }
-
-node "Sensors" {
-  [DHT22] Component
-  [BMP280] Component
-  [Other Sensors] Component
-}
-
-node "External Libraries" {
-    [DHT Library] Component
-    [ESP8266WiFi / WiFi] Component
-    [ArduinoJson] Component
-    [SPI] Component
-    [Wire] Component
-}
-
-node "Server/Data Storage Layer" {
-  [Data Logging Service\n(e.g., ThingSpeak, Adafruit IO)] Component
-  [Database] Component
-}
-
-[HomeSensorHub.ino] -- [config.h] : Reads
-[HomeSensorHub.ino] -- [OtaUpdater.h] : Uses
-[HomeSensorHub.ino] -- [Webserver.h] : Uses
-[HomeSensorHub.ino] -- [Sensor.h] : Uses
-[HomeSensorHub.ino] -- [DHTSensor.h] : Uses
-[OtaUpdater.cpp] -- [OtaUpdater.h] : Implements
-[Webserver.cpp] -- [Webserver.h] : Implements
-[Sensor.cpp] -- [Sensor.h] : Implements
-[DHTSensor.cpp] -- [DHTSensor.h] : Implements
-[DHTSensor.h] -- [Sensor.h] : Extends
-
-[HomeSensorHub.ino] -- [ESP8266WiFi / WiFi] : Uses
-[HomeSensorHub.ino] -- [ArduinoJson] : Uses
-[HomeSensorHub.ino] -- [SPI] : Uses
-[HomeSensorHub.ino] -- [Wire] : Uses
-[DHTSensor.cpp] -- [DHT Library] : Uses
-
-[DHT22] -- [DHTSensor.h] : Reads
-[BMP280] -- [Sensor.h] : Reads
-[Other Sensors] -- [Sensor.h] : Reads
-[HomeSensorHub.ino] -- [Data Logging Service\n(e.g., ThingSpeak, Adafruit IO)] : Sends Data
-[HomeSensorHub.ino] -- [Database] : Sends Data
-
 @enduml
 ```
+
+This diagram represents the structure of the TinkerWorks_HomeSensorHub project. Each box is a directory or file in the project, and the lines between them represent the hierarchical relationship. The diagram shows that the project consists of several key components, including sensor modules, routing functionality, and utility scripts, as well as test files and documentation.
 @enduml
