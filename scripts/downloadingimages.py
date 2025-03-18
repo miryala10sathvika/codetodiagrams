@@ -97,7 +97,7 @@ def main():
     os.makedirs(output_folder, exist_ok=True)
     
     # Read the CSV file
-    input_csv = "./dataset/dataonlywithstaticanduml.csv"
+    input_csv = "./dataset/filtered_output_uml.csv"
     image_column = "Image URL"
     
     try:

@@ -1,28 +1,28 @@
 import csv
 
-def filter_uml_static(csv_filename):
+def filter_uml_static(input_csv, output_csv):
     try:
-        # Open and read the CSV file
-        with open(csv_filename, 'r', encoding='utf-8') as file:
-            reader = csv.DictReader(file, delimiter=';')
-            
-            # Filter rows based on conditions
-            filtered_rows = [row for row in reader if 
-                           "UML" in row.get('Architectural Notation', '').split(',') and 
-                           "static" in row.get('Behavior', '').split(',')]
-            
-            # Print the filtered rows
-            for row in filtered_rows:
-                print(f"Repository: {row['Repository Name']}")
-                print(f"Image URL: {row['Image URL']}")
-                print(f"Architecture Scope: {row['Architecture Scope']}")
-                print(f"Behavior: {row['Behavior']}")
-                print("-" * 80)
-                
+        with open(input_csv, 'r', encoding='utf-8') as infile:
+            reader = csv.DictReader(infile, delimiter=';')
+            # Use the fieldnames from the input CSV for output
+            fieldnames = reader.fieldnames
+            filtered_rows = [
+                row for row in reader 
+                if "UML" in row.get('Architectural Notation', '').split(',')
+            ]
+
+        # Write the filtered rows to a new CSV file
+        with open(output_csv, 'w', newline='', encoding='utf-8') as outfile:
+            writer = csv.DictWriter(outfile, fieldnames=fieldnames, delimiter=';')
+            writer.writeheader()
+            writer.writerows(filtered_rows)
+
+        print(f"Filtered data written to {output_csv}")
+
     except FileNotFoundError:
-        print(f"Error: File '{csv_filename}' not found")
+        print(f"Error: File '{input_csv}' not found")
     except Exception as e:
         print(f"An error occurred: {str(e)}")
 
 # Example usage:
-filter_uml_static('data_extraction_framework.csv')
+filter_uml_static('data_extraction_framework.csv', 'filtered_output_uml.csv')
