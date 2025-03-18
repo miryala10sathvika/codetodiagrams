@@ -1,0 +1,38 @@
+@startuml
+```plantuml
+@startuml
+package modelbank {
+    class Account
+    class Asset
+    class Currency
+    class EconomicModel
+    class Entity
+    class Instrument
+    class Ledger
+    class Model
+    class Portfolio
+    class Position
+    class Scenario
+    class Security
+    class Term
+    class Trade
+}
+
+Account -- Entity : Owner
+Account -- Currency : Currency
+Portfolio -- Entity : Owner
+Portfolio -- Position : Contains
+Position -- Instrument : Instrument
+Trade -- Instrument : Instrument
+Ledger -- Trade : Records
+Security -- Instrument : Extends
+Instrument <|-- Security
+
+EconomicModel .. Scenario : Influences
+
+Scenario .. Model : Influences
+Portfolio -- Model : Valuation
+Asset -- Model : Valuation
+@enduml
+```
+@enduml

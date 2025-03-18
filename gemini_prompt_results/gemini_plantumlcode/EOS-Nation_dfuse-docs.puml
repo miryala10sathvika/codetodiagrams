@@ -1,0 +1,65 @@
+@startuml
+```plantuml
+@startuml
+!pragma teoz true
+' Component Diagram for dfuse-docs Repository
+
+[README.md] as README
+[LICENSE] as LICENSE
+[mkdocs.yml] as MkDocsConfig
+[docs/] as Docs
+[scripts/] as Scripts
+[.gitignore] as GitIgnore
+[requirements.txt] as Requirements
+
+package "docs/" {
+    [index.md] as Index
+    package "getting-started/" {
+        [installation.md] as Installation
+        [configuration.md] as Configuration
+    }
+    package "api-reference/" {
+        [graphql.md] as GraphQL
+        [grpc.md] as GRPC
+        [rest.md] as REST
+    }
+    package "concepts/" {
+        [blocks.md] as Blocks
+        [transactions.md] as Transactions
+        [forks.md] as Forks
+    }
+    package "tutorials/" {
+        [querying-data.md] as QueryingData
+        [realtime-streaming.md] as RealtimeStreaming
+    }
+    [troubleshooting/] as Troubleshooting
+    [contributing.md] as Contributing
+    [release-notes.md] as ReleaseNotes
+}
+
+component "Static Site Generator\n(e.g., MkDocs)" as StaticSiteGenerator
+
+README -- Docs : Describes
+MkDocsConfig -- StaticSiteGenerator : Configures
+StaticSiteGenerator -- Docs : Generates Site From
+Requirements -- StaticSiteGenerator : Dependencies
+StaticSiteGenerator -- "HTML Website" : Generates
+
+Docs -- Index : Contains
+Docs -- Installation : Contains
+Docs -- Configuration : Contains
+Docs -- GraphQL : Contains
+Docs -- GRPC : Contains
+Docs -- REST : Contains
+Docs -- Blocks : Contains
+Docs -- Transactions : Contains
+Docs -- Forks : Contains
+Docs -- QueryingData : Contains
+Docs -- RealtimeStreaming : Contains
+Docs -- Troubleshooting : Contains
+Docs -- Contributing : Contains
+Docs -- ReleaseNotes : Contains
+
+@enduml
+```
+@enduml

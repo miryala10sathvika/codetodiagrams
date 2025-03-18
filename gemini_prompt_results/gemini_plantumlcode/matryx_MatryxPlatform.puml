@@ -1,0 +1,49 @@
+@startuml
+```plantuml
+@startuml
+!define AztecBlue #4682B4
+!define LightSteelBlue #B0C4DE
+
+package "Matryx Platform" {
+
+  node "Blockchain" {
+    component "MatryxToken\n(Smart Contract)" as MatryxToken [[https://github.com/matryx/MatryxPlatform/blob/master/contracts/MatryxToken.sol]] {
+      artifact "ERC-20 Token"
+    }
+    component "MatryxTournament\n(Smart Contract)" as MatryxTournament [[https://github.com/matryx/MatryxPlatform/blob/master/contracts/MatryxTournament.sol]] {
+      artifact "Tournament Logic"
+    }
+    component "MatryxPlatform\n(Smart Contract)" as MatryxPlatform [[https://github.com/matryx/MatryxPlatform/blob/master/contracts/MatryxPlatform.sol]] {
+      artifact "Platform Registry"
+    }
+
+      MatryxPlatform -- MatryxTournament : deploys
+      MatryxPlatform -- MatryxToken : manages
+  }
+
+  node "Backend Server" {
+    component "API Endpoints\n(Node.js/Express)" as Backend {
+      artifact "Handles requests"
+    }
+    database "Database\n(MongoDB/PostgreSQL)" as Database {
+      artifact "Stores data"
+    }
+  }
+
+  node "Frontend Client" {
+    component "User Interface\n(React)" as Frontend {
+      artifact "Interactive UI"
+    }
+  }
+}
+
+Frontend -- Backend : interacts with
+Backend -- MatryxPlatform : interacts with
+Backend -- Database : stores/retrieves data
+MatryxToken -- Blockchain : deployed on
+MatryxTournament -- Blockchain : deployed on
+MatryxPlatform -- Blockchain : deployed on
+
+@enduml
+```
+@enduml

@@ -1,0 +1,29 @@
+@startuml
+```plantuml
+@startuml
+!define RECTANGLE(alias, label) component alias as label
+!define FONT_COLOR #333333
+skinparam componentStyle Rectangle
+skinparam component {
+  BackgroundColor #FFFFFF
+  BorderColor #808080
+  FontName SansSerif
+  FontSize 12
+  FontColor FONT_COLOR
+}
+
+RECTANGLE(lyrics_data_csv, "lyrics_data.csv\n(Dataset)")
+RECTANGLE(lyrics_sentiment_classifier, "Lyrics_Sentiment_Classifier.ipynb\n(Jupyter Notebook)")
+RECTANGLE(readme_md, "README.md\n(Documentation)")
+RECTANGLE(archive_dir, "archive\n(Data Archive)")
+RECTANGLE(gitignore, ".gitignore\n(Git Configuration)")
+
+lyrics_sentiment_classifier -- lyrics_data_csv : Reads Data
+lyrics_sentiment_classifier -- archive_dir : Reads Data (Original)
+readme_md -- lyrics_sentiment_classifier : Documents
+readme_md -- lyrics_data_csv : Documents
+gitignore -- lyrics_data_csv : Ignores (if present)
+
+@enduml
+```
+@enduml

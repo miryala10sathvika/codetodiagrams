@@ -110,12 +110,28 @@ def analyze_image_pair(initial_image_path, output_image_path):
     output_image = load_image(output_image_path)
     
     # Initialize Gemini API client
-    genai.configure(api_key="your_key")
+    genai.configure(api_key="your_api_key")
     model = genai.GenerativeModel("gemini-2.0-flash-exp")
     
     # Generate content using the model
     response = model.generate_content([
-        "Compare these two images. Analyze the differences.",
+        '''Please compare the two provided images and analyze the differences in detail. Your analysis should include:
+
+    Overview of Each Image:
+        Summarize the main content, themes, or subjects in each image.
+
+    Visual Elements Comparison:
+        Identify and describe differences in color schemes, shapes, textures, and patterns.
+        Highlight variations in layout, composition, and design elements.
+
+    Context and Style:
+        Note any differences in artistic style, mood, or visual tone.
+        Discuss any context-specific elements or details that set the images apart.
+
+    Subtle Differences:
+        Point out any minor or nuanced differences that may not be immediately obvious.
+
+Your response should be structured, detailed, and focus solely on comparing and contrasting the two images based on the aspects mentioned above.''',
         initial_image,
         output_image
     ])

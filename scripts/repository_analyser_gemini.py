@@ -16,18 +16,40 @@ genai.configure(api_key="your_api_key")
 def get_chatgpt_response(link):
     try:
         model = genai.GenerativeModel("gemini-2.0-flash")
-        response = model.generate_content(
-            [
-                "Analyze the following GitHub repository link and summarize it. Analyze each and every file in the repository and include it in the summary. It should also concentrate on the overall high-level architecture of the system.",
-                link
-            ]
-        )
+        prompt = f"""
+Please analyze the entire GitHub repository available at {link}. Your analysis should include the following components:
+
+File-by-File Analysis:
+    - Examine each file in the repository.
+    - Summarize the purpose, functionality, and any key code segments of each file.
+    - Highlight the role each file plays within the overall system.
+
+Repository Structure:
+    - Describe the directory layout and organization of the files.
+    - Explain how different parts of the repository interact and are connected.
+
+High-Level Architecture:
+    - Provide a summary of the overall system architecture.
+    - Identify major components, modules, and services, and explain how they collaborate to achieve the system’s goals.
+    - Discuss any architectural patterns or design decisions evident in the repository.
+
+Overall Summary:
+    - Conclude with a high-level summary that encapsulates the repository's purpose, its architecture, and the interrelation of its components.
+
+Your response should be detailed, structured, and include insights on how each part of the repository contributes to the overall design and functionality of the system.
+"""
+        response = model.generate_content([prompt])
         return response.text if hasattr(response, 'text') else "Error: No response text received."
     except Exception as e:
         return f"Error: {e}"
 
+
 def get_plantuml_from_summary(summary, repo_name, error_message=None):
-    system_content = "You are an expert at creating PlantUML diagrams. Generate a PlantUML component diagram based on the following repository summary. Include only the PlantUML code without any explanation. Ensure the code is syntax error free."
+    system_content = '''You are an expert in creating PlantUML diagrams. Based on the following repository summary, please generate a syntactically correct PlantUML component diagram. Your output should include only the PlantUML code and no additional explanation or commentary. Make sure that:
+
+    The diagram accurately represents the components described in the repository summary.
+    All components and their relationships (e.g., dependencies, interactions) are clearly represented.
+    The generated PlantUML code is free of syntax errors and can be directly used with PlantUML.'''
     
     if error_message:
         system_content += f"\nThe previous code generated had errors. Here's the error message: {error_message}"
@@ -42,7 +64,7 @@ def get_plantuml_from_summary(summary, repo_name, error_message=None):
 def save_plantuml_code(puml_code, repo_name):
     os.makedirs("gemini_plantumlcode", exist_ok=True)
     clean_repo_name = repo_name.replace('/', '_').replace('\\', '_').rstrip('_')
-    file_path = os.path.join("plantumlcode", f"{clean_repo_name}.puml")
+    file_path = os.path.join("gemini_plantumlcode", f"{clean_repo_name}.puml")
     with open(file_path, "w", encoding="utf-8") as file:
         file.write("@startuml\n")
         file.write(puml_code)

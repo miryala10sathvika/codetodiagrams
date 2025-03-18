@@ -1,0 +1,50 @@
+@startuml
+```plantuml
+@startuml HomeSensorHub
+
+package "HomeSensorHub" {
+  [README.md]
+  [docker-compose.yml]
+}
+
+package "Web Application" {
+  [Web Application Code] as WebApp
+  [requirements.txt]
+}
+
+package "MQTT Broker" {
+  [MQTT Configuration] as MQTTConfig
+  [MQTT Client Code] as MQTTClient
+}
+
+package "Database" {
+  [Database Schema] as DBSchema
+  [Database Initialization Scripts] as DBInit
+}
+
+package "Sensors" {
+  [Dummy Sensor Code] as DummySensor
+  [Sensor Specific Code] as SpecificSensor
+}
+
+README.md -- WebApp : Documents Web App
+README.md -- MQTTConfig : Documents MQTT setup
+README.md -- DBSchema : Documents Database
+
+docker-compose.yml -- WebApp : Deploys
+docker-compose.yml -- MQTTConfig : Deploys
+docker-compose.yml -- DBSchema : Deploys
+
+WebApp -- DBSchema : Reads/Writes
+WebApp -- MQTTClient : Subscribes/Publishes
+WebApp -- requirements.txt : Uses
+
+MQTTClient -- MQTTConfig : Uses Configuration
+DummySensor -- MQTTClient : Publishes
+SpecificSensor -- MQTTClient : Publishes
+
+center footer PlantUML Component Diagram
+
+@enduml
+```
+@enduml

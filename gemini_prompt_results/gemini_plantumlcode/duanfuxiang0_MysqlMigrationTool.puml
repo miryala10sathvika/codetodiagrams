@@ -1,0 +1,42 @@
+@startuml
+```plantuml
+@startuml
+!define AWESOME <font:FontAwesome>
+' Component Diagram for MysqlMigrationTool
+
+package "com.dfx.migration" {
+  [Application] <<SpringBootApplication>>
+  [DatabaseConfig]
+  [MigrationConfig]
+  [DataMigrator]
+  [SchemaMigrator]
+  [DatabaseUtils]
+
+  Application -- MigrationConfig : uses
+  Application -- SchemaMigrator : uses
+  Application -- DataMigrator : uses
+  MigrationConfig -- DatabaseConfig : has source
+  MigrationConfig -- DatabaseConfig : has destination
+  DataMigrator -- DatabaseConfig : uses
+  DataMigrator -- DatabaseUtils : uses
+  SchemaMigrator -- DatabaseConfig : uses
+  SchemaMigrator -- DatabaseUtils : uses
+}
+
+package "src/main/resources" {
+  [application.properties]
+  [application.yml]
+}
+
+Application .> application.properties : reads
+Application .> application.yml : reads
+
+package "pom.xml" {
+  [pom.xml]
+}
+
+Application ..> pom.xml : uses dependencies
+
+@enduml
+```
+@enduml

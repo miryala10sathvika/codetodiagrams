@@ -1,0 +1,42 @@
+@startuml
+```plantuml
+@startuml
+!define AWESOMEICON <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/github/github-original.svg" width="16">
+
+node "IBM Spectrum Scale Cluster" {
+  [Spectrum Scale CLI/API]
+}
+
+package Repository {
+  [README.md]
+  [LICENSE]
+  [scripts/]
+  [config/]
+  [docs/]
+  [examples/]
+  [tests/]
+
+  package config/ {
+    [security_baseline.yml]
+  }
+
+  package scripts/ {
+    [check_security_settings.py]
+    [apply_security_best_practices.py]
+    [generate_security_report.py]
+  }
+
+  [check_security_settings.py] -- [security_baseline.yml] : Reads
+  [apply_security_best_practices.py] -- [security_baseline.yml] : Reads
+  [check_security_settings.py] -- [Spectrum Scale CLI/API] : Uses
+  [apply_security_best_practices.py] -- [Spectrum Scale CLI/API] : Uses
+  [generate_security_report.py] -- [check_security_settings.py] : Uses
+  [generate_security_report.py] -- [apply_security_best_practices.py] : Uses
+}
+
+[scripts/] -- [Spectrum Scale CLI/API] : Interacts With
+[config/] .. [scripts/] : Provides Configuration
+
+@enduml
+```
+@enduml

@@ -1,0 +1,29 @@
+@startuml
+```plantuml
+@startuml
+!define AWESOME_FONT(element,color) element <font color=color><$fontawesome-solid-$color></font>
+
+package "Application" {
+  [index.php] as IndexPHP
+  [Router.php] as Router
+}
+
+package "Composer" {
+  [composer.json] as ComposerJSON
+  [composer.lock] as ComposerLock
+}
+
+package "Infrastructure" {
+  [Web Server] as WebServer
+}
+
+IndexPHP --> Router : Uses
+IndexPHP -- Composer: Includes autoloader
+WebServer -- IndexPHP : Receives request
+ComposerJSON -- ComposerLock: Manages dependencies versions
+
+note top of IndexPHP: Front Controller
+
+@enduml
+```
+@enduml

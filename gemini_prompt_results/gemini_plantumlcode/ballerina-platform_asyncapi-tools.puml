@@ -1,0 +1,63 @@
+@startuml
+```plantuml
+@startuml
+!pragma teoz true
+skinparam componentStyle uml2
+skinparam rectangle {
+    roundCorner 20
+}
+
+package "asyncapi-tools" {
+  [Ballerina.toml]
+  [README.md]
+  [LICENSE]
+  [.gitignore]
+
+  package "src" {
+    package "asyncapi_to_ballerina" {
+      [AsyncAPI Parser]
+      [Ballerina Code Generator]
+    }
+
+    package "ballerina_to_asyncapi" {
+      [Ballerina Code Analyzer]
+      [AsyncAPI Specification Generator]
+    }
+
+    package "asyncapi_validator" {
+      [AsyncAPI Validator]
+    }
+
+    package "utils" {
+      [Utilities]
+    }
+
+    [asyncapi_to_ballerina] -- [AsyncAPI Parser] : Uses
+    [asyncapi_to_ballerina] -- [Ballerina Code Generator] : Uses
+    [ballerina_to_asyncapi] -- [Ballerina Code Analyzer] : Uses
+    [ballerina_to_asyncapi] -- [AsyncAPI Specification Generator] : Uses
+    [asyncapi_validator] -- [AsyncAPI Parser] : Uses
+    [src] .[Utilities] : Uses
+  }
+
+  package "test" {
+    [Tests]
+  }
+
+  package "docs" {
+    [Documentation]
+  }
+
+  package "examples" {
+    [Examples]
+  }
+
+  [AsyncAPI Parser] -- [Utilities] : Uses
+  [Ballerina Code Generator] -- [Utilities] : Uses
+  [AsyncAPI Specification Generator] -- [Utilities] : Uses
+  [AsyncAPI Validator] -- [Utilities] : Uses
+}
+
+@enduml
+```
+@enduml

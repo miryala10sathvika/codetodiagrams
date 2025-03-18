@@ -1,0 +1,49 @@
+@startuml
+```plantuml
+@startuml
+!pragma teoz true
+component "Benchmark AI Framework" as Framework {
+  component "Configuration Files" as Config {
+    file "benchmark_config_schema.json" as Schema
+    file "default_config.yaml" as DefaultConfig
+    file "config.yaml (Examples)" as ExampleConfig
+  }
+  component "Scripts" as Scripts {
+    file "setup.sh" as SetupScript
+    file "run_benchmark.py" as RunBenchmark
+    file "analyze_results.py" as AnalyzeResults
+  }
+  component "Modules" as Modules {
+    component "AWS" as AWS {
+      file "sagemaker.py" as SageMaker
+      file "ec2.py" as EC2
+      file "s3.py" as S3
+    }
+    component "Model" as Model {
+      file "tensorflow_model.py" as TensorFlowModel
+      file "pytorch_model.py" as PyTorchModel
+    }
+    component "Data" as Data {
+      file "dataset_loader.py" as DatasetLoader
+    }
+  }
+  component "Documentation" as Documentation {
+    file "README.md" as Readme
+    file "report.md (Examples)" as ReportExample
+  }
+
+  Config -- RunBenchmark : Reads
+  SetupScript -- RunBenchmark : Sets up environment
+  RunBenchmark -- AWS : Uses
+  RunBenchmark -- Model : Uses
+  RunBenchmark -- Data : Uses
+  RunBenchmark -- AnalyzeResults : Generates Results
+  AnalyzeResults -- Documentation : Generates Report
+}
+
+Framework -- Documentation : Provides Information
+Framework -- Config : Uses Configuration
+
+@enduml
+```
+@enduml

@@ -1,0 +1,33 @@
+@startuml
+```plantuml
+@startuml
+component "GitHub Actions\nWorkflow" as github_actions
+component ".gitignore" as gitignore
+component "package.json\npackage-lock.json" as package_json
+component "README.md" as readme
+component "src/index.ts\n(Zod to OpenAPI Conversion)" as zswag_core
+component "src/types.ts\n(Type Definitions)" as zswag_types
+component "test/index.test.ts\n(Unit and Integration Tests)" as zswag_tests
+component "tsconfig.json\n(TypeScript Compiler Config)" as tsconfig
+component "eslint.config.js\n(ESLint Configuration)" as eslint_config
+
+github_actions -[hidden]> gitignore
+gitignore -[hidden]> package_json
+package_json -[hidden]> readme
+
+readme -- zswag_core : Describes Usage
+zswag_core -- zswag_types : Uses
+zswag_core -- package_json :  Uses Zod
+zswag_core -- tsconfig : Configures Compilation
+zswag_core -- eslint_config : Enforces Style
+
+zswag_tests -- zswag_core : Tests
+zswag_tests -- package_json : Uses Jest
+
+github_actions -- zswag_tests : Runs Tests
+github_actions -- eslint_config : Runs Linter
+github_actions -- tsconfig : Runs Compiler
+
+@enduml
+```
+@enduml

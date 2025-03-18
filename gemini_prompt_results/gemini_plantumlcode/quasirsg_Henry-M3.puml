@@ -1,0 +1,36 @@
+@startuml
+```plantuml
+@startuml
+!pragma teoz true
+skinparam componentStyle uml2
+skinparam rectangle {
+    RoundCorner 20
+}
+
+package "HENRY_M3" {
+  [Data Loading]
+  [Data Preprocessing]
+  [Feature Engineering]
+  [M3 Model Training]
+  [Model Evaluation]
+  [Model Persistence]
+}
+
+[Data Loading] --> [Data Preprocessing] : Loads Data
+[Data Preprocessing] --> [Feature Engineering] : Cleans and Transforms
+[Feature Engineering] --> [M3 Model Training] : Creates Features
+[M3 Model Training] --> [Model Evaluation] : Trains Model
+[Model Evaluation] --> [Model Persistence] : Evaluates Performance
+
+node "Jupyter Notebook\n(HENRY_M3_TEST_v1.0.ipynb)" {
+    [Data Loading]
+    [Data Preprocessing]
+    [Feature Engineering]
+    [M3 Model Training]
+    [Model Evaluation]
+    [Model Persistence]
+}
+
+@enduml
+```
+@enduml

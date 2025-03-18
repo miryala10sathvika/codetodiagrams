@@ -1,0 +1,40 @@
+@startuml
+```plantuml
+@startuml component_diagram
+
+package "Apps" {
+    [Web App] -down-> [API Client] : Uses
+    [Desktop App] -down-> [API Client] : Uses
+    [Mobile App] -down-> [API Client] : Uses
+    [API App]
+}
+
+package "Libs" {
+    [API Client] -down-> [API Interfaces] : Uses
+    [API Client] -down-> [Models] : Uses
+    [API Interfaces]
+    [Models]
+
+    package "Features" {
+        [Planning Module]
+        [Retrospective Module]
+    }
+
+    [Web App] .down.> [Common UI] : Uses
+    [Desktop App] .down.> [Common UI] : Uses
+    [Mobile App] .down.> [Common UI] : Uses
+
+    [Common UI]
+
+}
+
+package "Infrastructure" {
+    [Database]
+}
+
+[API App] -- [Database] : Accesses
+
+center footer PlantUML Component Diagram - Scrumlr.io
+@enduml
+```
+@enduml

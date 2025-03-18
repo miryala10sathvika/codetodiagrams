@@ -1,0 +1,19 @@
+@startuml
+```plantuml
+@startuml
+component "Web Server\n(e.g., Apache, Nginx)" as WebServer
+
+package "Python FCGI Application" {
+  component "example.py\n(FCGI Application)" as Example
+  component "fcgi_function.py\n(Python FCGI Interface)" as FCGI_PY
+}
+
+component "fcgi-functions.so\n(FCGI Implementation)" as FCGI_SO
+
+WebServer -- FCGI_SO : Uses FastCGI protocol
+FCGI_SO -- FCGI_PY : Implements FCGI Interface
+FCGI_PY -- Example : Provides API
+
+@enduml
+```
+@enduml
