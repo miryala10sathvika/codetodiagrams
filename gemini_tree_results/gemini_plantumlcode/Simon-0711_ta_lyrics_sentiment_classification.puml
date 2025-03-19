@@ -1,0 +1,19 @@
+@startuml
+```plantuml
+@startuml
+!define RECTANGLE component
+RECTANGLE "React Frontend" as frontend
+RECTANGLE "FastAPI Backend" as backend
+RECTANGLE "Elasticsearch" as elasticsearch
+RECTANGLE "CNN Model" as cnn
+RECTANGLE "Docker Compose" as dockercompose
+
+frontend -- backend : API Requests
+backend -- cnn : Sentiment Analysis
+backend -- elasticsearch : Data Storage & Retrieval
+dockercompose -- frontend : Orchestrates
+dockercompose -- backend : Orchestrates
+dockercompose -- elasticsearch : Orchestrates
+@enduml
+```
+@enduml

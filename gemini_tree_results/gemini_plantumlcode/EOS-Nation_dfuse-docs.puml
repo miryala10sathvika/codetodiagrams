@@ -1,0 +1,36 @@
+@startuml
+```plantuml
+@startuml
+!pragma teoz true
+component "Content\n(Markdown Files)" as Content
+component "Data\n(JSON, YAML)" as Data
+component "Layouts\n(HTML Templates)" as Layouts
+component "Static Assets\n(Images, CSS, JS)" as Assets
+component "Theme\n(Book)" as Theme
+component "Code Samples\n(Quickstarts, Samples)" as CodeSamples
+component "Static Site Generator\n(Likely Hugo)" as SSG
+component "Netlify" as Netlify
+
+Content -- SSG : Provides Content
+Data -- SSG : Provides Data
+Layouts -- SSG : Provides Templates
+Theme -- SSG : Provides Styling
+SSG -- Netlify : Deploys to
+Assets -- Netlify : Serves
+
+CodeSamples -- Content : Referenced in
+
+note top of Content : Markdown Documentation \n organized by platform and blockchain
+
+note top of Data : GraphQL Schema, \n Configuration, Examples
+
+note top of Layouts : HTML Templates, \n Partials, Shortcodes
+
+note top of Assets : Images, CSS, JavaScript
+
+note top of CodeSamples : Go, JavaScript, Python, \n TypeScript code examples
+
+center footer PlantUML diagram generated from repository summary
+@enduml
+```
+@enduml

@@ -1,0 +1,32 @@
+@startuml
+```plantuml
+@startuml
+!define DEVICONS https://raw.githubusercontent.com/tupadr3/plantuml-icon-font-sprites/master/devicons
+!define AWS https://raw.githubusercontent.com/plantuml/plantuml-aws/master/
+
+package Client {
+    node "Client Application" as client
+}
+
+node "Web Server\n(e.g., Nginx)" as webserver {
+    [Nginx Configuration]
+}
+
+package "FastCGI Application" {
+    component "ffunc Library\n(ffunc.c, ffunc.h)" as ffunc
+    component "Application Logic\n(e.g., profile_service.c)" as applogic
+    component "spdlog (Optional)" as spdlog
+}
+
+client --> webserver : Sends Request
+webserver --> applogic : Forwards Request (FastCGI)
+applogic ..> ffunc : Uses
+applogic ..> spdlog : (Optional) Logging
+applogic --> webserver : Sends Response (FastCGI)
+webserver --> client : Sends Response
+
+center footer Taymindis/fcgi-function
+
+@enduml
+```
+@enduml

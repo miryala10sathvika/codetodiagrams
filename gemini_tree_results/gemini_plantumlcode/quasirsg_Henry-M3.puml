@@ -1,0 +1,53 @@
+@startuml
+```plantuml
+@startuml
+!define RECT #LightBlue
+package "01-Node" {
+  [Node.js Fundamentals] RECT
+  [Child Process] RECT
+  [Module System] RECT
+  [Event Loop] RECT
+}
+
+package "02-Promises" {
+  [Promises] RECT
+  [Asynchronous Operations] RECT
+}
+
+package "03-WebServer" {
+  [HTTP Server (Node.js)] RECT
+  [Request Handling] RECT
+  [Response Generation] RECT
+  [HTML Serving] RECT
+}
+
+package "04-AdvancePromises" {
+  [Gulp (Task Runner)] RECT
+  [Asynchronous Build Processes] RECT
+  [Promise.all()] RECT
+  [Promise.race()] RECT
+}
+
+package "05-Express" {
+  [Express.js Framework] RECT
+  [Routing] RECT
+  [Middleware] RECT
+  [API Development] RECT
+}
+
+package "06-Testing" {
+  [Mocha (Testing Framework)] RECT
+  [Chai (Assertion Library)] RECT
+  [Unit Testing] RECT
+}
+
+[Node.js Fundamentals] --> [Promises] : Uses
+[Promises] --> [HTTP Server (Node.js)] : Used for
+[HTTP Server (Node.js)] --> [Express.js Framework] : Foundation
+[Asynchronous Build Processes] --> [Express.js Framework] : Builds
+[Express.js Framework] --> [Unit Testing] : Requires
+[API Development] --> [Unit Testing] : Requires
+
+@enduml
+```
+@enduml

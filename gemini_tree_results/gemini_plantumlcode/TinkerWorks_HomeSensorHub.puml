@@ -1,0 +1,48 @@
+@startuml
+```plantuml
+@startuml HomeSensorHub Component Diagram
+
+package "HomeSensorHub" {
+  [HomeSensorHub] as HSH
+  package "routing" {
+    [DataSender] as DS
+    [MQTTSender] as MS
+    [MQTTSubscriber] as MSub
+    [Payload] as PL
+    [SensorSink] as SS
+  }
+  package "sensors" {
+    [BoschBME] as BME
+    [RCWL0515] as RCWL
+    [TSL258x] as TSL
+    [SensorTypes] as ST
+    [Probe] as PB
+  }
+  package "utils" {
+    [Logging] as LG
+  }
+}
+
+HSH -- DS : Uses
+HSH -- BME : Uses
+HSH -- RCWL : Uses
+HSH -- TSL : Uses
+HSH -- ST : Uses
+HSH -- PB : Uses
+HSH -- LG : Uses
+
+DS <|-- MS : Implements
+DS -- PL : Uses
+
+MS -- ST : Uses
+MS -- MSub : Interacts with
+
+SS -- PL : Uses
+
+BME -- ST : Uses
+RCWL -- ST : Uses
+TSL -- ST : Uses
+
+@enduml
+```
+@enduml

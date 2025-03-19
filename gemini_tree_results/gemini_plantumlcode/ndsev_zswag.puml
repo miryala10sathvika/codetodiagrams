@@ -1,0 +1,62 @@
+@startuml
+```plantuml
+@startuml component_diagram
+    component "zswag (Python)" {
+        [app.py]
+        [doc.py]
+        [gen.py]
+        [reflect.py]
+        [test/]
+    }
+
+    component "pyzswagcl (C++)" {
+        [py-openapi-client.cpp]
+        [py-openapi-client.h]
+        [py-zswagcl.cpp]
+    }
+
+    component "zswagcl (C++)" {
+        [include/]
+        [src/]
+        [test/]
+    }
+
+    component "httpcl (C++)" {
+        [include/]
+        [src/]
+        [test/]
+    }
+
+    [app.py] -- [doc.py] : Uses
+    [app.py] -- [gen.py] : Uses
+    [doc.py] -- [reflect.py] : Uses
+    [pyzswagcl (C++)] ..> [zswagcl (C++)] : Wraps
+    [zswagcl (C++)] ..> [httpcl (C++)] : Uses
+
+    [app.py] .. [pyzswagcl (C++)] : Uses (via Python bindings)
+
+    package "Build System" {
+        [CMakeLists.txt]
+        [conanfile.py]
+        [setup.py]
+        [requirements.txt]
+        [deploy.sh]
+    }
+
+    [CMakeLists.txt] -- [httpcl (C++)] : Builds
+    [CMakeLists.txt] -- [zswagcl (C++)] : Builds
+    [CMakeLists.txt] -- [pyzswagcl (C++)] : Builds
+    [setup.py] -- [zswag (Python)] : Packages
+    [requirements.txt] -- [zswag (Python)] : Dependencies
+    [deploy.sh] -- [zswag (Python)] : Deploys
+
+    package "Documentation" {
+        [zswag-architecture.mdj]
+        [zswag-architecture.png]
+    }
+
+    [doc.py] .> [zswag-architecture.png] : Generates
+
+@enduml
+```
+@enduml

@@ -1,0 +1,52 @@
+@startuml
+```plantuml
+@startuml
+!define AWSPuml https://raw.githubusercontent.com/plantuml/plantuml-stdlib/master/distribution/themes
+!include <awspuml/AWSCommon>
+!include <awspuml/Database/RDS>
+!include <awspuml/Compute/EC2>
+
+package Core {
+  [conf.go] as Conf
+  [dao.go] as DAO
+}
+
+node "Source MySQL Database" {
+    [Source DB] as SourceDB
+}
+
+node "Target MySQL Database" {
+    [Target DB] as TargetDB
+}
+
+component "Full Data Migration" as FullMigration {
+    [full_data_migration.go] as FullMigrationGo
+}
+
+component "Incremental Data Migration" as IncrementalMigration {
+    [incremental_data_migration.go] as IncrementalMigrationGo
+}
+
+component "MySQL Migration Tool" {
+    FullMigration
+    IncrementalMigration
+    Core
+}
+
+Conf -- DAO : Uses
+FullMigrationGo -- Conf : Uses
+IncrementalMigrationGo -- Conf : Uses
+FullMigrationGo -- DAO : Uses
+IncrementalMigrationGo -- DAO : Uses
+DAO -- SourceDB : Connects to
+DAO -- TargetDB : Connects to
+
+FullMigrationGo -- SourceDB : Reads from
+FullMigrationGo -- TargetDB : Writes to
+
+IncrementalMigrationGo -- SourceDB : Reads from
+IncrementalMigrationGo -- TargetDB : Writes to
+
+@enduml
+```
+@enduml

@@ -1,0 +1,82 @@
+@startuml
+```plantuml
+@startuml
+!define SPC(x) [<space>x]
+
+package "Smart Contracts" {
+  [MatryxPlatform]
+  [MatryxTournament]
+  [MatryxToken]
+  [LibPlatform]
+  [LibTournament]
+  [LibCommit]
+  [MatryxCommit]
+  [SafeMath]
+  [Ownable]
+  [IMatryxToken]
+  [IToken]
+  [LibGlobals]
+  [MatryxForwarder]
+  [MatryxSystem]
+  package "MatryxToken" {
+        [BasicToken]
+        [ERC20Basic]
+        [ERC20]
+        [Haltable]
+        [MintableToken]
+        [ReleasableToken]
+        [StandardToken]
+        [UpgradeableToken]
+  }
+}
+
+package "Testing Contracts" {
+    [ICommitUpgradeTransition]
+    [LibCommit2]
+    [LibCommitUpgradeTransition]
+    [LibPlatform2]
+    [LibTournament2]
+}
+
+package "Truffle" {
+  [Migrations]
+}
+
+
+MatryxPlatform --|> MatryxTournament : Manages
+MatryxPlatform --|> MatryxToken : Uses
+MatryxPlatform --|> LibPlatform : Uses
+MatryxPlatform --|> LibCommit : Uses
+MatryxTournament --|> LibTournament : Uses
+MatryxTournament --|> MatryxToken : Distributes Rewards
+MatryxCommit --|> LibCommit : Uses
+MatryxToken --|> BasicToken : Extends
+MatryxToken --|> ERC20Basic : Implements
+MatryxToken --|> ERC20 : Implements
+MatryxToken --|> Haltable : Extends
+MatryxToken --|> MintableToken : Extends
+MatryxToken --|> ReleasableToken : Extends
+MatryxToken --|> StandardToken : Extends
+MatryxToken --|> UpgradeableToken : Extends
+BasicToken --|> ERC20Basic : Implements
+StandardToken --|> ERC20 : Implements
+Migrations --|> MatryxPlatform : Deploys
+Migrations --|> MatryxToken : Deploys
+Migrations --|> MatryxSystem : Deploys
+Migrations --|> LibPlatform : Deploys
+Migrations --|> LibTournament : Deploys
+Migrations --|> LibCommit : Deploys
+Migrations --|> IMatryxToken : Deploys
+Migrations --|> IToken : Deploys
+Migrations --|> LibGlobals : Deploys
+MatryxSystem --|> MatryxPlatform : Manages
+MatryxSystem --|> MatryxToken : Manages
+MatryxTournament --|> MatryxCommit : Uses
+MatryxTournament --|> SafeMath : Uses
+MatryxTournament --|> Ownable : Uses
+MatryxPlatform --|> SafeMath : Uses
+MatryxPlatform --|> Ownable : Uses
+
+@enduml
+```
+@enduml

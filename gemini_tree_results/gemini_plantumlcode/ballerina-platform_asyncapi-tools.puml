@@ -1,0 +1,48 @@
+@startuml
+```plantuml
+@startuml
+!define DEEPBLUE #1E90FF
+
+package "asyncapi-tools" {
+  [AsyncAPI Specification] as AsyncAPISpec
+  [Generated Ballerina Code] as GeneratedCode
+  [Ballerina Project] as BallerinaProject
+  [Ballerina AsyncAPI Module] as BallerinaModule
+  [AsyncAPI CLI] as CLI
+  [Native Handler] as NativeHandler
+  [Samples] as Samples
+
+  package "config" {
+      [Checkstyle Configuration] as CheckstyleConfig
+  }
+
+  package "websockets" {
+      [module-ballerina-asyncapi]
+  }
+
+  CLI -- AsyncAPISpec : Reads
+  CLI -- GeneratedCode : Generates
+  CLI -- NativeHandler : Uses for complex tasks
+  GeneratedCode -- BallerinaProject : Integrated into
+  BallerinaProject -- BallerinaModule : Imports
+  Samples -- BallerinaProject : Demonstrates Usage
+  BallerinaModule -- BallerinaProject : Used in
+
+    CLI -- CheckstyleConfig : Validates style
+
+}
+
+note top of CLI : Command-line tool\nfor code generation
+
+note top of NativeHandler : Java bridge for \ncomplex tasks
+
+note top of BallerinaModule : Ballerina module for\nAsyncAPI services
+
+note top of Samples : Example applications
+
+AsyncAPISpec -[hidden]-> GeneratedCode
+GeneratedCode -[hidden]-> BallerinaProject
+BallerinaProject -[hidden]-> BallerinaModule
+@enduml
+```
+@enduml

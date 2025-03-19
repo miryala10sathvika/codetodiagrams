@@ -1,0 +1,36 @@
+@startuml
+```plantuml
+@startuml
+!define DEVICONS https://raw.githubusercontent.com/tupadr3/plantuml-icon-font-sprites/master/devicons
+!define AWS https://raw.githubusercontent.com/plantuml/plantuml-aws/master/
+
+!include <c4/C4_Component.puml>
+
+title IBM Spectrum Scale Security Posture
+
+Component(fetch_script, "fetch_security_posture_and_upload_to_ES.sh", "Shell Script", "Orchestrates data collection and upload to Elasticsearch")
+Component(cronjob_script, "cronjob.py", "Python", "Schedules and executes security posture collection")
+Component(collector, "collector", "Python Package", "Collects security posture data from Spectrum Scale clusters") {
+    Component(security_posture_module, "security_posture.py", "Python", "Collects security posture data")
+}
+
+Component(scale_config, "scale-clusters.conf", "Configuration", "Configuration file for Spectrum Scale clusters")
+Component(security_config, "security-posture.conf", "Configuration", "Configuration for security posture collection")
+Component(elasticsearch, "Elasticsearch", "Data Store", "Stores collected security posture data")
+Component(kibana, "Kibana", "Visualization", "Visualizes security posture data")
+Component(kibana_dashboard, "kibana_dashboard.ndjson", "JSON", "Kibana dashboard definition")
+Component(split_json, "split_json_for_kibana.py", "Python", "Splits JSON for Kibana import")
+
+Rel(fetch_script, cronjob_script, "Executes")
+Rel(fetch_script, scale_config, "Reads")
+Rel(fetch_script, security_config, "Reads")
+Rel(cronjob_script, collector, "Uses")
+Rel(security_posture_module, scale_config, "Reads Cluster Info")
+Rel(security_posture_module, elasticsearch, "Sends Data to")
+Rel(elasticsearch, kibana, "Provides Data for")
+Rel(kibana, kibana_dashboard, "Imports Configuration from")
+Rel(split_json, kibana_dashboard, "Splits and transforms")
+
+@enduml
+```
+@enduml

@@ -1,0 +1,25 @@
+@startuml
+```plantuml
+@startuml
+!pragma teoz true
+component "API Interface\n(views.py)" as API
+component "SMEV Adapter\n(adapter.py)" as Adapter
+component "Schema Loader\n(schema_loader)" as SchemaLoader
+component "Request Processors\n(processors)" as Processors
+component "Data Models\n(models.py)" as Models
+component "Configuration\n(settings.py)" as Configuration
+component "SMEV3" as SMEV
+
+API -- Adapter : Uses
+Adapter -- SchemaLoader : Validates
+Adapter -- Processors : Processes
+Adapter -- Models : Uses
+Adapter -- Configuration : Reads
+Adapter -- SMEV : Interacts with
+
+Processors -- SchemaLoader : Uses
+SchemaLoader -- Configuration : Reads
+
+@enduml
+```
+@enduml

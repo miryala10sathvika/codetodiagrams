@@ -1,0 +1,55 @@
+@startuml
+```plantuml
+@startuml
+!define DEVICONS https://raw.githubusercontent.com/tupadr3g/plantuml-icon-font-sprites/v2.3.0
+!define AWS https://raw.githubusercontent.com/plantuml/plantuml-aws/master/aws
+
+package "Entities" {
+  [Account]
+  [AccountHolderProcessor]
+  [AccountProcessor]
+  [FinancialInstitution]
+  [FinancialInstitutionProcessor]
+  [Ledger]
+  [Payment]
+  [Transaction]
+}
+
+package "Providers" {
+  [DBProvider]
+  [ModelbankController]
+  [Modelbank.proto]
+  [Modelbank.pb.go]
+}
+
+package "Server" {
+  [Modelbank Server]
+}
+
+package "Usecases" {
+  [Modelbank Usecase]
+}
+
+[Main]
+[Makefile]
+
+Main -- Modelbank Server : Starts
+Modelbank Server -- ModelbankController : Registers
+ModelbankController -- Modelbank Usecase : Calls
+Modelbank Usecase -- DBProvider : Uses
+Modelbank Usecase -- AccountProcessor : Uses
+Modelbank Usecase -- AccountHolderProcessor : Uses
+Modelbank Usecase -- FinancialInstitutionProcessor : Uses
+AccountProcessor -- Account : Manages
+AccountHolderProcessor -- Account : Manages
+FinancialInstitutionProcessor -- FinancialInstitution : Manages
+DBProvider -- Account : Persists
+DBProvider -- FinancialInstitution : Persists
+DBProvider -- Ledger : Persists
+DBProvider -- Payment : Persists
+DBProvider -- Transaction : Persists
+ModelbankController -- Modelbank.pb.go : Uses
+Modelbank.pb.go -- Modelbank.proto : Implements
+@enduml
+```
+@enduml

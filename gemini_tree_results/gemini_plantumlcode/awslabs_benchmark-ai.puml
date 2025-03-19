@@ -1,0 +1,95 @@
+@startuml
+```plantuml
+@startuml
+!pragma layout smetana
+
+node "User" {
+  component baictl [
+    baictl (CLI)
+  ]
+  component client_lib [
+    client-lib (Python Library)
+  ]
+}
+
+node "Backend" {
+  component bai_bff [
+    bai-bff (Backend-For-Frontend)
+  ]
+  component executor [
+    executor
+  ]
+  component sm_executor [
+    sm-executor
+  ]
+  component fetcher [
+    fetcher
+  ]
+  component fetcher_job [
+    fetcher-job
+  ]
+  component watcher [
+    watcher
+  ]
+  component metrics_extractor [
+    metrics-extractor
+  ]
+  component metrics_pusher [
+    metrics-pusher
+  ]
+  component kafka_utils [
+    kafka-utils
+  ]
+  component prometheus_kafka_topic_exporter [
+    prometheus-kafka-topic-exporter
+  ]
+  component job_status_trigger [
+    job-status-trigger
+  ]
+  component cloudwatch_exporter [
+    cloudwatch-exporter
+  ]
+}
+
+node "CI/CD" {
+    component ci [
+        CI/CD Pipeline
+    ]
+}
+
+baictl -- bai_bff : interacts with
+client_lib -- bai_bff : interacts with
+bai_bff -- executor : orchestrates
+bai_bff -- fetcher : orchestrates
+bai_bff -- watcher : orchestrates
+bai_bff -- metrics_extractor : orchestrates
+bai_bff -- metrics_pusher : orchestrates
+bai_bff -- sm_executor : orchestrates
+
+executor -- fetcher : uses
+executor -- kafka_utils : uses
+
+fetcher -- fetcher_job : dispatches
+watcher -- kafka_utils : publishes to
+metrics_extractor -- kafka_utils : consumes from
+metrics_pusher -- kafka_utils : receives from
+prometheus_kafka_topic_exporter -- kafka_utils : interacts with
+
+ci .. bai_bff : deploys
+ci .. executor : deploys
+ci .. fetcher : deploys
+ci .. watcher : deploys
+ci .. metrics_extractor : deploys
+ci .. metrics_pusher : deploys
+ci .. kafka_utils : deploys
+ci .. prometheus_kafka_topic_exporter : deploys
+ci .. baictl : deploys
+ci .. client_lib : deploys
+ci .. job_status_trigger : deploys
+ci .. cloudwatch_exporter : deploys
+ci .. fetcher_job: deploys
+ci .. sm_executor: deploys
+
+@enduml
+```
+@enduml

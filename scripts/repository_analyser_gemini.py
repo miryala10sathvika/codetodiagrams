@@ -5,26 +5,54 @@ import pandas as pd
 import csv
 import re
 import json
+import shutil
 import google.generativeai as genai
 # Function to extract repository URL from a GitHub file URL
 def extract_repo_url(link):
     match = re.match(r"(https://github\.com/[^/]+/[^/]+)", link)
     return match.group(1) + "/" if match else link
 
-genai.configure(api_key="your_api_key")
+genai.configure(api_key="AIzaSyA19TLhE8m7qJuNy5VaKB7Ns7f_ymsWH4I")
 
 def get_chatgpt_response(link):
     try:
-        model = genai.GenerativeModel("gemini-2.0-flash")
+        repo_name = link.split('github.com/')[-1].rstrip('/')
+        local_repo_path = f"./{repo_name.replace('/', '_')}"
+
+        # Clone the repository if it doesn't exist
+        if os.path.exists(local_repo_path):
+            shutil.rmtree(local_repo_path)  # Remove existing folder
+
+        clone_cmd = ["git", "clone", link, local_repo_path]
+        clone_result = subprocess.run(clone_cmd, capture_output=True, text=True)
+
+        if clone_result.returncode != 0:
+            return f"Error: Failed to clone repository {link}"
+
+        # Generate repository structure using 'tree' command
+        try:
+            if os.name == "nt":  # Windows
+                structure_result = subprocess.run(["tree", "/F", local_repo_path], capture_output=True, text=True, shell=True)
+            else:  # Linux/Mac
+                structure_result = subprocess.run(["tree", "-L", "3", local_repo_path], capture_output=True, text=True)
+
+            repo_structure = structure_result.stdout
+        except Exception as e:
+            repo_structure = f"Error generating repository structure: {e}"
+
+        # Generate summary using the LLM
         prompt = f"""
 Please analyze the entire GitHub repository available at {link}. Your analysis should include the following components:
+
+Repository Structure:
+{repo_structure}
 
 File-by-File Analysis:
     - Examine each file in the repository.
     - Summarize the purpose, functionality, and any key code segments of each file.
     - Highlight the role each file plays within the overall system.
 
-Repository Structure:
+Repository Organization:
     - Describe the directory layout and organization of the files.
     - Explain how different parts of the repository interact and are connected.
 
@@ -38,8 +66,11 @@ Overall Summary:
 
 Your response should be detailed, structured, and include insights on how each part of the repository contributes to the overall design and functionality of the system.
 """
+        model = genai.GenerativeModel("gemini-2.0-flash")
         response = model.generate_content([prompt])
+
         return response.text if hasattr(response, 'text') else "Error: No response text received."
+
     except Exception as e:
         return f"Error: {e}"
 

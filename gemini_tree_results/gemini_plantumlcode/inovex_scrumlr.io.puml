@@ -1,0 +1,25 @@
+@startuml
+```plantuml
+@startuml
+!define AWSPuml https://raw.githubusercontent.com/awslabs/aws-icons-for-plantuml/v18.0/dist
+!include <c4/C4_Component>
+
+title Component Diagram for scrumlr.io
+
+Component(frontend, "Frontend", "React/TypeScript", "Handles user interaction, UI rendering, API communication, state management, and routing.", technology="React, TypeScript, Redux")
+Component(backend, "Backend", "Go", "Handles API requests, database management, user authentication, and real-time updates.", technology="Go, REST API, WebSockets")
+Component(database, "Database", "PostgreSQL/MySQL/SQLite", "Stores persistent application data.", technology="Relational Database")
+Component(nginx, "Nginx", "Reverse Proxy/Web Server", "Serves static assets and proxies requests to the backend.", technology="Nginx")
+Component(dex, "Dex", "Identity Provider", "Provides user authentication via OpenID Connect.", technology="OAuth2/OIDC")
+Component(redis, "Redis", "Cache/Broker", "Cache or message broker for the app.", technology="Redis")
+
+Rel(frontend, backend, "Uses REST API and WebSockets", "HTTPS, WebSockets")
+Rel(backend, database, "Reads/Writes data", "SQL")
+Rel(nginx, frontend, "Serves static content", "HTTPS")
+Rel(nginx, backend, "Proxies API requests", "HTTPS")
+Rel(backend, dex, "Authenticates Users", "Oauth2/OIDC")
+Rel(backend, redis, "Uses", "Redis Protocol")
+
+@enduml
+```
+@enduml
