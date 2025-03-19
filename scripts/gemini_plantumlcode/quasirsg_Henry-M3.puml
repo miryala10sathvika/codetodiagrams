@@ -1,0 +1,127 @@
+@startuml
+```plantuml
+@startuml
+!define RECT <<rectangle>>
+
+package "quasirsg_Henry-M3" {
+  [README.md] RECT
+  package "01-Node" {
+    [README.md] RECT
+    package "homework" {
+      [bash.js]
+      [README.md] RECT
+      [package.json]
+      [package-lock.json]
+      package "commands" {
+        [index.js]
+      }
+      [bash.js] -- [index.js] : uses
+    }
+    package "extraHomework" {
+        package "eventEmitter" {
+            [app.js]
+            [README.md] RECT
+            [emitter.js]
+            [app.js] -- [emitter.js] : uses
+        }
+        package "streams" {
+            [README.md] RECT
+            [runningAverage.js]
+        }
+    }
+    package "demo" {
+      package "patrones" {
+          package "multiples" {
+            [app.js]
+            package "saludos" {
+                [english.js]
+                [index.js]
+                [greetings.json]
+                [spanish.js]
+                [index.js] -- [english.js] : imports
+                [index.js] -- [spanish.js] : imports
+            }
+            [app.js] -- [index.js] : uses
+          }
+          package "otro" {
+              [saludo1.js]
+              [saludo2.js]
+              [saludo3.js]
+              [saludo4.js]
+              [saludo5.js]
+              [app.js]
+          }
+      }
+      package "demoNPM" {
+          [index.js]
+          [package.json]
+          [package-lock.json]
+      }
+      package "files" {
+          [app.js]
+      }
+      package "module" {
+          [app.js]
+          [prueba.js]
+          [test.js]
+          [demo1.js]
+          [hola.js]
+          package "saludos" {
+              [en.js]
+              [es.js]
+              [index.js]
+              [index.js] -- [en.js] : exports
+              [index.js] -- [es.js] : exports
+          }
+      }
+      package "pipes" {
+          [app.js]
+      }
+      package "streams" {
+          [app.js]
+      }
+    }
+  }
+  package "02-Promises" {
+      package "demo" {
+          [encadenandoPromesas.js]
+          [readFilePromise.js]
+          [sync.js]
+      }
+      package "homework" {
+        [...files] RECT
+      }
+  }
+  package "03-WebServer" {
+      package "demo" {
+        [...files] RECT
+      }
+      package "homework" {
+        [...files] RECT
+      }
+  }
+  package "04-AdvancePromises" {
+      package "homework" {
+        [...files] RECT
+      }
+  }
+  package "05-Express" {
+      package "Ejercicios" {
+          package "expressRoutes" {
+            [...files] RECT
+          }
+      }
+      package "homework" {
+        [...files] RECT
+      }
+  }
+  package "06-Testing" {
+      package "homework" {
+        [...files] RECT
+      }
+  }
+}
+
+@enduml
+```
+@enduml

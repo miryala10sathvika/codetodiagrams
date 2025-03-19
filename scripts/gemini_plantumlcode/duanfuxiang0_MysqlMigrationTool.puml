@@ -1,0 +1,29 @@
+@startuml
+```plantuml
+@startuml
+!define componentStyle uml2
+skinparam componentStyle $componentStyle
+' Component Diagram for MySQL Data Migration Tool
+
+package "Core" {
+  [conf.go] as Conf
+  [dao.go] as DAO
+}
+
+[full_data_migration.go] as FullMigration
+[incremental_data_migration.go] as IncrementalMigration
+[README.md] as Documentation
+[static/img/architecture.jpg] as ArchitectureImage
+
+FullMigration --> Conf : Uses Configuration
+FullMigration --> DAO : Uses Database Access
+IncrementalMigration --> Conf : Uses Configuration
+IncrementalMigration --> DAO : Uses Database Access
+Documentation -- ArchitectureImage : Includes
+Documentation -- FullMigration : Describes
+Documentation -- IncrementalMigration : Describes
+
+FullMigration --|> IncrementalMigration : Precedes
+@enduml
+```
+@enduml

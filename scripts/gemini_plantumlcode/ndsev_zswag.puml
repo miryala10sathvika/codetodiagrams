@@ -1,0 +1,105 @@
+@startuml
+```plantuml
+@startuml
+!define DEVICON https://raw.githubusercontent.com/tupadr3/plantuml-icon-font-sprites/master/devicons
+!define AWS https://raw.githubusercontent.com/awslabs/aws-toolkit-jetbrains/master/resources/icons/architecture/
+
+' Components
+component "CMakeLists.txt (Root)" as CMakeLists_Root
+component "conanfile.py" as conanfile
+component "deploy.sh" as deploy_sh
+component "LICENSE" as LICENSE
+component "README.md" as README
+component "requirements.txt" as requirements
+component "setup.py" as setup_py
+
+package "doc" {
+    component "zswag-architecture.mdj" as zswag_mdj
+    component "zswag-architecture.png" as zswag_png
+}
+
+package "libs" {
+    package "httpcl" {
+        component "CMakeLists.txt (httpcl)" as CMakeLists_httpcl
+        component "include (httpcl)" as include_httpcl
+        component "src (httpcl)" as src_httpcl
+        component "test (httpcl)" as test_httpcl
+        interface "HTTP Client" as HTTPClient
+    }
+
+    package "pyzswagcl" {
+        component "CMakeLists.txt (pyzswagcl)" as CMakeLists_pyzswagcl
+        component "py-openapi-client.cpp" as py_openapi_client_cpp
+        component "py-openapi-client.h" as py_openapi_client_h
+        component "py-zswagcl.cpp" as py_zswagcl_cpp
+        interface "Python Bindings" as PythonBindings
+    }
+
+    package "zswag" {
+        component "app.py" as app_py
+        component "doc.py" as doc_py
+        component "gen.py" as gen_py
+        component "__init__.py" as init_py
+        component "reflect.py" as reflect_py
+        component "test (zswag)" as test_zswag
+        interface "OpenAPI Generator" as OpenAPIGenerator
+    }
+
+    package "zswagcl" {
+        component "CMakeLists.txt (zswagcl)" as CMakeLists_zswagcl
+        component "include (zswagcl)" as include_zswagcl
+        component "src (zswagcl)" as src_zswagcl
+        component "test (zswagcl)" as test_zswagcl
+        interface "C++ OpenAPI Client" as CPP_OpenAPIClient
+    }
+}
+
+package ".github/workflows" {
+    component "cmake.yml" as cmake_yml
+    component "deploy.yaml" as deploy_yaml
+}
+
+' Relationships
+
+' httpcl relationships
+src_httpcl ..> include_httpcl : uses
+test_httpcl .> src_httpcl : tests
+HTTPClient -- src_httpcl
+
+' pyzswagcl relationships
+py_openapi_client_cpp ..> py_openapi_client_h : uses
+py_zswagcl_cpp ..> py_openapi_client_cpp : uses
+PythonBindings -- py_zswagcl_cpp
+
+' zswag relationships
+app_py ..> reflect_py : uses
+gen_py ..> doc_py : uses
+test_zswag .> app_py : tests
+OpenAPIGenerator -- gen_py
+
+' zswagcl relationships
+src_zswagcl ..> include_zswagcl : uses
+test_zswagcl .> src_zswagcl : tests
+CPP_OpenAPIClient -- src_zswagcl
+
+' Root relationships
+CMakeLists_Root -- CMakeLists_httpcl : includes
+CMakeLists_Root -- CMakeLists_pyzswagcl : includes
+CMakeLists_Root -- CMakeLists_zswagcl : includes
+setup_py -- requirements : installs
+deploy_sh -- setup_py : uses
+
+' Cross-library relationships
+CPP_OpenAPIClient ..> HTTPClient : uses
+PythonBindings ..> CPP_OpenAPIClient : uses
+OpenAPIGenerator ..> CPP_OpenAPIClient : generates
+OpenAPIGenerator ..> PythonBindings : generates
+app_py ..> PythonBindings : uses
+src_zswagcl ..> include_httpcl : uses
+
+'Workflow relationships
+cmake_yml -[hidden]-> deploy_yaml
+
+@enduml
+```
+@enduml

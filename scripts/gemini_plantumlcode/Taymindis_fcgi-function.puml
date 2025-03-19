@@ -1,0 +1,35 @@
+@startuml
+```plantuml
+@startuml
+!define AWESOME_FONT
+!include <awesomelib/awesomefont.puml>
+
+package "Web Server (Nginx/Apache)" {
+    [Web Server] <<Container>>
+    note right of [Web Server] : Receives HTTP Requests, forwards to ffunc via FastCGI
+}
+
+package "ffunc Library" {
+    [ffunc.c] <<Component>>
+    [ffunc.h] <<Interface>>
+    note right of [ffunc.c] : FastCGI Handler, Request Processing, Function Mapping, Memory Management
+
+    [ffunc.h] -- [ffunc.c] : Implements
+}
+
+package "User-Defined Functions" {
+    [User-Defined Function] <<Component>>
+    note right of [User-Defined Function] : Handles specific requests, application logic
+
+}
+
+[Web Server] -- [ffunc.c] : FastCGI Protocol
+[ffunc.c] -- [User-Defined Function] : Dynamically calls based on FN_HANDLER parameter
+
+note bottom of [ffunc.c] : Uses dlsym for dynamic linking
+note bottom of [ffunc.c] : Implements memory pooling
+
+center footer Taymindis_fcgi-function Component Diagram
+@enduml
+```
+@enduml

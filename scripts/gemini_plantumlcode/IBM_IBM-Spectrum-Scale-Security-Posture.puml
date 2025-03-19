@@ -1,0 +1,57 @@
+@startuml
+```plantuml
+@startuml
+!define AWESOME_FONT(customColor, backgroundColor) customColor;fontcolor=customColor;backcolor=backgroundColor;borderColor=customColor
+' Component Diagram for IBM Spectrum Scale Security Posture
+
+component "Spectrum Scale Cluster" as ScaleCluster {
+  [GPFS Commands]
+}
+
+component "cronjob.py" {
+  [Reads Configurations]
+  [Executes Scans]
+}
+
+component "fetch_security_posture_and_upload_to_ES.sh" {
+  [Collects Data]
+  [Uploads to Elasticsearch]
+}
+
+component "security_posture.py" {
+  [Gathers Security Data]
+}
+
+component "split_json_for_kibana.py" {
+  [Splits JSON Data]
+}
+
+database "Elasticsearch" {
+}
+
+component "Kibana" {
+  [Visualizes Data]
+  [kibana_dashboard.ndjson]
+}
+
+file "scale-clusters.conf" {
+  [Cluster Definitions]
+}
+
+file "security-posture.conf" {
+  [Elasticsearch Configuration]
+}
+
+ScaleCluster -- "security_posture.py" : Executes >
+"security_posture.py" -- "fetch_security_posture_and_upload_to_ES.sh" : Creates JSON >
+"fetch_security_posture_and_upload_to_ES.sh" -- "split_json_for_kibana.py" : Uses >
+"split_json_for_kibana.py" -- "fetch_security_posture_and_upload_to_ES.sh" : Generates Split JSON >
+"fetch_security_posture_and_upload_to_ES.sh" -- Elasticsearch : Uploads JSON >
+Elasticsearch -- Kibana : Provides Data >
+cronjob.py -- "fetch_security_posture_and_upload_to_ES.sh" : Executes >
+cronjob.py .. scale-clusters.conf : Reads >
+cronjob.py .. security-posture.conf : Reads >
+
+@enduml
+```
+@enduml

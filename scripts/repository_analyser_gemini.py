@@ -10,42 +10,86 @@ import google.generativeai as genai
 # Function to extract repository URL from a GitHub file URL
 def extract_repo_url(link):
     match = re.match(r"(https://github\.com/[^/]+/[^/]+)", link)
+    print(match.group(1))
     return match.group(1) + "/" if match else link
 
 genai.configure(api_key="AIzaSyA19TLhE8m7qJuNy5VaKB7Ns7f_ymsWH4I")
 
-def get_chatgpt_response(link):
+def clone_repository(link):
+    """Clones a GitHub repository to a local directory and returns the path."""
     try:
         repo_name = link.split('github.com/')[-1].rstrip('/')
         local_repo_path = f"./{repo_name.replace('/', '_')}"
 
-        # Clone the repository if it doesn't exist
+        # Remove the existing repository if it exists
         if os.path.exists(local_repo_path):
-            shutil.rmtree(local_repo_path)  # Remove existing folder
+            shutil.rmtree(local_repo_path)
 
+        # Clone the repository
         clone_cmd = ["git", "clone", link, local_repo_path]
         clone_result = subprocess.run(clone_cmd, capture_output=True, text=True)
 
         if clone_result.returncode != 0:
-            return f"Error: Failed to clone repository {link}"
+            raise Exception(f"Error: Failed to clone repository {link}")
+        print("cloned repository")
+        return local_repo_path
+    except Exception as e:
+        return f"Error: {e}"
 
-        # Generate repository structure using 'tree' command
+def extract_contents(root_folder):
+    """Extracts the contents of all code files in the repository and returns as a string."""
+    extracted_data = []
+    
+    for dirpath, _, filenames in os.walk(root_folder):
+        for filename in filenames:
+            file_path = os.path.join(dirpath, filename)
+            
+            # Only extract text/code files
+            if filename.endswith(('.py', '.js', '.java', '.cpp', '.c', '.h', '.html', '.css', '.md', '.json', '.xml', '.yaml', '.yml', '.sh', '.ts')):
+                extracted_data.append(f"--- File: {file_path} ---\n")
+                try:
+                    with open(file_path, 'r', encoding='utf-8', errors='ignore') as file:
+                        extracted_data.append(file.read())
+                except Exception as e:
+                    extracted_data.append(f"Error reading file: {e}\n")
+                extracted_data.append("\n\n")
+    result = "\n".join(extracted_data)
+    print(result)
+    return result
+
+def get_chatgpt_response(repo_link):
+    """Generates a structured analysis of the GitHub repository using its contents."""
+    try:
+        # Step 1: Clone the Repository
+        repo_path = clone_repository(repo_link)
+        if "Error" in repo_path:
+            return repo_path  # Return error message if cloning failed
+
+        # Step 2: Extract Repository Structure
         try:
             if os.name == "nt":  # Windows
-                structure_result = subprocess.run(["tree", "/F", local_repo_path], capture_output=True, text=True, shell=True)
+                structure_result = subprocess.run(["tree", "/F", repo_path], capture_output=True, text=True, shell=True)
             else:  # Linux/Mac
-                structure_result = subprocess.run(["tree", "-L", "3", local_repo_path], capture_output=True, text=True)
+                structure_result = subprocess.run(["tree", "-L", "3", repo_path], capture_output=True, text=True)
 
             repo_structure = structure_result.stdout
         except Exception as e:
             repo_structure = f"Error generating repository structure: {e}"
 
-        # Generate summary using the LLM
+        # Step 3: Extract Code File Contents
+        repo_contents = extract_contents(repo_path)
+
+        # Step 4: Prepare the Prompt for LLM
         prompt = f"""
-Please analyze the entire GitHub repository available at {link}. Your analysis should include the following components:
+Please analyze the entire GitHub repository using the extracted files provided below.
 
 Repository Structure:
 {repo_structure}
+
+Repository Contents:
+{repo_contents}
+
+Analysis Requirements:
 
 File-by-File Analysis:
     - Examine each file in the repository.

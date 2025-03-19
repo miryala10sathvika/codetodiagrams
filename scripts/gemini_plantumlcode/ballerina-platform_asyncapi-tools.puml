@@ -1,0 +1,46 @@
+@startuml
+```plantuml
+@startuml
+!pragma teoz true
+skinparam componentStyle uml2
+
+component "User Interface" as UI {
+}
+
+component "API Gateway" as API {
+}
+
+component "Authentication Service" as Auth {
+}
+
+component "User Service" as User {
+}
+
+component "Product Service" as Product {
+}
+
+component "Order Service" as Order {
+}
+
+database "User Database" as UserDB {
+}
+
+database "Product Database" as ProductDB {
+}
+
+database "Order Database" as OrderDB {
+}
+
+UI -- API : Uses
+API -- Auth : Authenticates
+API -- User : Manages Users
+API -- Product : Manages Products
+API -- Order : Manages Orders
+
+User -- UserDB : Stores/Retrieves
+Product -- ProductDB : Stores/Retrieves
+Order -- OrderDB : Stores/Retrieves
+
+@enduml
+```
+@enduml

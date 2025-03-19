@@ -1,0 +1,25 @@
+@startuml
+```plantuml
+@startuml
+!define AWSPuml https://raw.githubusercontent.com/awslabs/aws-icons-for-plantuml/v16.0/dist
+!include <c4/C4_Context>
+!include <c4/C4_Container>
+
+System_Ext(user, "User", "Interacts with Scrumlr")
+
+System(scrumlr, "Scrumlr", "Collaborative Retrospective Tool") {
+    Container(frontend, "Frontend", "React/TypeScript", "User Interface")
+    ContainerDb(database, "Database", "PostgreSQL", "Persistent Data Storage")
+    Container(backend, "Backend", "Go", "API and Business Logic")
+    Container(nats, "Realtime", "NATS", "Realtime Communication")
+}
+
+Rel(user, frontend, "Uses", "HTTPS")
+Rel(frontend, backend, "Requests Data", "REST API (HTTPS)")
+Rel(backend, database, "Stores and Retrieves Data", "SQL")
+Rel(backend, nats, "Publishes and Subscribes to Events")
+Rel(nats, frontend, "Sends Realtime Updates", "WebSockets")
+
+@enduml
+```
+@enduml
