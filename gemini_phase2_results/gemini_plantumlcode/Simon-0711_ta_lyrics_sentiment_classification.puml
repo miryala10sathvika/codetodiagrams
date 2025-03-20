@@ -1,0 +1,68 @@
+@startuml
+```plantuml
+@startuml
+!define AWESOME_FONT https://raw.githubusercontent.com/FortAwesome/Font-Awesome/6.x/master/svgs/brands/
+!define DEVICONS https://raw.githubusercontent.com/vorillaz/devicons/master/svg/file_type/
+
+package "Frontend" {
+  [React Frontend] as Frontend
+  Frontend -- [FastAPI Backend] : Uses API
+  note top of Frontend : Responsible for user interface \nand interaction with backend API
+}
+
+package "Backend" {
+  [FastAPI Backend] as Backend
+  Backend -- [CNN Model] : Uses for Classification
+  Backend -- [Elasticsearch] : Queries for Song Recommendation
+  note top of Backend : API endpoints for handling requests,\n interacting with CNN, querying Elasticsearch
+}
+
+package "Data Storage" {
+  [Elasticsearch]
+  note top of Elasticsearch : Stores song lyrics, artist info,\n mood classifications, facilitates text search
+}
+
+package "Data Handling & Processing" {
+  [Data Preprocessing] as Preprocessing
+  note top of Preprocessing : Normalizes, tokenizes, and stems lyrics
+  [Data Loading] as DataLoader
+  note top of DataLoader : Loads initial data from dump.json
+}
+
+package "CNN Model" {
+    [CNN Model]
+    note top of [CNN Model] : Trained to classify the\nsentiment/mood of song lyrics
+}
+
+Frontend -- Backend : API Requests
+Backend -- Preprocessing : Uses
+Backend -- DataLoader : Uses
+
+package "Docker" {
+    [docker-compose.yaml]
+    note top of [docker-compose.yaml] : Defines services (frontend, backend,\nelasticsearch) and their configurations.
+}
+
+database "dump.json" {
+    note top: Contains initial lyrics and \nmood classifications.
+}
+
+Elasticsearch -- dump.json : Loads data
+DataLoader -- dump.json : Reads
+
+package "Utilities" {
+    [utils.py] as utils
+    note top of utils: Utility functions, including\npreprocessing pipeline.
+}
+Backend -- utils : Uses
+
+package "Elasticsearch Functions" {
+    [elasticsearch_functions.py] as elasticsearch_functions
+    note top of elasticsearch_functions: Functions for interacting with Elasticsearch.\nImplements DAO pattern.
+}
+Backend -- elasticsearch_functions : Uses
+
+center footer Repository: Simon-0711_ta_lyrics_sentiment_classification
+@enduml
+```
+@enduml

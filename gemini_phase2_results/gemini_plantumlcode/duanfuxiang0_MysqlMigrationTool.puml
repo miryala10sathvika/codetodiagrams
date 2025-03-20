@@ -1,0 +1,52 @@
+@startuml
+```plantuml
+@startuml
+!define DEVICONS https://raw.githubusercontent.com/tupadr3g/plantuml-icon-font-sprites/master/devicons2
+!define AWS https://raw.githubusercontent.com/plantuml/plantuml-aws/master/aws
+
+package "MySQL Data Migration Tool" {
+
+  [Go Scripts] as GoScripts
+  package "Go" {
+    component "full_data_migration.go" as FullMigration
+    component "incremental_data_migration.go" as IncrementalMigration
+  }
+
+  package "Core" {
+    component "conf.go" as Conf
+    component "dao.go" as DAO
+  }
+
+  package "Documentation" {
+    file "README.md" as Readme
+    file "architecture.jpg" as Architecture
+  }
+  
+  database "Source MySQL" as SourceDB {
+  }
+  
+  database "Target MySQL" as TargetDB {
+  }
+
+
+  GoScripts -- FullMigration : Uses
+  GoScripts -- IncrementalMigration : Uses
+
+  FullMigration -- DAO : Uses
+  IncrementalMigration -- DAO : Uses
+  DAO -- SourceDB : Reads/Writes
+  DAO -- TargetDB : Reads/Writes
+
+  Conf -- FullMigration : Provides Configuration
+  Conf -- IncrementalMigration : Provides Configuration
+
+  Readme -- Architecture : Describes
+  
+  IncrementalMigration -- SourceDB : Reads Binlog
+
+}
+
+center footer Migration Tool Components
+@enduml
+```
+@enduml

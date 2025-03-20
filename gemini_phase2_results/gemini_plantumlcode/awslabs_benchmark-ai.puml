@@ -1,0 +1,58 @@
+@startuml
+```plantuml
+@startuml
+!define AWESOME_FONT <font name="Arial" size=14>
+package "awslabs_benchmark-ai" {
+  [Anubis Cron Job]
+  [Executor]
+  [Watcher]
+  [Metrics Handling] as Metrics
+  [CloudWatch Exporter]
+  [Fetcher Dispatcher]
+  [Puller]
+  [Kafka]
+  [Kubernetes (EKS)]
+  [EC2 (Bare Metal)]
+  [SageMaker]
+  [TOML Descriptors]
+  [CloudWatch]
+  [Grafana]
+  [Elasticsearch]
+  [Jobs]
+  [Logs]
+
+  Anubis Cron Job -- Executor : Schedules/Triggers
+  Executor -- TOML Descriptors : Transpiles
+  Executor -- Kubernetes (EKS) : Deploys/Monitors
+  Executor -- EC2 (Bare Metal) : Deploys/Monitors
+  Executor -- SageMaker : Deploys/Monitors
+  Executor -- Kafka : Benchmark Events
+  Watcher -- Kubernetes (EKS) : Monitors Status
+  Watcher -- SageMaker : Monitors Status
+  Watcher -- Kafka : Status Updates
+  Metrics -- Kafka : Pushes Metrics
+  Metrics -- Elasticsearch : Pushes Metrics (Alternative)
+  Metrics -- Logs : Extracts Metrics
+  CloudWatch Exporter -- Kafka : Extracts Metrics
+  CloudWatch Exporter -- CloudWatch : Pushes Metrics
+  Fetcher Dispatcher -- Kubernetes (EKS) : Dispatches Fetch Requests as Jobs
+  Fetcher Dispatcher -- Puller : Runs jobs for pulls.
+  Executor -- Jobs : Creates/Applies
+  Executor -- Services : Creates/Applies
+  Kubernetes (EKS) -- Jobs : Executes Benchmark Jobs
+  Kubernetes (EKS) -- Services : Exposes Services
+  Kafka -- CloudWatch Exporter
+  Kafka -- Metrics
+  CloudWatch -- Grafana : Visualizes Metrics
+
+  note top of Metrics : Includes metrics-pusher & metrics-extractor
+  note right of Elasticsearch : Backends for emitting metrics
+
+  [TOML Descriptors] .> [Jobs] : Generates Manifests
+  [TOML Descriptors] .> [Services] : Generates Manifests
+  [TOML Descriptors] .> [SageMaker] : Generates Job Definitions
+
+}
+@enduml
+```
+@enduml

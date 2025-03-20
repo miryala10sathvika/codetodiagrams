@@ -1,0 +1,107 @@
+@startuml
+```plantuml
+@startuml HomeSensorHub Component Diagram
+
+package "HomeSensorHub" {
+  [homesensorhub.py] as Main [
+    Main Application
+    Initializes sensors, senders, and subscribers, manages the main event loop.
+  ]
+
+  package "routing" {
+    [mqtt.py] as MQTT [
+      MQTT Client (Singleton)
+      Manages connection, publishing, and subscribing.
+    ]
+    [mqtt_sender.py] as MQTTSender [
+      MQTT Sender
+      Formats data into JSON payloads and publishes them to topics.
+    ]
+    [mqtt_subscriber.py] as MQTTSubscriber [
+      MQTT Subscriber
+      Subscribes to topics for on-the-fly configuration.
+    ]
+  }
+
+  package "sensors" {
+    [sensor_types.py] as SensorTypes [
+      Sensor Types
+      Defines base classes for sensor types and SensorTypePolled for threaded polling. Includes CallbackPair.
+    ]
+    [probe.py] as Probe [
+      Probe
+      Interface for sensor probing, uses file locks.
+    ]
+
+    package "BoschBME" {
+      [BME280] as BME280 [
+        Bosch BME280 Sensor
+        Probing, data reading, and type definitions.
+      ]
+      [BME680] as BME680 [
+        Bosch BME680 Sensor
+        Probing, data reading, and type definitions.
+      ]
+    }
+
+    package "TSL258x" {
+      [TSL258x] as TSL258xSensor [
+        TSL258x Light Sensor
+        Probing, data reading, and type definitions.
+      ]
+    }
+
+    package "RCWL0515" {
+      [RCWL0515] as RCWL0515Sensor [
+        RCWL0515 Motion Sensor
+        Probing, data reading, and type definitions.
+      ]
+    }
+  }
+
+  package "utils" {
+    [logging.py] as Logging [
+      Logging
+      Initializes and provides a logger instance.
+    ]
+  }
+}
+
+package "External" {
+  [MQTT Broker]
+  [Sensors (BME280, BME680, TSL258x, RCWL0515)]
+  [FileLock]
+  [Threads]
+  [verboselogs]
+  [coloredlogs]
+}
+
+Main -- MQTT : Uses
+Main -- MQTTSender : Uses
+Main -- MQTTSubscriber : Uses
+Main -- SensorTypes : Uses
+Main -- Probe : Uses
+Main -- Logging : Uses
+
+MQTTSender -- MQTT Broker : Publishes to
+MQTTSubscriber -- MQTT Broker : Subscribes to
+
+Probe -- BME280 : Detects and Initializes
+Probe -- BME680 : Detects and Initializes
+Probe -- TSL258xSensor : Detects and Initializes
+Probe -- RCWL0515Sensor : Detects and Initializes
+Probe -- FileLock : Uses
+
+SensorTypes -- Threads : Uses
+
+BME280 -- Sensors : Reads data from
+BME680 -- Sensors : Reads data from
+TSL258xSensor -- Sensors : Reads data from
+RCWL0515Sensor -- Sensors : Reads data from
+
+Logging -- verboselogs : Uses
+Logging -- coloredlogs : Uses
+
+@enduml
+```
+@enduml

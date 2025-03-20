@@ -1,0 +1,43 @@
+@startuml
+```plantuml
+@startuml
+!define RECTANGLE rect
+package "Entities" {
+  [Account (account.go)] RECTANGLE
+  [Financial Institution (financialInstitution.go)] RECTANGLE
+  [Payment (payment.go)] RECTANGLE
+  [Transaction (transaction.go)] RECTANGLE
+  [Account Processor (accountProcessor.go)] RECTANGLE
+}
+
+package "Providers" {
+  [DB Provider (dbProvider.go)] RECTANGLE
+  [Modelbank Controller (modelbankController.go)] RECTANGLE
+  [Modelbank.pb.go] RECTANGLE
+  [Modelbank.proto] RECTANGLE
+}
+
+package "Server" {
+  [Modelbank Server (modelbank_server.go)] RECTANGLE
+}
+
+package "Use Cases" {
+  [Modelbank Use Case (modelbankUsecase.go)] RECTANGLE
+}
+
+database PostgreSQL {
+}
+
+[Modelbank Controller (modelbankController.go)] -- [Modelbank Use Case (modelbankUsecase.go)] : Uses
+[Modelbank Use Case (modelbankUsecase.go)] -- [DB Provider (dbProvider.go)] : Uses
+[Account Processor (accountProcessor.go)] -- [DB Provider (dbProvider.go)] : Uses
+[DB Provider (dbProvider.go)] -- PostgreSQL : Connects to
+
+[Modelbank Server (modelbank_server.go)] -- [Modelbank Use Case (modelbankUsecase.go)] : Uses
+[Modelbank Server (modelbank_server.go)] -- [Modelbank.pb.go] : Implements
+
+[Modelbank.pb.go] -- [Modelbank.proto] : Generated from
+[Modelbank Controller (modelbankController.go)] -- [Modelbank.pb.go] : Uses
+@enduml
+```
+@enduml

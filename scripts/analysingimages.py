@@ -110,7 +110,7 @@ def analyze_image_pair(initial_image_path, output_image_path):
     output_image = load_image(output_image_path)
     
     # Initialize Gemini API client
-    genai.configure(api_key="AIzaSyA19TLhE8m7qJuNy5VaKB7Ns7f_ymsWH4I")
+    genai.configure(api_key="your_api_key")
     model = genai.GenerativeModel("gemini-2.0-flash-exp")
     
     # Generate content using the model

@@ -1,0 +1,49 @@
+@startuml
+```plantuml
+@startuml
+!define RECTANGLE_FONT Arial-Bold
+skinparam componentStyle Rectangle
+skinparam rectangle {
+  FontName RECTANGLE_FONT
+  FontSize 12
+  BorderColor Black
+}
+skinparam node {
+  FontName RECTANGLE_FONT
+  FontSize 12
+  BorderColor Black
+}
+
+package "asyncapi-tools" {
+  [AsyncAPI CLI] as asyncapi_cli
+  [OpenAPI CLI] as openapi_cli
+  [Code Generation Modules] as codegen_modules
+  [Validation Module] as validation_module
+  [Native Handler] as native_handler
+  [Test Resources] as test_resources
+  [Folder Configuration] as folder_configuration
+
+  package "Code Generation Modules" {
+    [AsyncApiToBallerinaGenerator]
+    [BallerinaToAsyncApiGenerator]
+    [IntermediateClientGenerator]
+    [BallerinaTypesGenerator]
+    [TestGenerator]
+  }
+
+  codegen_modules -- AsyncApiToBallerinaGenerator
+  codegen_modules -- BallerinaToAsyncApiGenerator
+  codegen_modules -- IntermediateClientGenerator
+  codegen_modules -- BallerinaTypesGenerator
+  codegen_modules -- TestGenerator
+
+  asyncapi_cli -- codegen_modules : Uses
+  openapi_cli -- codegen_modules : Uses
+  validation_module -- test_resources : Uses
+  native_handler -- codegen_modules : Uses
+  folder_configuration -- native_handler : Uses
+}
+
+@enduml
+```
+@enduml

@@ -13,7 +13,26 @@ def extract_repo_url(link):
     print(match.group(1))
     return match.group(1) + "/" if match else link
 
-genai.configure(api_key="AIzaSyA19TLhE8m7qJuNy5VaKB7Ns7f_ymsWH4I")
+genai.configure(api_key="your_api_key")
+
+TOKEN_LIMIT = 50000  # Approximate max tokens per request (adjust as needed)
+
+def chunk_text(text, max_tokens=TOKEN_LIMIT):
+    """Splits text into chunks of max_tokens length."""
+    words = text.split()  # Split by words to avoid cutting in the middle of a word
+    chunks = []
+    current_chunk = []
+
+    for word in words:
+        current_chunk.append(word)
+        if len(current_chunk) >= max_tokens:
+            chunks.append(" ".join(current_chunk))
+            current_chunk = []
+
+    if current_chunk:
+        chunks.append(" ".join(current_chunk))
+
+    return chunks
 
 def clone_repository(link):
     """Clones a GitHub repository to a local directory and returns the path."""
@@ -31,7 +50,7 @@ def clone_repository(link):
 
         if clone_result.returncode != 0:
             raise Exception(f"Error: Failed to clone repository {link}")
-        print("cloned repository")
+
         return local_repo_path
     except Exception as e:
         return f"Error: {e}"
@@ -53,12 +72,10 @@ def extract_contents(root_folder):
                 except Exception as e:
                     extracted_data.append(f"Error reading file: {e}\n")
                 extracted_data.append("\n\n")
-    result = "\n".join(extracted_data)
-    print(result)
-    return result
+    return "\n".join(extracted_data)
 
 def get_chatgpt_response(repo_link):
-    """Generates a structured analysis of the GitHub repository using its contents."""
+    """Generates a structured analysis of the GitHub repository using its contents, with chunking."""
     try:
         # Step 1: Clone the Repository
         repo_path = clone_repository(repo_link)
@@ -79,41 +96,55 @@ def get_chatgpt_response(repo_link):
         # Step 3: Extract Code File Contents
         repo_contents = extract_contents(repo_path)
 
-        # Step 4: Prepare the Prompt for LLM
-        prompt = f"""
-Please analyze the entire GitHub repository using the extracted files provided below.
+        # Step 4: Split Contents if Too Large
+        chunks = chunk_text(repo_contents, max_tokens=TOKEN_LIMIT)
+        partial_summaries = []
 
-Repository Structure:
-{repo_structure}
-
-Repository Contents:
-{repo_contents}
-
-Analysis Requirements:
-
-File-by-File Analysis:
-    - Examine each file in the repository.
-    - Summarize the purpose, functionality, and any key code segments of each file.
-    - Highlight the role each file plays within the overall system.
-
-Repository Organization:
-    - Describe the directory layout and organization of the files.
-    - Explain how different parts of the repository interact and are connected.
-
-High-Level Architecture:
-    - Provide a summary of the overall system architecture.
-    - Identify major components, modules, and services, and explain how they collaborate to achieve the system’s goals.
-    - Discuss any architectural patterns or design decisions evident in the repository.
-
-Overall Summary:
-    - Conclude with a high-level summary that encapsulates the repository's purpose, its architecture, and the interrelation of its components.
-
-Your response should be detailed, structured, and include insights on how each part of the repository contributes to the overall design and functionality of the system.
-"""
         model = genai.GenerativeModel("gemini-2.0-flash")
-        response = model.generate_content([prompt])
 
-        return response.text if hasattr(response, 'text') else "Error: No response text received."
+        # Step 5: Process Each Chunk Separately
+        for i, chunk in enumerate(chunks):
+            print(f"Processing chunk {i+1}/{len(chunks)}...")  # Log progress
+            chunk_prompt = f"""
+            This is part {i+1} of {len(chunks)} from the GitHub repository analysis.
+
+            Repository Structure:
+            {repo_structure}
+
+            Repository Contents (Chunk {i+1}):
+            {chunk}
+
+            Please analyze this part and generate a summary that includes:
+            - Key functionalities and components
+            - Important files and their roles
+            - Architectural insights (if relevant)
+            - Any notable design patterns
+
+            This is only one part of the full repository. Keep your response modular so that it can be merged with other parts.
+            """
+            try:
+                response = model.generate_content([chunk_prompt])
+                partial_summaries.append(response.text if hasattr(response, 'text') else "Error: No response text received.")
+            except Exception as e:
+                partial_summaries.append(f"Error processing chunk {i+1}: {e}")
+
+        # Step 6: Combine All Partial Summaries
+        final_summary = "\n\n".join(partial_summaries)
+
+        # Step 7: Generate Final Merged Summary
+        final_prompt = f"""
+        The following are partial summaries from an analysis of a GitHub repository:
+
+        {final_summary}
+
+        Please merge these summaries into a single, well-structured report. Ensure that:
+        - There is no repetition
+        - The information flows logically
+        - The final report provides a cohesive overview of the repository's structure, functionality, and architecture.
+        """
+        final_response = model.generate_content([final_prompt])
+
+        return final_response.text if hasattr(final_response, 'text') else "Error: No response text received."
 
     except Exception as e:
         return f"Error: {e}"

@@ -1,0 +1,67 @@
+@startuml
+```plantuml
+@startuml
+!define AWESOME fontname Arial
+
+package "Frontend" {
+    [React Application] as FrontendApp
+    [Redux Store] as Redux
+    [API Abstraction (src/api/index.ts)] as API
+    [React Components] as Components
+    [React Router] as Router
+    [I18n] as Internationalization
+    [Utils] as Utilities
+    [Configuration (src/config.ts)] as FrontendConfig
+    [Cypress Tests] as Cypress
+}
+
+package "Backend" {
+    [Go Backend (src/main.go)] as BackendApp
+    [TOML Configuration] as BackendConfig
+    [API Documentation (Postman Collection)] as Postman
+}
+
+package "CI/CD" {
+    [GitHub Actions Workflows] as GithubActions
+    [Docker Compose (deployment/docker/docker-compose.yml)] as DockerCompose
+    [STACKIT Kubernetes Engine (deployment/SKE/)] as SKE
+}
+
+package "External" {
+    [WebSockets] as WebSockets
+    [OAuth Providers\n(Google, GitHub, etc.)] as OAuth
+    [Postgres DB] as Database
+}
+
+FrontendApp -- API : Uses
+FrontendApp -- Redux : Uses
+FrontendApp -- Components : Uses
+FrontendApp -- Router : Uses
+FrontendApp -- Internationalization : Uses
+FrontendApp -- Utilities : Uses
+FrontendApp -- FrontendConfig : Uses
+FrontendApp -- Cypress: Uses
+
+API -- BackendApp : Makes Requests
+BackendApp -- Database : Uses
+
+BackendApp -- BackendConfig : Reads
+GithubActions -- FrontendApp : Builds & Tests
+GithubActions -- BackendApp : Builds & Tests
+GithubActions -- DockerCompose : Deploys
+GithubActions -- SKE : Deploys
+
+FrontendApp -- WebSockets : Uses for Real-time
+FrontendApp -- OAuth : Authentication
+
+DockerCompose -- FrontendApp : Deploys
+DockerCompose -- BackendApp : Deploys
+DockerCompose -- Database : Deploys
+
+SKE -- FrontendApp : Deploys
+SKE -- BackendApp : Deploys
+SKE -- Database : Deploys
+
+@enduml
+```
+@enduml

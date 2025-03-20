@@ -1,0 +1,38 @@
+@startuml
+```plantuml
+@startuml
+!define AWESOMEICON https://raw.githubusercontent.com/tupadr3/plantuml-icon-font-sprites/v2.3.0
+
+' Components
+[Spectrum Scale Clusters] as ScaleClusters <<Database>>
+[collector/security_posture.py] as SecurityPostureCollector <<Python>>
+[split_json_for_kibana.py] as JSONSplitter <<Python>>
+[Elasticsearch] as Elasticsearch <<Database>>
+[Kibana] as Kibana <<Web Application>>
+[kibana_dashboard.ndjson] as KibanaDashboardConfig
+[fetch_security_posture_and_upload_to_ES.sh] as OrchestrationScript <<Shell Script>>
+[cronjob.py] as Cronjob <<Python>>
+[scale-clusters.conf] as ScaleClustersConfig <<Configuration File>>
+[security-posture.conf] as SecurityPostureConfig <<Configuration File>>
+[README.md] as Readme <<Documentation>>
+
+' Relationships
+SecurityPostureCollector -- ScaleClusters : Collects data from
+SecurityPostureCollector -- JSONSplitter : Sends JSON data to
+JSONSplitter -- Elasticsearch : Uploads transformed JSON data to
+Elasticsearch -- Kibana : Provides data for
+Kibana -- KibanaDashboardConfig : Uses configuration from
+OrchestrationScript -- SecurityPostureCollector : Executes
+OrchestrationScript -- JSONSplitter : Executes
+OrchestrationScript -- Elasticsearch : Uploads to
+Cronjob -- OrchestrationScript : Schedules execution of
+ScaleClustersConfig -- SecurityPostureCollector : Provides cluster configuration
+SecurityPostureConfig -- Elasticsearch : Provides connection details
+
+' Styling and annotations
+
+center footer IBM Spectrum Scale Security Posture Visualization
+
+@enduml
+```
+@enduml

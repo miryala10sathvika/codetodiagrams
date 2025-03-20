@@ -1,0 +1,76 @@
+@startuml
+```plantuml
+@startuml
+!pragma teoz true
+skinparam componentStyle uml2
+
+package "Zserio OpenAPI Bridge" {
+
+  [Zserio OpenAPI Bridge]
+
+  package "OpenAPI Generation (zswag.gen)" {
+    [zswag/gen.py] as Gen
+  }
+
+  package "Server (Python - OAServer)" {
+    [zswag/app.py] as Server
+    component Flask
+    component Connexion
+  }
+
+  package "Client (Python)" {
+    [zswag/__init__.py] as ClientPython
+  }
+
+  package "Client (C++)" {
+    [C++ OpenAPI Client] as ClientCPP
+  }
+
+  package "HTTP Client Library (C++)" {
+    [libs/httpcl/*] as HTTPClient
+    component "HttpLibHttpClient"
+    component "Config"
+  }
+
+  package "Python Bindings for C++ Client" {
+    [libs/pyzswagcl/*] as PythonBindings
+    file "py-zswagcl.cpp"
+    file "py-openapi-client.cpp"
+    file "py-openapi-client.h"
+    component pybind11
+  }
+
+  package "Reflection Utilities" {
+    [zswag/reflect.py] as Reflect
+  }
+
+  [README.md]
+  [conanfile.py]
+  [setup.py]
+  package ".github/workflows/" {
+    [CI/CD Pipelines]
+  }
+
+  Zserio OpenAPI Bridge -- Gen : Uses
+  Zserio OpenAPI Bridge -- Server : Uses
+  Zserio OpenAPI Bridge -- ClientPython : Uses
+  Zserio OpenAPI Bridge -- ClientCPP : Uses
+
+  Server -- Flask : Uses
+  Server -- Connexion : Uses
+
+  ClientPython -- PythonBindings : Uses
+  ClientCPP -- HTTPClient : Uses
+  ClientCPP -- PythonBindings
+
+  HTTPClient -- Config : Uses
+
+  ClientCPP -- HTTPClient
+  PythonBindings -- pybind11 : Uses
+
+  Server -- Reflect : Uses
+}
+
+@enduml
+```
+@enduml

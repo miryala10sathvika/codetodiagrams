@@ -1,0 +1,80 @@
+@startuml
+```plantuml
+@startuml
+!define AWESOME_FONT <font color=green size=24><b>
+!define END_FONT </font></b>
+
+package "Application" {
+  [Controllers]
+  [Models]
+  [Views]
+  [Config]
+  [Libraries]
+  [DAO]
+}
+
+package "Assets" {
+  [JavaScript Files]
+}
+
+package "System (CodeIgniter Core)" {
+  [Core Classes]
+  [Security Class]
+  [Form Validation Class]
+  [Table Class]
+  [Parser Class]
+  [Loader Class]
+  [FTP Class]
+  [Image Manipulation Class]
+  [Typography Class]
+  [Benchmarking Class]
+  [Caching Class]
+}
+
+package "User Guide" {
+  [HTML Documentation]
+}
+
+package "Third Party" {
+  package "DoctrineORM-2.3.2" {
+    [Doctrine ORM]
+    [Symfony Yaml Component]
+  }
+}
+
+
+[Controllers] -- [Models] : Uses
+[Controllers] -- [Views] : Uses
+[Models] -- [DAO] : Uses
+[DAO] -- [Doctrine ORM] : Uses
+[Application] -- [System (CodeIgniter Core)] : Uses
+[Application] -- [Third Party] : Uses
+[Assets] -- [Views] : Included In
+
+[Controllers] -- [Form Validation Class] : Uses
+[Controllers] -- [Table Class] : Uses
+[Controllers] -- [Parser Class] : Uses
+[Controllers] -- [Loader Class] : Uses
+[Controllers] -- [FTP Class] : Uses
+[Controllers] -- [Image Manipulation Class] : Uses
+[Controllers] -- [Typography Class] : Uses
+[Controllers] -- [Benchmarking Class] : Uses
+[Controllers] -- [Caching Class] : Uses
+
+[Symfony Yaml Component] .[Doctrine ORM]: Testing
+
+
+note top of Application : Core Application Logic
+
+note top of Assets : Client-Side Resources
+
+note top of "System (CodeIgniter Core)" : CodeIgniter Framework
+
+note top of "User Guide" : CodeIgniter Documentation
+
+note top of "Third Party" : External Libraries
+
+
+@enduml
+```
+@enduml

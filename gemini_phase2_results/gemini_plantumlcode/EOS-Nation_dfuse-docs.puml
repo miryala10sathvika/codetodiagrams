@@ -1,0 +1,87 @@
+@startuml
+```plantuml
+@startuml
+!pragma teoz true
+skinparam componentStyle uml2
+' Component Definitions
+component "Hugo" as hugo {
+    artifact "config.json"
+    artifact "themes/book/layouts/partials/*.html"
+    artifact "content/_index.md"
+    artifact "content/platform/public-apis/graphql.md"
+    artifact "content/eosio/public-apis/reference/graphql-api.md"
+    artifact "content/eosio/public-apis/reference/authentication.md"
+    artifact "content/*.md"
+}
+
+component "GraphQL Schema Extractor" as graphql_extractor {
+    artifact "graphql.js"
+    file "[graphql].graphql" as graphql_schema
+}
+
+component "Code Snippet Extractor" as code_extractor {
+    artifact "extract.js"
+}
+
+component "API Client Libraries" as api_clients {
+    component "JavaScript Client" as js_client {
+        artifact "package.json (JavaScript examples)"
+        artifact "README.md (JavaScript examples)"
+        artifact "index.ts/index.js"
+        note bottom: @dfuse/client,apollo-client,\ngraphql, eosjs
+    }
+    component "Go Client" as go_client {
+        artifact "main.go"
+    }
+    component "Python Client" as py_client {
+        artifact "main.py"
+    }
+}
+
+component "Examples & Tutorials" as examples_tutorials {
+    note bottom: Push Guaranteed Example\nCheck EOS Account Balance Example\nWebsocket API examples
+}
+
+component "dfuse.io API Server" as dfuse_api {
+  note: Remote Server
+}
+
+component "apiproxy" as api_proxy
+component "etcd" as service_discovery
+
+
+database "graphql.json" as graphql_json
+database "data/examples.json" as examples_json
+
+artifact "README.md" as readme {
+    note bottom: Overview, Contribution Guidelines\nHugo requirements, Development instructions
+}
+
+artifact "package.json" as package_json
+artifact "package-lock.json" as package_lock_json
+
+' Relationships
+graphql_extractor -- graphql_schema : Reads
+graphql_extractor -- graphql_json : Generates
+code_extractor -- examples_json : Generates
+
+hugo -- graphql_json : Reads
+hugo -- examples_json : Reads
+hugo -- readme : Reads
+hugo -- package_json : Reads
+hugo -- package_lock_json : Reads
+
+js_client -- dfuse_api : Interacts with
+go_client -- dfuse_api : Interacts with
+py_client -- dfuse_api : Interacts with
+
+examples_tutorials -- js_client : Uses
+examples_tutorials -- go_client : Uses
+examples_tutorials -- py_client : Uses
+
+api_proxy -- dfuse_api : Routes requests
+service_discovery -- api_proxy : Uses
+
+@enduml
+```
+@enduml

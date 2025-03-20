@@ -1,0 +1,74 @@
+@startuml
+```plantuml
+@startuml
+!pragma teoz true
+
+node "Node.js Runtime" as nodejs
+
+package "01-Node (Fundamentals)" {
+    component "bash.js\n(Command Handler)" as bash
+    component "commands/index.js\n(Command Implementations)" as commands
+    component "eventEmitter/*\n(Custom Event Emitter)" as eventEmitter
+    component "streams/*\n(Stream Operations)" as streams
+    component "demo/patrones/otro\n(Module Patterns)" as modulePatterns
+}
+
+package "02-Promises & 04-AdvancePromises" {
+    component "ejemplos.js\n(Promise Examples)" as promiseExamples
+    component "exercise-one.js, exercise-two.js\n(Promise Exercises)" as promiseExercises
+    component "utils.js\n(Promise Utilities)" as promiseUtils
+    component "demo/encadenandoPromesas.js\n(Promise Chaining)" as promiseChaining
+    component "pledge.js (Custom Promise Implementation)" as pledge
+}
+
+package "06-Testing" {
+    component "index.js\n(Application Export)" as appExport
+    component "tests/index.spec.js\n(Mini Application Tests)" as appTests
+}
+
+package "Web Server (http module)" {
+    component "http Server" as httpServer
+}
+
+package "Express.js Framework" {
+    component "Express Application" as expressApp
+    interface "Middleware" as middleware
+}
+
+component "Package Manifests\n(package.json)" as packageJson
+
+nodejs -- bash
+nodejs -- commands
+nodejs -- eventEmitter
+nodejs -- streams
+nodejs -- modulePatterns
+
+nodejs -- promiseExamples
+nodejs -- promiseExercises
+nodejs -- promiseUtils
+nodejs -- promiseChaining
+
+promiseExercises -- promiseUtils : Uses
+promiseExercises -- packageJson : Uses
+
+nodejs -- appExport
+nodejs -- appTests
+
+nodejs -- httpServer
+expressApp -- middleware
+
+packageJson -- nodejs : Manages dependencies
+
+httpServer -- expressApp : Uses
+
+bash -- commands : Uses
+bash -- packageJson : Uses
+promiseExamples -- pledge : Uses
+pledge -- "Jasmine Specifications\n(pledge.spec.ch[1-5].html)" : Tested by
+
+appTests -- appExport : Tests
+
+center footer PlantUML Component Diagram - Node.js Learning Module
+@enduml
+```
+@enduml

@@ -1,0 +1,48 @@
+@startuml
+```plantuml
+@startuml
+!pragma teoz true
+component "HTTP REST API\n(smev_int/views.py)" as API
+component "Business Logic\n(smev_int/processors/query.py)" as Logic
+component "Data Access\n(smev_int/models.py)" as Data
+component "External Service Interaction\n(smev_int/adapter.py)" as Adapter
+database MongoDB
+component "Schema Loader\n(smev_int/schema_loader/loader.py)" as SchemaLoader
+component Sanic
+component Zeep
+component asyncio
+
+API -- Logic : Uses
+Logic -- Data : Uses
+Logic -- Adapter : Uses
+Data -- MongoDB : Accesses
+Logic -- SchemaLoader : Uses
+API -- Sanic : Uses
+Adapter -- Zeep : Uses
+Logic -- asyncio : Uses
+
+component settings {
+    file "settings.py"
+}
+
+component Core {
+    file "smev_int/core.py"
+}
+
+Core -- MongoDB : Connects to
+Core -- Adapter : Configures
+Core -- Sanic : Initializes
+
+component DockerCompose {
+    file "docker-compose.yml"
+}
+DockerCompose -- MongoDB : Defines
+
+component Run {
+    file "smev_int/run.py"
+}
+Run -- Core : Executes
+
+@enduml
+```
+@enduml

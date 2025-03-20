@@ -1,0 +1,63 @@
+@startuml
+```plantuml
+@startuml
+!define AWESOMEURL https://raw.githubusercontent.com/awesomeware/plantuml-themes/master/themes
+!include AWESOMEURL/aws/common.puml
+!include AWESOMEURL/aws/AWS_Database.puml
+
+package "fcgi-function Library" {
+
+    [ffunc.h] as ffunc_h
+    [ffunc.c] as ffunc_c
+    [Examples] as examples
+    [Request Handling] as request_handling
+    [Configuration] as configuration
+    [Memory Management] as memory_management
+    [Request Body Handling] as request_body_handling
+    [Multi-threading] as multi_threading
+    [Platform Support] as platform_support
+    [Direct Consume] as direct_consume
+    [FastCGI Integration] as fastcgi_integration
+
+    ffunc_h -- ffunc_c : Implements
+    ffunc_c -- request_handling : Uses
+    ffunc_c -- configuration : Uses
+    ffunc_c -- memory_management : Uses
+    ffunc_c -- request_body_handling : Uses
+    ffunc_c -- multi_threading : Uses
+    ffunc_c -- platform_support : Uses
+    ffunc_c -- direct_consume : Uses
+    ffunc_c -- fastcgi_integration : Uses
+
+    examples -- ffunc_h : Uses
+}
+
+package "Web Servers" {
+    [Nginx] as nginx
+    [Apache] as apache
+}
+
+package "FastCGI" {
+    [fcgiapp.h] as fcgiapp_h
+}
+
+package "External Logging Libraries"{
+    [spdlog] as spdlog
+    [g3log] as g3log
+    [mini-async-log] as mini_async_log
+}
+
+fastcgi_integration -- fcgiapp_h : Uses
+
+nginx -- "fcgi-function Library" : Communicates via FastCGI
+apache -- "fcgi-function Library" : Communicates via FastCGI
+
+examples .. spdlog : Uses (Optional)
+examples .. g3log : Uses (Optional)
+examples .. mini_async_log : Uses (Optional)
+
+
+center footer PlantUML Component Diagram of fcgi-function Library
+@enduml
+```
+@enduml

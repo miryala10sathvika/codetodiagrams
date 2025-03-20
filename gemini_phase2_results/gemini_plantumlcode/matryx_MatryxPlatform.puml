@@ -1,0 +1,68 @@
+@startuml
+```plantuml
+@startuml MatryxPlatform Component Diagram
+
+component "Matryx Platform" {
+    [MatryxPlatform.sol]
+    [MatryxTournament.sol]
+    [MatryxCommit.sol]
+    [MatryxToken]
+    [LibPlatform.sol]
+    [LibTournament.sol]
+    [LibCommit.sol]
+    [MatryxSystem]
+    [MatryxRoundFactory.sol]
+    [MatryxTournamentFactory.sol]
+
+    [MatryxPlatform.sol] -- [LibPlatform.sol] : delegatecall
+    [MatryxPlatform.sol] -- [LibTournament.sol] : delegatecall
+    [MatryxPlatform.sol] -- [LibCommit.sol] : delegatecall
+    [MatryxPlatform.sol] -- [MatryxTournament.sol] : Manages Tournaments
+    [MatryxPlatform.sol] -- [MatryxCommit.sol] : Manages Commits
+    [MatryxPlatform.sol] -- [MatryxToken] : Token Interaction
+    [MatryxPlatform.sol] -- [MatryxSystem] : Address Lookup
+    [MatryxSystem] -- [MatryxPlatform.sol] : Manages Addresses
+    [MatryxSystem] -- [MatryxRoundFactory.sol] : Creates Rounds
+    [MatryxSystem] -- [MatryxTournamentFactory.sol] : Creates Tournaments
+}
+
+component "Frontend" {
+    [JavaScript Tests]
+    [Automated Setup Generation]
+}
+
+component "Documentation (Sphinx)" {
+    [jQuery.js]
+    [Underscore.js]
+    [doctools.js]
+    [searchtools.js]
+    [language_data.js]
+    [websupport2.js]
+    [basic.css]
+    [documentation_options.js]
+}
+
+component "Infrastructure" {
+    [IPFS]
+    [Truffle]
+    [Travis CI]
+    [Solidity Coverage]
+    [Solidity Linting]
+    [Gas Parser]
+}
+
+[MatryxPlatform.sol] -- [IPFS] : Stores Content Hashes
+[JavaScript Tests] -- [MatryxPlatform.sol] : Tests
+[Automated Setup Generation] -- [MatryxPlatform.sol] : Generates Setup
+[Documentation (Sphinx)] -- [MatryxPlatform.sol] : API Documentation
+[Truffle] -- [MatryxPlatform.sol] : Deployment & Testing
+[Travis CI] -- [MatryxPlatform.sol] : Continuous Integration
+[Solidity Coverage] -- [MatryxPlatform.sol] : Code Coverage
+[Solidity Linting] -- [MatryxPlatform.sol] : Code Style
+[Gas Parser] -- [MatryxPlatform.sol] : Analyzes Gas Usage
+
+note top of "Matryx Platform" : Smart Contracts
+
+@enduml
+```
+@enduml
